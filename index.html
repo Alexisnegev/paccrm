@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PacCRM — IP5 Énergie</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#F4F5F7;color:#172B4D;min-height:100vh}
+:root{
+  --bg:#F4F5F7;--s:#fff;--s2:#F4F5F7;--bd:#E2E8F0;--bd2:#CBD5E0;
+  --blue:#0052CC;--bl:#DEEBFF;--green:#006644;--gl:#E3FCEF;
+  --orange:#974F0C;--ol:#FFF0E6;--red:#BF2600;--rl:#FFEBE6;
+  --purple:#403294;--pl:#EAE6FF;--teal:#006C72;--tl:#E6FCFF;
+  --t:#172B4D;--t2:#5E6C84;--t3:#97A0AF;--r:4px;--r2:8px;
+}
+
+/* LOGIN */
+.login-wrap{position:fixed;inset:0;background:linear-gradient(135deg,#0052CC,#0747A6);display:flex;align-items:center;justify-content:center;z-index:999}
+.login-card{background:#fff;border-radius:12px;padding:36px 40px;width:360px;max-width:94vw;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.login-title{font-size:20px;font-weight:700;color:var(--t);text-align:center;margin-bottom:4px;display:flex;align-items:center;justify-content:center;gap:10px}
+.login-icon{width:36px;height:36px;border-radius:8px;background:var(--blue);display:flex;align-items:center;justify-content:center}
+.login-icon i{color:#fff;font-size:20px}
+.login-sub{font-size:12px;color:var(--t3);text-align:center;margin-bottom:24px}
+.login-lbl{font-size:11px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.login-inp{width:100%;padding:10px 14px;border:1px solid var(--bd2);border-radius:6px;font-size:14px;font-family:'Inter',sans-serif;outline:none;color:var(--t);margin-bottom:14px;transition:border-color .15s}
+.login-inp:focus{border-color:var(--blue);box-shadow:0 0 0 2px rgba(0,82,204,.15)}
+.login-btn{width:100%;padding:11px;background:var(--blue);color:#fff;border:none;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
+.login-btn:hover{background:#0747A6}
+.login-err{background:var(--rl);color:var(--red);padding:10px 14px;border-radius:6px;font-size:13px;margin-bottom:14px;border:1px solid #FFBDAD;display:none}
+.login-err.show{display:block}
+
+/* APP */
+.app{display:flex;height:100vh;overflow:hidden}
+.sb{width:220px;min-width:220px;background:var(--s);border-right:1px solid var(--bd);display:flex;flex-direction:column;height:100vh}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+
+/* SIDEBAR */
+.logo{padding:16px;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:9px}
+.logo-ic{width:32px;height:32px;border-radius:6px;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-ic i{color:#fff;font-size:18px}
+.logo-t{font-size:15px;font-weight:600;color:var(--t)}
+.logo-s{font-size:10px;color:var(--t3)}
+.nav{padding:10px 8px;flex:1;overflow-y:auto}
+.nav-s{font-size:10px;font-weight:600;color:var(--t3);padding:10px 10px 4px;text-transform:uppercase;letter-spacing:.5px}
+.ni{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--r);cursor:pointer;font-size:13px;color:var(--t2);transition:all .12s;margin-bottom:1px;user-select:none}
+.ni:hover{background:var(--bl);color:var(--blue)}
+.ni.act{background:var(--bl);color:var(--blue);font-weight:500}
+.ni i{font-size:16px;width:18px;text-align:center}
+.nbadge{margin-left:auto;font-size:10px;font-weight:600;padding:1px 6px;border-radius:10px;background:var(--blue);color:#fff}
+.nbadge.red{background:#DE350B}
+.team-s{padding:10px 8px 14px;border-top:1px solid var(--bd)}
+.team-lbl{font-size:10px;font-weight:600;color:var(--t3);margin-bottom:7px;padding:0 4px;text-transform:uppercase;letter-spacing:.5px}
+.tm{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:var(--r);cursor:pointer}
+.tm:hover{background:var(--s2)}
+.av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0}
+.tm-n{font-size:12px;color:var(--t2);flex:1}
+.tm-c{font-size:11px;color:var(--t3)}
+
+/* TOPBAR */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:11px 20px;border-bottom:1px solid var(--bd);background:var(--s);flex-shrink:0;gap:10px}
+.ptitle{font-size:15px;font-weight:600;color:var(--t);white-space:nowrap}
+.tbr{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.sbox{display:flex;align-items:center;gap:6px;background:var(--s2);border:1px solid var(--bd2);border-radius:var(--r);padding:6px 11px;width:200px}
+.sbox input{background:none;border:none;outline:none;color:var(--t);font-size:12px;font-family:'Inter',sans-serif;width:100%}
+.sbox input::placeholder{color:var(--t3)}
+.user-chip{display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:var(--r);background:var(--s2);border:1px solid var(--bd);font-size:12px;color:var(--t2)}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 13px;border-radius:var(--r);font-size:12px;font-family:'Inter',sans-serif;font-weight:500;cursor:pointer;border:none;transition:all .12s;white-space:nowrap}
+.btn-p{background:var(--blue);color:#fff}.btn-p:hover{background:#0047B3}
+.btn-sec{background:var(--s);color:var(--t2);border:1px solid var(--bd2)}.btn-sec:hover{background:var(--s2)}
+.btn-sm{padding:5px 10px;font-size:11px}
+.btn-red{background:var(--rl);color:var(--red);border:1px solid #FFBDAD}
+
+/* CONTENT */
+.content{flex:1;overflow-y:auto;padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+.content::-webkit-scrollbar{width:4px}
+.content::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:2px}
+
+/* KPI */
+.kgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.kcard{background:var(--s);border:1px solid var(--bd);border-radius:var(--r2);padding:15px}
+.klbl{font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:7px}
+.kval{font-size:22px;font-weight:600;color:var(--t)}
+.kdelta{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:500;padding:2px 6px;border-radius:10px;margin-top:5px}
+.kdelta.up{background:var(--gl);color:var(--green)}
+.kdelta.dn{background:var(--rl);color:var(--red)}
+
+/* PANELS */
+.twocol{display:grid;grid-template-columns:1fr 270px;gap:12px}
+.panel{background:var(--s);border:1px solid var(--bd);border-radius:var(--r2);overflow:hidden}
+.ph{display:flex;align-items:center;justify-content:space-between;padding:11px 15px;border-bottom:1px solid var(--bd)}
+.pt{font-size:13px;font-weight:600;color:var(--t)}
+
+/* TABLE */
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{text-align:left;padding:8px 12px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);border-bottom:1px solid var(--bd);background:var(--s2);white-space:nowrap}
+tbody tr{border-bottom:1px solid var(--bd);cursor:pointer;transition:background .1s}
+tbody tr:hover{background:#F8F9FF}
+tbody tr:last-child{border-bottom:none}
+td{padding:9px 12px;color:var(--t2);vertical-align:middle}
+td.b{color:var(--t);font-weight:500}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;white-space:nowrap}
+.bn{background:var(--pl);color:var(--purple)}
+.bc{background:var(--bl);color:var(--blue)}
+.br{background:var(--ol);color:var(--orange)}
+.bq{background:var(--tl);color:var(--teal)}
+.bs{background:var(--gl);color:var(--green)}
+.bl2{background:var(--rl);color:var(--red)}
+
+/* ACTIVITY */
+.ai{display:flex;gap:9px;padding:10px 15px;border-bottom:1px solid var(--bd);align-items:flex-start}
+.ai:last-child{border-bottom:none}
+.ai:hover{background:var(--s2)}
+.aico{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.aico i{font-size:14px}
+.atxt{font-size:12px;color:var(--t2);line-height:1.5}
+.atxt b{color:var(--t);font-weight:500}
+.atm{font-size:10px;color:var(--t3);margin-top:2px}
+
+/* PIPELINE */
+.pwrap{overflow-x:auto;padding:12px}
+.pcols{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;min-width:620px}
+.pch{font-size:10px;font-weight:600;margin-bottom:7px;display:flex;align-items:center;justify-content:space-between}
+.sp{font-size:10px;font-weight:600;padding:3px 9px;border-radius:10px}
+.sc{font-size:10px;color:var(--t3)}
+.lc{background:var(--s);border:1px solid var(--bd);border-radius:var(--r);padding:9px 11px;margin-bottom:6px;cursor:pointer;transition:all .12s}
+.lc:hover{border-color:var(--blue);box-shadow:0 2px 8px rgba(0,82,204,.1)}
+.ln{font-size:12px;font-weight:500;color:var(--t);margin-bottom:2px}
+.lv{font-size:12px;font-weight:600;color:var(--blue)}
+.lm{font-size:10px;color:var(--t3);margin-top:3px}
+
+/* RELANCES */
+.ri{display:flex;align-items:center;gap:11px;padding:10px 15px;border-bottom:1px solid var(--bd);cursor:pointer;transition:background .1s}
+.ri:hover{background:var(--s2)}
+.ri:last-child{border-bottom:none}
+.ri-info{flex:1}
+.ri-n{font-size:13px;font-weight:500;color:var(--t)}
+.ri-d{font-size:11px;color:var(--t3);margin-top:2px}
+.rtag{font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;white-space:nowrap}
+.rug{background:var(--rl);color:var(--red)}
+.rso{background:var(--ol);color:var(--orange)}
+
+/* TABS */
+.tabs{display:flex;gap:3px;padding:9px 13px;border-bottom:1px solid var(--bd)}
+.tab{padding:5px 11px;border-radius:var(--r);font-size:12px;font-weight:500;cursor:pointer;color:var(--t3);transition:all .12s;user-select:none}
+.tab:hover{background:var(--s2);color:var(--t2)}
+.tab.act{background:var(--bl);color:var(--blue)}
+
+/* PERF */
+.pi{padding:11px 15px;border-bottom:1px solid var(--bd)}
+.pi:last-child{border-bottom:none}
+.pr{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.pn{font-size:12px;color:var(--t);display:flex;align-items:center;gap:7px;font-weight:500}
+.pv{font-size:12px;font-weight:600;color:var(--blue)}
+.pb{height:5px;background:var(--s2);border-radius:3px;overflow:hidden}
+.pf{height:100%;border-radius:3px}
+.ps{font-size:10px;color:var(--t3);margin-top:3px}
+
+/* FICHE */
+.fscroll{flex:1;overflow-y:auto;padding:18px 20px}
+.fscroll::-webkit-scrollbar{width:4px}
+.fscroll::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:2px}
+.fhdr{display:flex;align-items:center;gap:13px;margin-bottom:16px;padding:15px;background:var(--s);border:1px solid var(--bd);border-radius:var(--r2)}
+.fav{width:44px;height:44px;border-radius:50%;background:var(--bl);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;flex-shrink:0}
+.fn{font-size:16px;font-weight:600;color:var(--t)}
+.fm{font-size:12px;color:var(--t3);margin-top:2px}
+.scard{background:var(--s);border:1px solid var(--bd);border-radius:var(--r2);margin-bottom:12px;overflow:hidden}
+.shead{display:flex;align-items:center;gap:8px;padding:11px 15px;border-bottom:1px solid var(--bd);background:var(--s2)}
+.shead i{font-size:15px;color:var(--blue)}
+.shead-t{font-size:13px;font-weight:600;color:var(--t)}
+.sbody{padding:13px 15px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.fg{display:flex;flex-direction:column;gap:4px}
+.fg.full{grid-column:1/-1}
+.flbl{font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px}
+.finp{background:var(--s);border:1px solid var(--bd2);border-radius:var(--r);padding:7px 10px;color:var(--t);font-size:12px;font-family:'Inter',sans-serif;outline:none;transition:border-color .15s;width:100%}
+.finp:focus{border-color:var(--blue);box-shadow:0 0 0 2px rgba(0,82,204,.15)}
+select.finp{cursor:pointer}
+.tgroup{display:flex;flex-wrap:wrap;gap:5px}
+.tbtn{padding:6px 11px;border-radius:var(--r);border:1px solid var(--bd2);background:var(--s);font-size:12px;font-weight:500;color:var(--t2);cursor:pointer;transition:all .12s;user-select:none;font-family:'Inter',sans-serif}
+.tbtn:hover{border-color:var(--blue);color:var(--blue)}
+.tbtn.on{background:var(--bl);border-color:var(--blue);color:var(--blue);font-weight:600}
+.score-segs{display:flex;gap:3px;flex:1}
+.sseg{height:8px;flex:1;border-radius:2px;background:var(--s2)}
+.notes-ta{background:var(--s);border:1px solid var(--bd2);border-radius:var(--r);padding:9px 11px;color:var(--t);font-size:12px;width:100%;min-height:65px;resize:vertical;outline:none;font-family:'Inter',sans-serif;line-height:1.5}
+.notes-ta:focus{border-color:var(--blue)}
+.factions{display:flex;gap:8px;margin-top:14px;padding:13px 15px;background:var(--s);border:1px solid var(--bd);border-radius:var(--r2);flex-wrap:wrap}
+
+/* DOCS */
+.dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.dcard{border:1px solid var(--bd);border-radius:var(--r2);padding:13px;display:flex;flex-direction:column;gap:9px;transition:all .15s}
+.dcard.has{border-color:#B3D4FF;background:#F0F7FF}
+.dtop{display:flex;align-items:flex-start;gap:9px}
+.dic{width:34px;height:34px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.dic i{font-size:19px}
+.dlbl{font-size:12px;font-weight:600;color:var(--t);line-height:1.3}
+.dfn{font-size:11px;color:var(--blue);margin-top:2px;word-break:break-all}
+.dst{font-size:11px;color:var(--t3);margin-top:2px}
+.dst.ok{color:var(--green);font-weight:500}
+.dbtns{display:flex;gap:5px;flex-wrap:wrap}
+.dbtn{display:inline-flex;align-items:center;gap:4px;padding:4px 9px;border-radius:var(--r);font-size:11px;font-weight:500;cursor:pointer;border:1px solid var(--bd2);background:var(--s);color:var(--t2);transition:all .12s;font-family:'Inter',sans-serif}
+.dbtn:hover{background:var(--s2)}
+.dbtn.pr{background:var(--blue);color:#fff;border-color:var(--blue)}
+.dbtn.pr:hover{background:#0047B3}
+.dbtn.dl{color:var(--red);border-color:#FFBDAD}
+.dbtn.dl:hover{background:var(--rl)}
+.dpbar{display:flex;align-items:center;gap:9px;padding:9px 13px;background:var(--s2);border-radius:var(--r);margin-top:4px}
+.dpbar-b{flex:1;height:4px;background:var(--bd2);border-radius:2px;overflow:hidden}
+.dpbar-f{height:100%;border-radius:2px;transition:width .3s}
+
+/* ELIG */
+.elig-block{padding:13px 15px;border-bottom:1px solid var(--bd)}
+.elig-block:last-child{border-bottom:none}
+.elig-title{font-size:13px;font-weight:600;color:var(--t)}
+.elig-sub{font-size:11px;color:var(--t3);margin-top:2px}
+.elig-ok{font-size:12px;color:var(--green);margin-top:5px;display:flex;gap:6px;align-items:flex-start}
+.elig-ko{font-size:12px;color:var(--red);margin-top:5px;display:flex;gap:6px;align-items:flex-start}
+.gcheck{display:flex;align-items:center;gap:9px;cursor:pointer;padding:7px 9px;border-radius:var(--r);border:1px solid var(--bd);background:var(--s);transition:all .12s;margin-bottom:6px}
+.gcheck.on{background:var(--bl);border-color:var(--blue)}
+.gcheck input{width:15px;height:15px;accent-color:var(--blue);cursor:pointer;flex-shrink:0}
+.gcheck span{font-size:12px;color:var(--t2)}
+.gcheck.on span{color:var(--blue);font-weight:500}
+
+/* USERS */
+.urow{display:flex;align-items:center;gap:11px;padding:11px 15px;border-bottom:1px solid var(--bd);transition:background .1s}
+.urow:last-child{border-bottom:none}
+.urow:hover{background:var(--s2)}
+.uinfo{flex:1}
+.un{font-size:13px;font-weight:500;color:var(--t)}
+.usub{font-size:11px;color:var(--t3);margin-top:2px}
+.ucode{font-size:12px;color:var(--t3);font-family:monospace;background:var(--s2);padding:2px 8px;border-radius:4px;border:1px solid var(--bd)}
+.inv-btn{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:var(--r);font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--bd2);background:var(--s);color:var(--blue);transition:all .12s;text-decoration:none}
+.inv-btn:hover{background:var(--bl);border-color:var(--blue)}
+
+/* NOTIF */
+.nbell{position:fixed;bottom:18px;right:18px;z-index:250;width:50px;height:50px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 16px rgba(0,82,204,.4);font-size:21px;transition:transform .15s}
+.nbell:hover{transform:scale(1.08)}
+.nbadge2{position:absolute;top:-2px;right:-2px;background:#DE350B;color:#fff;font-size:9px;font-weight:700;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.npanel{position:fixed;bottom:78px;right:18px;z-index:250;width:310px;background:var(--s);border:1px solid var(--bd);border-radius:var(--r2);box-shadow:0 8px 32px rgba(0,0,0,.15);overflow:hidden}
+.nph{padding:11px 13px;background:var(--blue);color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:space-between}
+.nph-close{cursor:pointer;font-size:15px;opacity:.8}
+.nitem{display:flex;gap:9px;padding:9px 13px;border-bottom:1px solid var(--bd);cursor:pointer;transition:background .1s}
+.nitem:hover{background:var(--s2)}
+.nitem:last-child{border-bottom:none}
+.nitem-ic{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px}
+.nitem-t{font-size:12px;font-weight:600;color:var(--t)}
+.nitem-s{font-size:11px;color:var(--t3);margin-top:2px}
+.nbanner{position:fixed;top:0;left:0;right:0;z-index:300;background:#DE350B;color:#fff;padding:11px 15px;display:flex;align-items:center;gap:9px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.nbanner-t{flex:1;font-size:13px;font-weight:500}
+.nbanner-x{cursor:pointer;font-size:17px;opacity:.8}
+
+/* MOBILE */
+.mob-nav{display:none;overflow-x:auto;padding:7px;gap:3px;border-top:1px solid var(--bd);background:var(--s)}
+.mni{display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 11px;border-radius:var(--r);cursor:pointer;font-size:10px;color:var(--t3);transition:all .12s;white-space:nowrap;flex-shrink:0;min-width:56px;user-select:none}
+.mni:hover,.mni.act{background:var(--bl);color:var(--blue)}
+.mni i{font-size:19px}
+.mnb{background:#DE350B;color:#fff;font-size:9px;padding:1px 4px;border-radius:8px;min-width:15px;text-align:center}
+@media(max-width:768px){
+  .sb .nav,.sb .team-s{display:none}
+  .sb{width:100%;min-width:unset;height:auto;border-right:none;border-bottom:1px solid var(--bd)}
+  .mob-nav{display:flex!important}
+  .app{flex-direction:column}
+  .main{height:calc(100vh - 110px)}
+  .kgrid{grid-template-columns:1fr 1fr}
+  .twocol{grid-template-columns:1fr}
+  .dgrid{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:1fr}
+  .topbar{padding:9px 13px}
+  .content{padding:12px}
+  .fscroll{padding:12px}
+  .npanel{right:10px;left:10px;width:auto;bottom:65px}
+  .nbell{bottom:12px;right:12px}
+}
+@media(min-width:769px){.mob-nav{display:none!important}}
+
+/* MODAL */
+.moverlay{display:none;position:fixed;inset:0;background:rgba(9,30,66,.5);z-index:200;align-items:center;justify-content:center}
+.moverlay.open{display:flex}
+.mbox{background:var(--s);border-radius:var(--r2);width:480px;max-width:96vw;max-height:92vh;overflow-y:auto;box-shadow:0 8px 32px rgba(9,30,66,.25)}
+.mhdr{display:flex;align-items:center;justify-content:space-between;padding:15px 18px;border-bottom:1px solid var(--bd)}
+.mtitle{font-size:14px;font-weight:600;color:var(--t)}
+.mclose{cursor:pointer;color:var(--t3);font-size:17px;width:26px;height:26px;border-radius:var(--r);display:flex;align-items:center;justify-content:center}
+.mclose:hover{background:var(--s2);color:var(--t)}
+.mbody{padding:18px}
+.mfooter{display:flex;gap:8px;justify-content:flex-end;padding:13px 18px;border-top:1px solid var(--bd)}
+.empty{text-align:center;padding:30px;color:var(--t3);font-size:13px}
+
+/* ── RAPPEL POP-UP ── */
+.rappel-overlay{position:fixed;inset:0;background:rgba(9,30,66,.6);z-index:500;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
+.rappel-card{background:#fff;border-radius:14px;width:360px;max-width:95vw;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden;animation:popIn .25s ease}
+@keyframes popIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+.rappel-top{background:linear-gradient(135deg,#DE350B,#FF5630);padding:18px 20px;color:#fff}
+.rappel-badge{font-size:11px;font-weight:600;background:rgba(255,255,255,.2);padding:2px 8px;border-radius:10px;display:inline-block;margin-bottom:8px}
+.rappel-name{font-size:19px;font-weight:700;margin-bottom:3px}
+.rappel-info{font-size:13px;opacity:.9}
+.rappel-tel{display:flex;align-items:center;gap:8px;margin-top:12px;background:rgba(255,255,255,.15);padding:10px 14px;border-radius:8px;cursor:pointer;transition:background .15s}
+.rappel-tel:hover{background:rgba(255,255,255,.25)}
+.rappel-tel-num{font-size:16px;font-weight:600;letter-spacing:.5px}
+.rappel-body{padding:16px 20px}
+.rappel-note{font-size:12px;color:#5E6C84;background:#F4F5F7;padding:9px 12px;border-radius:6px;margin-bottom:14px;line-height:1.5}
+.rappel-note b{color:#172B4D}
+.rappel-actions{display:flex;flex-direction:column;gap:8px}
+.rappel-btn-main{display:flex;align-items:center;justify-content:center;gap:7px;padding:12px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;font-family:'Inter',sans-serif;transition:all .15s;width:100%}
+.rappel-btn-done{background:#006644;color:#fff}.rappel-btn-done:hover{background:#004d32}
+.rappel-btn-row{display:flex;gap:8px}
+.rappel-btn-sm{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:9px;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid #E2E8F0;background:#fff;color:#5E6C84;font-family:'Inter',sans-serif;transition:all .15s}
+.rappel-btn-sm:hover{background:#F4F5F7;color:#172B4D}
+.rappel-btn-report{border-color:#FFAB00;color:#974F0C;background:#FFF0E6}
+.rappel-btn-report:hover{background:#FFE380}
+.rappel-btn-fiche{border-color:#0052CC;color:#0052CC;background:#DEEBFF}
+.rappel-btn-fiche:hover{background:#B3D4FF}
+.rappel-counter{text-align:center;font-size:11px;color:#97A0AF;margin-top:10px}
+
+/* REPORTER MODAL */
+.reporter-card{background:#fff;border-radius:12px;width:320px;max-width:95vw;box-shadow:0 8px 32px rgba(0,0,0,.2);overflow:hidden}
+.reporter-head{padding:14px 18px;border-bottom:1px solid #E2E8F0;font-size:14px;font-weight:600;color:#172B4D;display:flex;align-items:center;justify-content:space-between}
+.reporter-body{padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.reporter-opt{display:flex;align-items:center;gap:10px;padding:10px 13px;border-radius:8px;border:1px solid #E2E8F0;cursor:pointer;transition:all .15s;font-size:13px;color:#172B4D}
+.reporter-opt:hover{background:#DEEBFF;border-color:#0052CC;color:#0052CC}
+.reporter-opt i{font-size:18px;color:#0052CC}
+.reporter-custom{display:flex;flex-direction:column;gap:6px;padding:10px 13px;border-radius:8px;border:1px solid #E2E8F0}
+.reporter-custom label{font-size:11px;font-weight:600;color:#97A0AF;text-transform:uppercase;letter-spacing:.5px}
+.reporter-custom input{border:none;outline:none;font-size:13px;color:#172B4D;font-family:'Inter',sans-serif;width:100%}
+
+/* RAPPEL BADGE in fiche */
+.rappel-set{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:8px;border:1px solid #FFAB00;background:#FFF0E6;margin-top:8px}
+.rappel-set i{color:#974F0C;font-size:16px}
+.rappel-set-info{flex:1}
+.rappel-set-date{font-size:12px;font-weight:600;color:#974F0C}
+.rappel-set-sub{font-size:11px;color:#97A0AF;margin-top:1px}
+.rappel-set-del{cursor:pointer;color:#97A0AF;font-size:15px;padding:2px}
+.rappel-set-del:hover{color:#BF2600}
+
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="login-wrap">
+  <div class="login-card">
+    <div class="login-title">
+      <div class="login-icon"><i class="ti ti-home-bolt"></i></div>
+      PacCRM
+    </div>
+    <div class="login-sub">IP5 Énergie — Pompes à chaleur</div>
+    <div class="login-lbl">Code d'accès</div>
+    <div class="login-err" id="login-err">Code incorrect</div>
+    <input class="login-inp" id="login-inp" type="password" placeholder="Entrez votre code…">
+    <button class="login-btn" id="login-btn">Se connecter</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="app" id="app" style="display:none">
+  <aside class="sb" id="sidebar"></aside>
+  <div class="main">
+    <div class="topbar" id="topbar"></div>
+    <div id="main-content" style="flex:1;display:flex;flex-direction:column;overflow:hidden"></div>
+  </div>
+</div>
+<div class="mob-nav" id="mob-nav"></div>
+
+<!-- MODAL -->
+<div class="moverlay" id="moverlay">
+  <div class="mbox" id="mbox"></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// AUTH
+// ═══════════════════════════════════════════
+const USERS = [
+  {name:'Carole', code:'111', role:'admin',      color:'#DEEBFF',tc:'#0052CC'},
+  {name:'Alexis', code:'000', role:'admin',      color:'#EAE6FF',tc:'#403294'},
+  {name:'Jonas',  code:'222', role:'admin',      color:'#E3FCEF',tc:'#006644'},
+  {name:'Mebarek',code:'333', role:'commercial', color:'#FFF0E6',tc:'#974F0C'},
+];
+const ADMIN_CODE = 'Assadna312!';
+let currentUser = null;
+
+function tryLogin(code){
+  if(!code) return false;
+  if(code === ADMIN_CODE){ currentUser={name:'Admin',code,role:'admin',color:'#172B4D',tc:'#fff'}; return true; }
+  const u = USERS.find(u=>u.code===code);
+  if(u){ currentUser=u; return true; }
+  return false;
+}
+function isAdmin(){ return currentUser && currentUser.role==='admin'; }
+function logout(){ currentUser=null; document.getElementById('app').style.display='none'; document.getElementById('login-wrap').style.display='flex'; document.getElementById('login-inp').value=''; }
+
+document.getElementById('login-btn').onclick = function(){
+  const code = document.getElementById('login-inp').value.trim();
+  if(tryLogin(code)){
+    document.getElementById('login-wrap').style.display='none';
+    document.getElementById('app').style.display='flex';
+    render();
+    startRappelSystem();
+  } else {
+    const err = document.getElementById('login-err');
+    err.style.display='block';
+    document.getElementById('login-inp').value='';
+    setTimeout(()=>err.style.display='none', 2500);
+  }
+};
+document.getElementById('login-inp').addEventListener('keydown', e=>{ if(e.key==='Enter') document.getElementById('login-btn').click(); });
+
+// ═══════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════
+const SK = 'paccrm_v2';
+function load(){ try{ const r=localStorage.getItem(SK); if(r) return JSON.parse(r); }catch(e){} return null; }
+function save(){ try{ localStorage.setItem(SK,JSON.stringify({contacts:state.contacts})); }catch(e){} }
+
+const DEFAULT = [
+  {id:1,prenom:'Julien',nom:'Moreau',tel:'06 11 22 33 44',ville:'Lyon',offre:'PAC Air/Air 9kW',valeur:8200,statut:'Devis envoyé',commercial:'Mebarek',urgence:'urgent',rfr:28000,personnes:3,surface:110,radiateur:'Acier',chauffage:'Gaz',combles:'Non isolés',sousSol:'Sans sous-sol',isoMur:'Possible',anneeConst:1985,vitrage:'Simple',toiture:'Tuile',dpe:'E',notes:'',docs:{avis:null,cni:null,taxe:null},gestes174:{iso_combles:true,iso_fenetres:true},installateur:'EcoInstall Pro',origineType:'commercial',origineDetail:'Mebarek'},
+  {id:2,prenom:'Marie',nom:'Dupont',tel:'06 22 33 44 55',ville:'Bordeaux',offre:'PAC Air/Eau 12kW',valeur:12400,statut:'RDV fixé',commercial:'Carole',urgence:'soon',rfr:42000,personnes:4,surface:145,radiateur:'Fonte',chauffage:'Fioul',combles:'Isolés',sousSol:'Non isolé',isoMur:'Impossible',anneeConst:1972,vitrage:'Double',toiture:'Ardoise',dpe:'F',notes:'',docs:{avis:{name:'avis_2023.pdf',size:'1.2 Mo'},cni:null,taxe:null},gestes174:{iso_combles:true,iso_plancher:true,iso_mur_int:true},installateur:'ThermoPro Sud',origineType:'parrainage',origineDetail:'Jean Dupont'},
+  {id:3,prenom:'Pierre',nom:'Bernard',tel:'06 33 44 55 66',ville:'Nantes',offre:'PAC Géothermique',valeur:18500,statut:'Signé',commercial:'Alexis',urgence:null,rfr:55000,personnes:2,surface:190,radiateur:'Plancher chauffant',chauffage:'Gaz',combles:'Isolés',sousSol:'Isolé',isoMur:'Possible',anneeConst:2005,vitrage:'Double',toiture:'Tuile',dpe:'C',notes:'',docs:{avis:{name:'avis.pdf',size:'980 Ko'},cni:{name:'CNI.jpg',size:'2.1 Mo'},taxe:{name:'taxe.pdf',size:'560 Ko'}},gestes174:{},installateur:'EcoInstall Pro',origineType:'marketing',origineDetail:'Facebook Ads'},
+  {id:4,prenom:'Sophie',nom:'Martin',tel:'06 44 55 66 77',ville:'Toulouse',offre:'PAC Air/Air 7kW',valeur:6800,statut:'Contacté',commercial:'Jonas',urgence:'urgent',rfr:19500,personnes:1,surface:65,radiateur:'Acier',chauffage:'Électrique',combles:'Non isolés',sousSol:'Sans sous-sol',isoMur:'Possible',anneeConst:1995,vitrage:'Simple',toiture:'Terrasse',dpe:'E',notes:'',docs:{avis:null,cni:null,taxe:null},gestes174:{iso_fenetres:true},installateur:'',origineType:'commercial',origineDetail:'Jonas'},
+  {id:5,prenom:'Lucas',nom:'Petit',tel:'06 55 66 77 88',ville:'Marseille',offre:'PAC Air/Eau 15kW',valeur:15200,statut:'Nouveau',commercial:'Mebarek',urgence:'soon',rfr:37000,personnes:5,surface:220,radiateur:'Fonte',chauffage:'Fioul',combles:'Non isolés',sousSol:'Non isolé',isoMur:'Impossible',anneeConst:1965,vitrage:'Simple',toiture:'Tuile',dpe:'G',notes:'',docs:{avis:{name:'avis.pdf',size:'1.4 Mo'},cni:null,taxe:null},gestes174:{iso_combles:true,iso_mur_ext:true},installateur:'ThermoPro Sud',origineType:'parrainage',origineDetail:'Claire Fontaine'},
+];
+
+const saved = load();
+const state = { view:'dashboard', contacts: saved ? saved.contacts : DEFAULT, ficheId:null, search:'', statusFilter:'', relTab:0 };
+
+// ═══════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════
+const fmt = n => n.toLocaleString('fr-FR')+' €';
+const SBADGE = {Nouveau:'bn',Contacté:'bc','RDV fixé':'br','Devis envoyé':'bq',Signé:'bs',Perdu:'bl2'};
+const DPE_C = {A:'#006644',B:'#006644',C:'#3B6D11',D:'#974F0C',E:'#974F0C',F:'#BF2600',G:'#BF2600'};
+const DPE_B = {A:'#E3FCEF',B:'#E3FCEF',C:'#EAF3DE',D:'#FFF0E6',E:'#FFF0E6',F:'#FFEBE6',G:'#FFEBE6'};
+const STAGES = ['Nouveau','Contacté','RDV fixé','Devis envoyé','Signé'];
+const SCOL = {Nouveau:'#403294',Contacté:'#0052CC','RDV fixé':'#974F0C','Devis envoyé':'#006C72',Signé:'#006644'};
+const SBG = {Nouveau:'#EAE6FF',Contacté:'#DEEBFF','RDV fixé':'#FFF0E6','Devis envoyé':'#E6FCFF',Signé:'#E3FCEF'};
+const DCFG = {
+  avis:{label:"Avis d'imposition",icon:'ti-receipt-tax',c:'#0052CC',bg:'#DEEBFF'},
+  cni:{label:'Carte nationale d\'identité',icon:'ti-id',c:'#403294',bg:'#EAE6FF'},
+  taxe:{label:'Taxe d\'habitation',icon:'ti-home-2',c:'#006644',bg:'#E3FCEF'},
+};
+const GESTES = [
+  {key:'iso_combles',    label:'Isolation combles'},
+  {key:'iso_plancher',   label:'Isolation plancher bas / vide sanitaire'},
+  {key:'iso_mur_int',    label:'Isolation murs intérieure (ITI)'},
+  {key:'iso_mur_ext',    label:'Isolation murs extérieure (ITE)'},
+  {key:'iso_toiture',    label:'Isolation toiture-terrasse'},
+  {key:'iso_fenetres',   label:'Remplacement fenêtres / double vitrage'},
+];
+const RFR_TM = {1:17009,2:24875,3:29917,4:34948,5:39990};
+
+function bdg(s){ return `<span class="badge ${SBADGE[s]||'bc'}">${s}</span>`; }
+function dpeBdg(d){ if(!d)return '—'; return `<span class="badge" style="background:${DPE_B[d]||'#F4F5F7'};color:${DPE_C[d]||'#97A0AF'};font-weight:700">${d}</span>`; }
+function sc(c){
+  let s=0;
+  if(c.rfr<=21400)s+=30; else if(c.rfr<=31400)s+=20; else if(c.rfr<=45000)s+=10;
+  if(['Fioul','Gaz'].includes(c.chauffage))s+=20;
+  if(['E','F','G'].includes(c.dpe))s+=20;
+  if(c.combles==='Non isolés')s+=10;
+  if(c.sousSol==='Non isolé')s+=5;
+  if(c.surface>=80&&c.surface<=250)s+=10;
+  if(c.anneeConst&&c.anneeConst<1990)s+=5;
+  return Math.min(s,100);
+}
+function scC(s){ return s>=70?'var(--green)':s>=40?'var(--orange)':'var(--red)'; }
+function scB(s){ return s>=70?'var(--gl)':s>=40?'var(--ol)':'var(--rl)'; }
+function scL(s){ return s>=70?'Très éligible':s>=40?'Éligible':'Peu éligible'; }
+function nDocs(c){ const d=c.docs||{}; return [d.avis,d.cni,d.taxe].filter(Boolean).length; }
+function docsBdg(c){
+  const n=nDocs(c);
+  if(n===3)return '<span class="badge bs"><i class="ti ti-circle-check"></i> Complet</span>';
+  if(n>0)return `<span class="badge br">${n}/3</span>`;
+  return '<span class="badge bl2">0/3</span>';
+}
+function th171(c){
+  const ok=[],ko=[];
+  const age=c.anneeConst?(new Date().getFullYear()-c.anneeConst):null;
+  if(!age||age<2)ko.push('Logement de moins de 2 ans'); else ok.push('Logement +2 ans ✓');
+  const hyd=['Acier','Fonte','Plancher chauffant'].includes(c.radiateur);
+  const chaud=['Gaz','Fioul','Propane','Bois'].includes(c.chauffage);
+  if(!hyd)ko.push('Pas d\'émetteurs hydrauliques'); else ok.push('Émetteurs hydrauliques ✓');
+  if(!chaud)ko.push('Pas de chaudière'); else ok.push('Chaudière existante ✓');
+  const p=Math.min(Math.max(parseInt(c.personnes)||1,1),5);
+  const plaf=RFR_TM[p]||39990;
+  if(!c.rfr)ko.push('RFR non renseigné');
+  else if(c.rfr>plaf)ko.push(`RFR trop élevé (${c.rfr.toLocaleString('fr-FR')}€ > ${plaf.toLocaleString('fr-FR')}€)`);
+  else ok.push(`RFR très modeste ✓ (≤${plaf.toLocaleString('fr-FR')}€)`);
+  return {elig:ko.length===0,ok,ko};
+}
+function th174(c){
+  const ok=[],ko=[];
+  const age=c.anneeConst?(new Date().getFullYear()-c.anneeConst):null;
+  if(!age||age<2)ko.push('Logement de moins de 2 ans'); else ok.push('Logement +2 ans ✓');
+  const g=c.gestes174||{};
+  const n=GESTES.filter(x=>g[x.key]).length;
+  if(n<2)ko.push(`${n} geste(s) sélectionné(s) — minimum 2 requis`); else ok.push(`${n} geste(s) d'isolation ✓`);
+  return {elig:ko.length===0,ok,ko,n};
+}
+function ceeBdg(c){
+  const a=th171(c),b=th174(c);
+  return (a.elig?'<span class="badge bs">TH-171</span>':'')+' '+(b.elig?'<span class="badge bq">TH-174</span>':'');
+}
+function origineIcon(t){ return t==='parrainage'?'🤝':t==='marketing'?'📣':'👤'; }
+function visibleContacts(){ if(!currentUser)return []; if(isAdmin())return state.contacts; return state.contacts.filter(c=>c.commercial===currentUser.name); }
+
+// ═══════════════════════════════════════════
+// NAVIGATE
+// ═══════════════════════════════════════════
+function go(v){ state.view=v; if(v!=='fiche')state.ficheId=null; render(); }
+function openFiche(id){ state.view='fiche'; state.ficheId=id; render(); }
+function upd(id,k,v){ state.contacts=state.contacts.map(c=>c.id===id?{...c,[k]:v}:c); save(); render(); }
+function updDoc(id,k,v){ state.contacts=state.contacts.map(c=>c.id===id?{...c,docs:{...(c.docs||{}),[k]:v}}:c); save(); render(); }
+function updGeste(id,k,v){ state.contacts=state.contacts.map(c=>c.id===id?{...c,gestes174:{...(c.gestes174||{}),[k]:v}}:c); save(); render(); }
+function delContact(id){ if(confirm('Supprimer ce contact ?')){ state.contacts=state.contacts.filter(c=>c.id!==id); save(); go('contacts'); } }
+
+// ═══════════════════════════════════════════
+// MODAL
+// ═══════════════════════════════════════════
+function openModal(){
+  const m = {prenom:'',nom:'',tel:'',ville:'',offre:'PAC Air/Eau 12kW',valeur:'',commercial:'Mebarek',statut:'Nouveau',rfr:'',personnes:'',surface:'',radiateur:'Acier',chauffage:'Gaz',anneeConst:'',dpe:'D',installateur:'',origineType:'commercial',origineDetail:''};
+  function renderM(){
+    document.getElementById('mbox').innerHTML = `
+      <div class="mhdr"><span class="mtitle">Nouveau contact</span><span class="mclose" id="mclose-btn"><i class="ti ti-x"></i></span></div>
+      <div class="mbody">
+        <div class="fgrid" style="gap:11px">
+          <div class="fg"><div class="flbl">Prénom *</div><input class="finp" id="m-prenom" placeholder="Jean" value="${m.prenom}"></div>
+          <div class="fg"><div class="flbl">Nom *</div><input class="finp" id="m-nom" placeholder="Dupont" value="${m.nom}"></div>
+          <div class="fg"><div class="flbl">Téléphone</div><input class="finp" id="m-tel" placeholder="06 00 00 00 00" value="${m.tel}"></div>
+          <div class="fg"><div class="flbl">Ville</div><input class="finp" id="m-ville" placeholder="Lyon" value="${m.ville}"></div>
+          <div class="fg"><div class="flbl">RFR (€)</div><input class="finp" id="m-rfr" type="number" placeholder="28000" value="${m.rfr}"></div>
+          <div class="fg"><div class="flbl">Personnes dans le foyer</div><input class="finp" id="m-personnes" type="number" placeholder="3" value="${m.personnes}"></div>
+          <div class="fg"><div class="flbl">Surface (m²)</div><input class="finp" id="m-surface" type="number" placeholder="120" value="${m.surface}"></div>
+          <div class="fg"><div class="flbl">Année construction</div><input class="finp" id="m-annee" type="number" placeholder="1985" value="${m.anneeConst}"></div>
+          <div class="fg"><div class="flbl">DPE actuel</div><select class="finp" id="m-dpe">${['A','B','C','D','E','F','G'].map(d=>`<option${m.dpe===d?' selected':''}>${d}</option>`).join('')}</select></div>
+          <div class="fg"><div class="flbl">Chauffage actuel</div><select class="finp" id="m-chauffage">${['Gaz','Fioul','Électrique','Bois','Propane'].map(d=>`<option${m.chauffage===d?' selected':''}>${d}</option>`).join('')}</select></div>
+          <div class="fg"><div class="flbl">Radiateurs</div><select class="finp" id="m-radiateur">${['Acier','Fonte','Plancher chauffant','Ventilo-convecteur','Mixte'].map(d=>`<option${m.radiateur===d?' selected':''}>${d}</option>`).join('')}</select></div>
+          <div class="fg"><div class="flbl">Offre PAC</div><select class="finp" id="m-offre">${['PAC Air/Air 7kW','PAC Air/Air 9kW','PAC Air/Air 12kW','PAC Air/Eau 12kW','PAC Air/Eau 15kW','PAC Géothermique'].map(d=>`<option${m.offre===d?' selected':''}>${d}</option>`).join('')}</select></div>
+          <div class="fg"><div class="flbl">Commercial</div><select class="finp" id="m-commercial">${['Mebarek','Carole','Alexis','Jonas'].map(d=>`<option${m.commercial===d?' selected':''}>${d}</option>`).join('')}</select></div>
+          <div class="fg"><div class="flbl">Statut</div><select class="finp" id="m-statut">${['Nouveau','Contacté','RDV fixé','Devis envoyé'].map(d=>`<option${m.statut===d?' selected':''}>${d}</option>`).join('')}</select></div>
+          <div class="fg full"><div class="flbl">Installateur partenaire</div><input class="finp" id="m-install" placeholder="Nom de l'installateur" value="${m.installateur}"></div>
+          <div class="fg"><div class="flbl">Origine du lead</div><select class="finp" id="m-origtype">${['commercial','parrainage','marketing'].map(d=>`<option value="${d}"${m.origineType===d?' selected':''}>${d.charAt(0).toUpperCase()+d.slice(1)}</option>`).join('')}</select></div>
+          <div class="fg"><div class="flbl" id="m-origdetail-lbl">Commercial apporteur</div><input class="finp" id="m-origdetail" placeholder="Nom" value="${m.origineDetail}"></div>
+        </div>
+      </div>
+      <div class="mfooter">
+        <button class="btn btn-sec" id="mcancel-btn">Annuler</button>
+        <button class="btn btn-p" id="madd-btn"><i class="ti ti-plus"></i> Ajouter</button>
+      </div>`;
+
+    document.getElementById('mclose-btn').onclick = closeModal;
+    document.getElementById('mcancel-btn').onclick = closeModal;
+    document.getElementById('m-origtype').onchange = function(){
+      const lbl = {commercial:'Commercial apporteur',parrainage:'Parrainé par',marketing:'Canal marketing'};
+      document.getElementById('m-origdetail-lbl').textContent = lbl[this.value]||'Détail';
+    };
+    document.getElementById('madd-btn').onclick = function(){
+      const prenom = document.getElementById('m-prenom').value.trim();
+      const nom = document.getElementById('m-nom').value.trim();
+      if(!prenom||!nom){ alert('Prénom et nom requis.'); return; }
+      const newC = {
+        id: Date.now(),
+        prenom, nom,
+        tel: document.getElementById('m-tel').value.trim(),
+        ville: document.getElementById('m-ville').value.trim(),
+        rfr: parseInt(document.getElementById('m-rfr').value)||0,
+        personnes: parseInt(document.getElementById('m-personnes').value)||1,
+        surface: parseInt(document.getElementById('m-surface').value)||0,
+        anneeConst: parseInt(document.getElementById('m-annee').value)||0,
+        dpe: document.getElementById('m-dpe').value,
+        chauffage: document.getElementById('m-chauffage').value,
+        radiateur: document.getElementById('m-radiateur').value,
+        offre: document.getElementById('m-offre').value,
+        valeur: 0,
+        commercial: document.getElementById('m-commercial').value,
+        statut: document.getElementById('m-statut').value,
+        installateur: document.getElementById('m-install').value.trim(),
+        origineType: document.getElementById('m-origtype').value,
+        origineDetail: document.getElementById('m-origdetail').value.trim(),
+        urgence: null, notes: '',
+        combles:'Non isolés',sousSol:'Sans sous-sol',isoMur:'Possible',vitrage:'Double',toiture:'Tuile',
+        docs:{avis:null,cni:null,taxe:null}, gestes174:{}
+      };
+      state.contacts = [newC, ...state.contacts];
+      save();
+      closeModal();
+      render();
+    };
+  }
+  renderM();
+  document.getElementById('moverlay').classList.add('open');
+}
+function closeModal(){ document.getElementById('moverlay').classList.remove('open'); }
+document.getElementById('moverlay').addEventListener('click', e=>{ if(e.target===document.getElementById('moverlay'))closeModal(); });
+
+// ═══════════════════════════════════════════
+// FILE UPLOAD
+// ═══════════════════════════════════════════
+function trigUp(cid,k){ document.getElementById(`fu-${cid}-${k}`).click(); }
+function handleFile(cid,k,inp){
+  const f=inp.files[0]; if(!f)return;
+  const sz=f.size>1048576?(f.size/1048576).toFixed(1)+' Mo':(f.size/1024).toFixed(0)+' Ko';
+  const r=new FileReader();
+  r.onload=e=>updDoc(cid,k,{name:f.name,size:sz,data:e.target.result});
+  r.readAsDataURL(f);
+}
+function removeDoc(cid,k){ if(confirm('Supprimer ce document ?'))updDoc(cid,k,null); }
+function viewDoc(cid,k){
+  const c=state.contacts.find(x=>x.id===cid);
+  const d=c&&c.docs&&c.docs[k];
+  if(!d)return;
+  if(d.data){ const w=window.open(); w.document.write(`<img src="${d.data}" style="max-width:100%"><br><a href="${d.data}" download="${d.name}">Télécharger</a>`); }
+  else alert(d.name);
+}
+
+// ═══════════════════════════════════════════
+// NOTIFICATIONS
+// ═══════════════════════════════════════════
+let notifOpen=false;
+function getUrgent(){ return visibleContacts().filter(c=>c.urgence==='urgent'); }
+function sendBrowserNotif(title,body,cid){
+  if('Notification'in window&&Notification.permission==='granted'){
+    const n=new Notification(title,{body,requireInteraction:true});
+    n.onclick=()=>{ window.focus(); openFiche(cid); n.close(); };
+  }
+}
+function showBanner(urgent){
+  const ex=document.getElementById('nbanner'); if(ex)ex.remove();
+  if(!urgent.length)return;
+  const b=document.createElement('div');
+  b.id='nbanner'; b.className='nbanner';
+  b.innerHTML=`<i class="ti ti-bell-ringing" style="font-size:19px;flex-shrink:0"></i><div class="nbanner-t"><b>${urgent.length} relance${urgent.length>1?'s':''} urgente${urgent.length>1?'s':''}</b> — ${urgent.map(c=>c.prenom+' '+c.nom).join(', ')}</div><span class="nbanner-x" onclick="this.parentElement.remove()">✕</span>`;
+  document.body.prepend(b);
+  setTimeout(()=>{ if(b.parentElement)b.remove(); },8000);
+}
+function toggleNotif(){
+  notifOpen=!notifOpen;
+  const ex=document.getElementById('npanel'); if(ex)ex.remove();
+  if(!notifOpen)return;
+  const urgent=getUrgent();
+  const soon=visibleContacts().filter(c=>c.urgence==='soon');
+  const all=[...urgent,...soon];
+  const p=document.createElement('div');
+  p.id='npanel'; p.className='npanel';
+  p.innerHTML=`<div class="nph"><span><i class="ti ti-bell" style="margin-right:5px"></i>Relances (${all.length})</span><span class="nph-close" onclick="toggleNotif()">✕</span></div>
+    ${all.length?all.map(c=>`<div class="nitem" onclick="toggleNotif();openFiche(${c.id})"><div class="nitem-ic" style="background:${c.urgence==='urgent'?'#FFEBE6':'#FFF0E6'}"><i class="ti ti-phone" style="color:${c.urgence==='urgent'?'#BF2600':'#974F0C'}"></i></div><div><div class="nitem-t">${c.prenom} ${c.nom} <span style="font-weight:400;color:var(--t3)">→ ${c.commercial}</span></div><div class="nitem-s">${c.offre} · <b style="color:${c.urgence==='urgent'?'#BF2600':'#974F0C'}">${c.urgence==='urgent'?"Aujourd'hui":'Cette semaine'}</b></div></div></div>`).join(''):'<div class="empty">Aucune relance 🎉</div>'}
+    <div style="padding:9px 13px;border-top:1px solid var(--bd)"><button class="btn btn-p" style="width:100%;justify-content:center" onclick="toggleNotif();fireNotifs()"><i class="ti ti-bell-ringing"></i> Envoyer toutes les relances</button></div>`;
+  document.body.appendChild(p);
+}
+function fireNotifs(){
+  const urgent=getUrgent();
+  showBanner(urgent);
+  if('Notification'in window&&Notification.permission==='default') Notification.requestPermission();
+  urgent.forEach((c,i)=>setTimeout(()=>sendBrowserNotif('📞 Relance — '+c.commercial,c.prenom+' '+c.nom+' · '+c.offre,c.id),i*2000));
+}
+function renderBell(){
+  const ex=document.getElementById('nbell-wrap'); if(ex)ex.remove();
+  const urgent=getUrgent();
+  const w=document.createElement('div'); w.id='nbell-wrap';
+  w.innerHTML=`<div class="nbell" onclick="toggleNotif()"><i class="ti ti-bell"></i>${urgent.length?`<div class="nbadge2">${urgent.length}</div>`:''}</div>`;
+  document.body.appendChild(w);
+}
+
+// ═══════════════════════════════════════════
+// INVITE
+// ═══════════════════════════════════════════
+function inviteLink(u){
+  const url=window.location.href;
+  const sub=encodeURIComponent('Invitation PacCRM — IP5 Énergie');
+  const body=encodeURIComponent('Bonjour '+u.name+',\n\nTu es invité(e) sur PacCRM IP5 Énergie.\n\n🔗 Accès : '+url+'\n🔑 Code : '+u.code+'\n👤 Rôle : '+(u.role==='admin'?'Administrateur':'Commercial')+'\n\nBonne utilisation !\nIP5 Énergie');
+  return 'mailto:?subject='+sub+'&body='+body;
+}
+
+// ═══════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════
+function render(){
+  const contacts=visibleContacts();
+  const {view,ficheId,search,statusFilter,relTab}=state;
+  const signed=contacts.filter(c=>c.statut==='Signé');
+  const active=contacts.filter(c=>!['Signé','Perdu'].includes(c.statut));
+  const urgent=contacts.filter(c=>c.urgence==='urgent');
+  const soon=contacts.filter(c=>c.urgence==='soon');
+  const ca=signed.reduce((s,c)=>s+c.valeur,0);
+  const conv=contacts.length?Math.round(signed.length/contacts.length*100):0;
+  const titles={dashboard:'Tableau de bord',pipeline:'Pipeline',contacts:'Contacts',contrats:'Contrats',relances:'Relances',performance:'Performance',utilisateurs:'Utilisateurs',fiche:'Fiche client'};
+  const navItems=[
+    {id:'dashboard',icon:'ti-layout-dashboard',label:'Tableau de bord'},
+    {id:'pipeline',icon:'ti-timeline',label:'Pipeline',badge:active.length},
+    {id:'contacts',icon:'ti-users',label:'Contacts'},
+    {id:'contrats',icon:'ti-file-check',label:'Contrats'},
+    {id:'relances',icon:'ti-bell',label:'Relances',badge:urgent.length,red:true},
+    {id:'performance',icon:'ti-chart-bar',label:'Performance'},
+    ...(isAdmin()?[{id:'utilisateurs',icon:'ti-users-group',label:'Utilisateurs'}]:[]),
+  ];
+  const filtered=contacts.filter(c=>{
+    const q=search.toLowerCase();
+    return(!q||(c.prenom+' '+c.nom+c.ville+c.offre).toLowerCase().includes(q))&&(!statusFilter||c.statut===statusFilter);
+  });
+
+  // SIDEBAR
+  document.getElementById('sidebar').innerHTML=`
+    <div class="logo"><div class="logo-ic"><i class="ti ti-home-bolt"></i></div><div><div class="logo-t">PacCRM</div><div class="logo-s">IP5 Énergie</div></div></div>
+    <nav class="nav">
+      <div class="nav-s">Navigation</div>
+      ${navItems.map(n=>`<div class="ni ${(view===n.id||(view==='fiche'&&n.id==='contacts'))?'act':''}" onclick="go('${n.id}')"><i class="ti ${n.icon}"></i>${n.label}${n.badge!==undefined?`<span class="nbadge${n.red?' red':''}">${n.badge}</span>`:''}</div>`).join('')}
+    </nav>
+    <div class="team-s">
+      <div class="team-lbl">Équipe</div>
+      ${[['CA','Carole','#DEEBFF','#0052CC'],['AL','Alexis','#EAE6FF','#403294'],['JO','Jonas','#E3FCEF','#006644'],['ME','Mebarek','#FFF0E6','#974F0C']].map(([i,n,bg,c])=>`<div class="tm"><div class="av" style="background:${bg};color:${c}">${i}</div><span class="tm-n">${n}</span><span class="tm-c">${state.contacts.filter(x=>x.commercial===n&&!['Signé','Perdu'].includes(x.statut)).length}</span></div>`).join('')}
+    </div>`;
+
+  // TOPBAR
+  document.getElementById('topbar').innerHTML=`
+    <div class="ptitle">${titles[view]||'PacCRM'}</div>
+    <div class="tbr">
+      ${view!=='fiche'?`<div class="sbox"><i class="ti ti-search" style="font-size:13px;color:var(--t3)"></i><input placeholder="Rechercher…" value="${search}" oninput="state.search=this.value;render()"></div>`:''}
+      <div class="user-chip"><div class="av" style="width:22px;height:22px;font-size:9px;background:${currentUser?.color||'#DEEBFF'};color:${currentUser?.tc||'#0052CC'}">${currentUser?.name[0]||'?'}</div>${currentUser?.name||'—'} <span class="badge ${isAdmin()?'bs':'bc'}" style="font-size:9px;padding:1px 5px">${currentUser?.role||''}</span></div>
+      ${isAdmin()?`<button class="btn btn-p" onclick="openModal()"><i class="ti ti-plus"></i> Nouveau contact</button>`:''}
+      <button class="btn btn-sec btn-sm" onclick="logout()" title="Déconnexion"><i class="ti ti-logout"></i></button>
+    </div>`;
+
+  // MOBILE NAV
+  document.getElementById('mob-nav').innerHTML=navItems.map(n=>`<div class="mni ${(view===n.id||(view==='fiche'&&n.id==='contacts'))?'act':''}" onclick="go('${n.id}')"><i class="ti ${n.icon}"></i><span>${n.label}</span>${n.badge?`<span class="mnb">${n.badge}</span>`:''}</div>`).join('');
+
+  // BELL
+  renderBell();
+
+  // MAIN CONTENT
+  const mc=document.getElementById('main-content');
+  mc.innerHTML='';
+
+  // DASHBOARD
+  if(view==='dashboard'){
+    const ACT=[
+      {icon:'ti-phone',bg:'#DEEBFF',ic:'#0052CC',text:'<b>Mebarek</b> a appelé <b>Julien Moreau</b>',time:'Il y a 1h'},
+      {icon:'ti-file-text',bg:'#EAE6FF',ic:'#403294',text:'<b>Carole</b> a envoyé un devis à <b>Lucas Petit</b>',time:'Il y a 2h'},
+      {icon:'ti-check',bg:'#E3FCEF',ic:'#006644',text:'<b>Alexis</b> a signé avec <b>Pierre Bernard</b>',time:'Il y a 3h'},
+      {icon:'ti-calendar',bg:'#FFF0E6',ic:'#974F0C',text:'RDV fixé avec <b>Marie Dupont</b>',time:'Il y a 5h'},
+    ];
+    const div=document.createElement('div'); div.className='content';
+    div.innerHTML=`
+      <div class="kgrid">
+        <div class="kcard"><div class="klbl">CA ce mois</div><div class="kval">${fmt(ca)}</div><span class="kdelta up">↑ +18%</span></div>
+        <div class="kcard"><div class="klbl">Contrats signés</div><div class="kval">${signed.length}</div><span class="kdelta up">+3 ce mois</span></div>
+        <div class="kcard"><div class="klbl">Prospects actifs</div><div class="kval">${active.length}</div><span class="kdelta up">+5 nouveaux</span></div>
+        <div class="kcard"><div class="klbl">Taux de conversion</div><div class="kval">${conv}%</div><span class="kdelta dn">-2%</span></div>
+      </div>
+      <div class="twocol">
+        <div class="panel">
+          <div class="ph"><span class="pt">Leads récents</span><button class="btn btn-sec btn-sm" onclick="go('pipeline')">Pipeline <i class="ti ti-arrow-right"></i></button></div>
+          <div class="tw"><table><thead><tr><th>Nom</th><th>Offre</th><th>DPE</th><th>CEE</th><th>Docs</th><th>Statut</th></tr></thead><tbody>
+          ${contacts.slice(0,6).map(c=>`<tr onclick="openFiche(${c.id})"><td class="b">${c.prenom} ${c.nom}</td><td>${c.offre}</td><td>${dpeBdg(c.dpe)}</td><td style="white-space:nowrap">${ceeBdg(c)}</td><td>${docsBdg(c)}</td><td>${bdg(c.statut)}</td></tr>`).join('')}
+          </tbody></table></div>
+        </div>
+        <div class="panel">
+          <div class="ph"><span class="pt">Activité récente</span></div>
+          ${ACT.map(a=>`<div class="ai"><div class="aico" style="background:${a.bg}"><i class="ti ${a.icon}" style="color:${a.ic}"></i></div><div><div class="atxt">${a.text}</div><div class="atm">${a.time}</div></div></div>`).join('')}
+        </div>
+      </div>
+      <div class="panel">
+        <div class="ph"><span class="pt"><i class="ti ti-bell" style="font-size:13px;vertical-align:-2px;margin-right:5px;color:var(--red)"></i>Relances urgentes</span><button class="btn btn-sec btn-sm" onclick="go('relances')">Toutes <i class="ti ti-arrow-right"></i></button></div>
+        ${urgent.length?urgent.map(c=>`<div class="ri" onclick="openFiche(${c.id})"><i class="ti ti-alert-circle" style="font-size:19px;color:var(--red);flex-shrink:0"></i><div class="ri-info"><div class="ri-n">${c.prenom} ${c.nom}</div><div class="ri-d">${c.offre} · ${c.commercial} · ${c.ville}</div></div>${docsBdg(c)}<span class="rtag rug">Aujourd'hui</span></div>`).join(''):'<div class="empty">Aucune relance urgente 🎉</div>'}
+      </div>`;
+    mc.appendChild(div);
+  }
+
+  // PIPELINE
+  else if(view==='pipeline'){
+    const div=document.createElement('div'); div.className='content';
+    div.innerHTML=`<div class="panel"><div class="ph"><span class="pt">Pipeline commercial</span><span style="font-size:13px;font-weight:600;color:var(--blue)">Total actif : ${fmt(active.reduce((s,c)=>s+c.valeur,0))}</span></div>
+      <div class="pwrap"><div class="pcols">${STAGES.map(stage=>{const leads=contacts.filter(c=>c.statut===stage);return`<div><div class="pch"><span class="sp" style="background:${SBG[stage]};color:${SCOL[stage]}">${stage}</span><span class="sc">${leads.length}</span></div>${leads.length?leads.map(c=>`<div class="lc" onclick="openFiche(${c.id})"><div class="ln">${c.prenom} ${c.nom}</div><div class="lv">${fmt(c.valeur)}</div><div class="lm">${c.surface||'—'}m² · ${c.commercial}</div></div>`).join(''):'<div style="font-size:11px;color:var(--t3);padding:5px">Aucun</div>'}</div>`;}).join('')}</div></div></div>`;
+    mc.appendChild(div);
+  }
+
+  // CONTACTS
+  else if(view==='contacts'){
+    const div=document.createElement('div'); div.className='content';
+    div.innerHTML=`<div class="panel"><div class="ph"><span class="pt">Contacts (${filtered.length})</span>
+      <select class="finp" style="width:auto;padding:5px 9px;font-size:11px" onchange="state.statusFilter=this.value;render()">
+        <option value="">Tous les statuts</option>${['Nouveau','Contacté','RDV fixé','Devis envoyé','Signé','Perdu'].map(s=>`<option${statusFilter===s?' selected':''}>${s}</option>`).join('')}
+      </select></div>
+      <div class="tw"><table><thead><tr><th>Nom</th><th>Ville</th><th>Surface</th><th>Chauffage</th><th>DPE</th><th>RFR</th><th>Origine</th><th>CEE</th><th>Docs</th><th>Statut</th></tr></thead><tbody>
+      ${filtered.length?filtered.map(c=>`<tr onclick="openFiche(${c.id})"><td class="b">${c.prenom} ${c.nom}${c.rappel&&!c.rappelFait?' <span class="badge" style="background:#FFF0E6;color:#974F0C;font-size:9px"><i class="ti ti-alarm"></i></span>':''}</td><td>${c.ville}</td><td>${c.surface||'—'} m²</td><td>${c.chauffage}</td><td>${dpeBdg(c.dpe)}</td><td>${c.rfr?c.rfr.toLocaleString('fr-FR')+' €':'—'}</td><td style="font-size:12px">${origineIcon(c.origineType)} ${c.origineDetail||'—'}</td><td style="white-space:nowrap">${ceeBdg(c)}</td><td>${docsBdg(c)}</td><td>${bdg(c.statut)}</td></tr>`).join(''):'<tr><td colspan="10" class="empty">Aucun résultat</td></tr>'}
+      </tbody></table></div></div>`;
+    mc.appendChild(div);
+  }
+
+  // CONTRATS
+  else if(view==='contrats'){
+    const contrats=contacts.filter(c=>c.statut==='Signé');
+    const div=document.createElement('div'); div.className='content';
+    div.innerHTML=`<div class="panel"><div class="ph"><span class="pt">Contrats signés</span><span style="font-size:13px;font-weight:600;color:var(--blue)">Total : ${fmt(contrats.reduce((s,c)=>s+c.valeur,0))}</span></div>
+      <div class="tw"><table><thead><tr><th>Client</th><th>Offre PAC</th><th>Surface</th><th>Installateur</th><th>Valeur</th><th>Commercial</th><th>Documents</th></tr></thead><tbody>
+      ${contrats.length?contrats.map(c=>`<tr onclick="openFiche(${c.id})"><td class="b">${c.prenom} ${c.nom}</td><td>${c.offre}</td><td>${c.surface||'—'} m²</td><td style="font-size:12px">${c.installateur||'—'}</td><td style="color:var(--blue);font-weight:600">${fmt(c.valeur)}</td><td>${c.commercial}</td><td>${docsBdg(c)}</td></tr>`).join(''):'<tr><td colspan="7" class="empty">Aucun contrat</td></tr>'}
+      </tbody></table></div></div>`;
+    mc.appendChild(div);
+  }
+
+  // RELANCES
+  else if(view==='relances'){
+    const relList=(list,type)=>list.length?list.map(c=>`<div class="ri" onclick="openFiche(${c.id})"><i class="ti ${type==='urgent'?'ti-alert-circle':'ti-clock'}" style="font-size:19px;color:${type==='urgent'?'var(--red)':'var(--orange)'};flex-shrink:0"></i><div class="ri-info"><div class="ri-n">${c.prenom} ${c.nom}</div><div class="ri-d">${c.offre} · ${c.statut} · ${c.commercial}</div></div>${docsBdg(c)}<span class="rtag ${type==='urgent'?'rug':'rso'}">${type==='urgent'?"Aujourd'hui":'Cette semaine'}</span></div>`).join(''):'<div class="empty">Aucune relance</div>';
+    const div=document.createElement('div'); div.className='content';
+    div.innerHTML=`<div class="panel"><div class="ph"><span class="pt">Relances & suivi</span></div>
+      <div class="tabs"><div class="tab ${relTab===0?'act':''}" onclick="state.relTab=0;render()">Urgent (${urgent.length})</div><div class="tab ${relTab===1?'act':''}" onclick="state.relTab=1;render()">Cette semaine (${soon.length})</div><div class="tab ${relTab===2?'act':''}" onclick="state.relTab=2;render()">Toutes</div></div>
+      ${relTab===0?relList(urgent,'urgent'):relTab===1?relList(soon,'soon'):relList([...urgent,...soon],'all')}
+      </div>`;
+    mc.appendChild(div);
+  }
+
+  // PERFORMANCE
+  else if(view==='performance'){
+    const PERF=[{n:'Mebarek',i:'ME',bg:'#FFF0E6',c:'#974F0C',ca:42400,obj:55000,d:5},{n:'Carole',i:'CA',bg:'#DEEBFF',c:'#0052CC',ca:36800,obj:55000,d:4},{n:'Alexis',i:'AL',bg:'#EAE6FF',c:'#403294',ca:28500,obj:45000,d:3},{n:'Jonas',i:'JO',bg:'#E3FCEF',c:'#006644',ca:21000,obj:40000,d:2}];
+    const OFFRES=[{o:'PAC Géothermique',n:3,ca:58000},{o:'PAC Air/Eau 15kW',n:5,ca:76000},{o:'PAC Air/Eau 12kW',n:6,ca:74400},{o:'PAC Air/Air 12kW',n:4,ca:38400}];
+    const div=document.createElement('div'); div.className='content';
+    div.innerHTML=`
+      <div class="kgrid">
+        <div class="kcard"><div class="klbl">Meilleur commercial</div><div class="kval" style="font-size:17px">Mebarek</div><span class="kdelta up">42 400 € ce mois</span></div>
+        <div class="kcard"><div class="klbl">Objectif mensuel</div><div class="kval">128 / 195k</div><span class="kdelta up">66% atteint</span></div>
+        <div class="kcard"><div class="klbl">Délai moyen closing</div><div class="kval">22 j</div><span class="kdelta dn">+3j</span></div>
+        <div class="kcard"><div class="klbl">Appels ce mois</div><div class="kval">268</div><span class="kdelta up">+19%</span></div>
+      </div>
+      <div class="twocol">
+        <div class="panel"><div class="ph"><span class="pt">Performance par commercial</span></div>${PERF.map(p=>`<div class="pi"><div class="pr"><div class="pn"><div class="av" style="background:${p.bg};color:${p.c}">${p.i}</div>${p.n}</div><div class="pv">${fmt(p.ca)}</div></div><div class="pb"><div class="pf" style="width:${Math.round(p.ca/p.obj*100)}%;background:${p.c}"></div></div><div class="ps">${p.d} contrats · Obj : ${fmt(p.obj)}</div></div>`).join('')}</div>
+        <div class="panel"><div class="ph"><span class="pt">Top offres PAC</span></div>${OFFRES.map(o=>`<div class="pi"><div class="pr"><span style="font-size:12px;color:var(--t);font-weight:500">${o.o}</span><span style="font-size:12px;font-weight:600;color:var(--blue)">${fmt(o.ca)}</span></div><div class="pb"><div class="pf" style="width:${Math.round(o.ca/76000*100)}%;background:var(--blue)"></div></div><div class="ps">${o.n} ventes</div></div>`).join('')}</div>
+      </div>`;
+    mc.appendChild(div);
+  }
+
+  // UTILISATEURS
+  else if(view==='utilisateurs'&&isAdmin()){
+    const allU=[
+      {name:'Carole', code:'111',role:'admin',     color:'#DEEBFF',tc:'#0052CC'},
+      {name:'Alexis', code:'000',role:'admin',     color:'#EAE6FF',tc:'#403294'},
+      {name:'Jonas',  code:'222',role:'admin',     color:'#E3FCEF',tc:'#006644'},
+      {name:'Mebarek',code:'333',role:'commercial',color:'#FFF0E6',tc:'#974F0C'},
+    ];
+    const div=document.createElement('div'); div.className='content';
+    div.innerHTML=`<div class="panel"><div class="ph"><span class="pt">👥 Utilisateurs & Invitations</span></div>
+      ${allU.map(u=>`<div class="urow"><div class="av" style="background:${u.color};color:${u.tc}">${u.name[0]}</div><div class="uinfo"><div class="un">${u.name} <span class="badge ${u.role==='admin'?'bs':'bc'}" style="margin-left:4px">${u.role}</span></div><div class="usub">${state.contacts.filter(c=>c.commercial===u.name).length} contact(s) assigné(s)</div></div><span class="ucode">${u.code}</span><a class="inv-btn" href="${inviteLink(u)}" target="_blank"><i class="ti ti-mail"></i> Inviter</a></div>`).join('')}
+    </div>
+    <div class="panel" style="margin-top:0"><div class="ph"><span class="pt">ℹ️ Niveaux d'accès</span></div>
+      <div style="padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="padding:13px;border-radius:var(--r);background:var(--gl);border:1px solid #ABF5D1"><div style="font-size:13px;font-weight:600;color:var(--green);margin-bottom:5px">🔑 Admin</div><div style="font-size:12px;color:var(--green)">Accès complet — tous les contacts, toutes les vues</div></div>
+        <div style="padding:13px;border-radius:var(--r);background:var(--bl);border:1px solid #B3D4FF"><div style="font-size:13px;font-weight:600;color:var(--blue);margin-bottom:5px">📞 Commercial</div><div style="font-size:12px;color:var(--blue)">Accès limité — uniquement ses propres contacts</div></div>
+      </div>
+    </div>`;
+    mc.appendChild(div);
+  }
+
+  // FICHE
+  else if(view==='fiche'&&ficheId){
+    const c=state.contacts.find(x=>x.id===ficheId);
+    if(!c){ go('contacts'); return; }
+    const e1=th171(c), e2=th174(c), docs=c.docs||{}, nD=nDocs(c), score=sc(c);
+    const tog=(k,v,cur)=>`<div class="tbtn ${cur===v?'on':''}" onclick="upd(${c.id},'${k}','${v}')">${v}</div>`;
+    const dCard=(k)=>{const d=docs[k],cfg=DCFG[k];return`<div class="dcard ${d?'has':''}"><div class="dtop"><div class="dic" style="background:${cfg.bg}"><i class="ti ${cfg.icon}" style="color:${cfg.c}"></i></div><div style="flex:1;min-width:0"><div class="dlbl">${cfg.label}</div>${d?`<div class="dfn">${d.name}</div><div class="dst ok"><i class="ti ti-circle-check"></i> ${d.size}</div>`:`<div class="dst">Aucun fichier</div>`}</div></div><div class="dbtns">${d?`<button class="dbtn dl" onclick="removeDoc(${c.id},'${k}')"><i class="ti ti-trash"></i> Supprimer</button><button class="dbtn" onclick="viewDoc(${c.id},'${k}')"><i class="ti ti-eye"></i> Voir</button>`:`<button class="dbtn pr" onclick="trigUp(${c.id},'${k}')"><i class="ti ti-upload"></i> Ajouter</button>`}</div><input type="file" id="fu-${c.id}-${k}" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="handleFile(${c.id},'${k}',this)"></div>`;};
+
+    const div=document.createElement('div');
+    div.style.cssText='flex:1;display:flex;flex-direction:column;overflow:hidden';
+    div.innerHTML=`<div class="fscroll">
+      <div class="fhdr">
+        <div class="fav">${c.prenom[0]}${c.nom[0]}</div>
+        <div style="flex:1"><div class="fn">${c.prenom} ${c.nom}</div><div class="fm">${c.tel||'—'} · ${c.ville} · ${c.commercial}</div></div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          ${bdg(c.statut)}
+          <select class="finp" style="width:auto;padding:5px 9px;font-size:11px" onchange="upd(${c.id},'statut',this.value)">
+            ${['Nouveau','Contacté','RDV fixé','Devis envoyé','Signé','Perdu'].map(s=>`<option${c.statut===s?' selected':''}>${s}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+
+      <!-- INSTALLATEUR & ORIGINE -->
+      <div class="scard"><div class="shead"><i class="ti ti-tools"></i><span class="shead-t">Installateur & Origine du lead</span></div>
+        <div class="sbody">
+          <div class="fgrid" style="margin-bottom:12px">
+            <div class="fg full"><div class="flbl">Installateur partenaire</div><input class="finp" placeholder="Nom de l'installateur" value="${c.installateur||''}" oninput="upd(${c.id},'installateur',this.value)"></div>
+          </div>
+          <div class="flbl" style="margin-bottom:7px">Origine du lead</div>
+          <div class="tgroup" style="margin-bottom:10px">
+            ${['commercial','parrainage','marketing'].map(t=>`<div class="tbtn ${(c.origineType||'commercial')===t?'on':''}" onclick="upd(${c.id},'origineType','${t}')">${t==='commercial'?'👤 Commercial':t==='parrainage'?'🤝 Parrainage':'📣 Marketing'}</div>`).join('')}
+          </div>
+          <div class="fg"><div class="flbl">${c.origineType==='parrainage'?'Parrainé par':c.origineType==='marketing'?'Canal marketing':'Commercial apporteur'}</div>
+            <input class="finp" placeholder="${c.origineType==='parrainage'?'Nom du parrain':c.origineType==='marketing'?'Ex: Facebook Ads, Google…':'Nom du commercial'}" value="${c.origineDetail||''}" oninput="upd(${c.id},'origineDetail',this.value)">
+          </div>
+        </div>
+      </div>
+
+      <!-- PIÈCES JOINTES -->
+      <div class="scard"><div class="shead"><i class="ti ti-paperclip"></i><span class="shead-t">Pièces jointes</span><span class="badge ${nD===3?'bs':nD>0?'br':'bl2'}" style="margin-left:8px">${nD}/3</span></div>
+        <div class="sbody">
+          <div class="dgrid">${dCard('avis')}${dCard('cni')}${dCard('taxe')}</div>
+          <div class="dpbar" style="margin-top:11px">
+            <i class="ti ${nD===3?'ti-circle-check':nD>0?'ti-clock':'ti-alert-triangle'}" style="color:${nD===3?'var(--green)':nD>0?'var(--orange)':'var(--red)'}"></i>
+            <span style="font-size:12px;font-weight:500;color:${nD===3?'var(--green)':nD>0?'var(--orange)':'var(--red)'}">${nD===3?'Dossier complet':nD>0?'Dossier incomplet':'Aucun document'}</span>
+            <div class="dpbar-b"><div class="dpbar-f" style="width:${Math.round(nD/3*100)}%;background:${nD===3?'var(--green)':nD>0?'var(--orange)':'var(--red)'}"></div></div>
+            <span style="font-size:11px;color:var(--t3)">${nD}/3</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ÉLIGIBILITÉ CEE -->
+      <div class="scard"><div class="shead"><i class="ti ti-certificate"></i><span class="shead-t">Éligibilité CEE</span></div>
+        <div class="elig-block">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <div><div class="elig-title">BAR-TH-171</div><div class="elig-sub">Remplacement chaudière par PAC — Ménages très modestes</div></div>
+            <span class="badge ${e1.elig?'bs':'bl2'}">${e1.elig?'✓ Éligible':'✗ Non éligible'}</span>
+          </div>
+          ${e1.ok.map(r=>`<div class="elig-ok"><i class="ti ti-circle-check" style="flex-shrink:0;margin-top:1px"></i>${r}</div>`).join('')}
+          ${e1.ko.map(r=>`<div class="elig-ko"><i class="ti ti-circle-x" style="flex-shrink:0;margin-top:1px"></i>${r}</div>`).join('')}
+        </div>
+        <div class="elig-block">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <div><div class="elig-title">BAR-TH-174</div><div class="elig-sub">PAC haute performance — Min. 2 gestes d'isolation</div></div>
+            <span class="badge ${e2.elig?'bs':'bl2'}">${e2.elig?'✓ Éligible':'✗ Non éligible'}</span>
+          </div>
+          ${e2.ok.map(r=>`<div class="elig-ok"><i class="ti ti-circle-check" style="flex-shrink:0;margin-top:1px"></i>${r}</div>`).join('')}
+          ${e2.ko.map(r=>`<div class="elig-ko"><i class="ti ti-circle-x" style="flex-shrink:0;margin-top:1px"></i>${r}</div>`).join('')}
+          <div style="margin-top:11px">
+            <div class="flbl" style="margin-bottom:7px">Gestes d'isolation réalisables chez ce client</div>
+            ${GESTES.map(g=>{const on=(c.gestes174||{})[g.key];return`<label class="gcheck ${on?'on':''}"><input type="checkbox" ${on?'checked':''} onchange="updGeste(${c.id},'${g.key}',this.checked)"><span>${g.label}</span></label>`;}).join('')}
+            <div style="margin-top:8px;padding:7px 11px;border-radius:var(--r);background:${e2.n>=2?'var(--gl)':e2.n===1?'var(--ol)':'var(--rl)'};color:${e2.n>=2?'var(--green)':e2.n===1?'var(--orange)':'var(--red)'};font-size:12px;font-weight:500">
+              ${e2.n}/6 geste(s) — ${e2.n>=2?'Éligible BAR-TH-174 ✓':e2.n===1?'1 geste manquant':'Minimum 2 requis'}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INFOS GÉNÉRALES -->
+      <div class="scard"><div class="shead"><i class="ti ti-user"></i><span class="shead-t">Informations générales</span></div>
+        <div class="sbody"><div class="fgrid">
+          <div class="fg"><div class="flbl">Revenu fiscal de référence (€)</div><input class="finp" type="number" placeholder="28000" value="${c.rfr||''}" oninput="upd(${c.id},'rfr',parseInt(this.value)||0)"></div>
+          <div class="fg"><div class="flbl">Personnes dans le foyer</div><input class="finp" type="number" min="1" max="15" placeholder="3" value="${c.personnes||''}" oninput="upd(${c.id},'personnes',parseInt(this.value)||0)"></div>
+        </div></div>
+      </div>
+
+      <!-- LOGEMENT -->
+      <div class="scard"><div class="shead"><i class="ti ti-home"></i><span class="shead-t">Caractéristiques du logement</span></div>
+        <div class="sbody"><div class="fgrid">
+          <div class="fg"><div class="flbl">Surface (m²)</div><input class="finp" type="number" placeholder="120" value="${c.surface||''}" oninput="upd(${c.id},'surface',parseInt(this.value)||0)"></div>
+          <div class="fg"><div class="flbl">Année de construction</div><input class="finp" type="number" placeholder="1985" value="${c.anneeConst||''}" oninput="upd(${c.id},'anneeConst',parseInt(this.value)||0)"></div>
+          <div class="fg"><div class="flbl">DPE actuel</div><select class="finp" onchange="upd(${c.id},'dpe',this.value)">${['A','B','C','D','E','F','G'].map(d=>`<option${c.dpe===d?' selected':''}>${d}</option>`).join('')}</select></div>
+          <div class="fg"><div class="flbl">Type de toiture</div><select class="finp" onchange="upd(${c.id},'toiture',this.value)">${['Tuile','Ardoise','Zinc','Terrasse','Bac acier'].map(t=>`<option${c.toiture===t?' selected':''}>${t}</option>`).join('')}</select></div>
+        </div></div>
+      </div>
+
+      <!-- CHAUFFAGE -->
+      <div class="scard"><div class="shead"><i class="ti ti-flame"></i><span class="shead-t">Système de chauffage</span></div>
+        <div class="sbody">
+          <div class="fg" style="margin-bottom:11px"><div class="flbl" style="margin-bottom:6px">Type de chauffage</div><div class="tgroup">${['Gaz','Fioul','Électrique','Bois','Propane','Aucun'].map(v=>tog('chauffage',v,c.chauffage)).join('')}</div></div>
+          <div class="fg" style="margin-bottom:11px"><div class="flbl" style="margin-bottom:6px">Émetteurs de chaleur</div><div class="tgroup">${['Acier','Fonte','Plancher chauffant','Ventilo-convecteur','Climatisation','Mixte'].map(v=>tog('radiateur',v,c.radiateur)).join('')}</div></div>
+          <div class="fg"><div class="flbl" style="margin-bottom:6px">Type de vitrage</div><div class="tgroup">${['Simple','Double','Triple','Double récent'].map(v=>tog('vitrage',v,c.vitrage)).join('')}</div></div>
+        </div>
+      </div>
+
+      <!-- ISOLATION -->
+      <div class="scard"><div class="shead"><i class="ti ti-building"></i><span class="shead-t">Isolation existante</span></div>
+        <div class="sbody">
+          <div class="fg" style="margin-bottom:11px"><div class="flbl" style="margin-bottom:6px">Combles</div><div class="tgroup">${['Isolés','Non isolés','Combles perdus isolés','Pas de combles'].map(v=>tog('combles',v,c.combles)).join('')}</div></div>
+          <div class="fg" style="margin-bottom:11px"><div class="flbl" style="margin-bottom:6px">Sous-sol / vide sanitaire</div><div class="tgroup">${['Isolé','Non isolé','Sans sous-sol'].map(v=>tog('sousSol',v,c.sousSol)).join('')}</div></div>
+          <div class="fg"><div class="flbl" style="margin-bottom:6px">Isolation murs intérieure</div><div class="tgroup">${['Possible','Impossible','Déjà réalisée','Non prioritaire'].map(v=>tog('isoMur',v,c.isoMur)).join('')}</div></div>
+        </div>
+      </div>
+
+      <!-- SCORE -->
+      <div class="scard"><div class="shead"><i class="ti ti-star"></i><span class="shead-t">Score d'éligibilité MaPrimeRénov'</span></div>
+        <div style="display:flex;align-items:center;gap:11px;padding:13px 15px">
+          <div class="score-segs">${[...Array(10)].map((_,i)=>`<div class="sseg" style="background:${i<Math.round(score/10)?(score>=70?'#006644':score>=40?'#974F0C':'#BF2600'):''}"></div>`).join('')}</div>
+          <span class="badge" style="background:${scB(score)};color:${scC(score)};font-size:12px;padding:4px 11px">${score}% — ${scL(score)}</span>
+        </div>
+      </div>
+
+      <!-- NOTES -->
+      <div class="scard"><div class="shead"><i class="ti ti-notes"></i><span class="shead-t">Notes commerciales</span></div>
+        <div class="sbody"><textarea class="notes-ta" placeholder="Observations, remarques…" oninput="upd(${c.id},'notes',this.value)">${c.notes||''}</textarea></div>
+      </div>
+
+
+      <!-- RAPPEL TÉLÉPHONIQUE -->
+      <div class="scard"><div class="shead"><i class="ti ti-alarm"></i><span class="shead-t">Rappel téléphonique</span></div>
+        <div class="sbody">
+          ${c.rappel && !c.rappelFait ? `
+          <div class="rappel-set">
+            <i class="ti ti-bell-ringing"></i>
+            <div class="rappel-set-info">
+              <div class="rappel-set-date">${new Date(c.rappel).toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'})} à ${new Date(c.rappel).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</div>
+              <div class="rappel-set-sub">Programmé pour ${c.commercial}</div>
+            </div>
+            <span class="rappel-set-del" onclick="supprimerRappel(${c.id})" title="Supprimer le rappel"><i class="ti ti-x"></i></span>
+          </div>` : c.rappelFait ? `<div style="padding:9px 12px;border-radius:8px;background:var(--gl);border:1px solid #ABF5D1;font-size:12px;color:var(--green);font-weight:500;margin-bottom:8px"><i class="ti ti-phone-check"></i> Rappel effectué ✓</div>` : ''}
+          <div class="fg" style="margin-top:${c.rappel||c.rappelFait?'10px':'0'}">
+            <div class="flbl" style="margin-bottom:6px">${c.rappel&&!c.rappelFait?'Modifier le rappel':'Programmer un rappel'}</div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <input type="datetime-local" class="finp" id="rappel-input-${c.id}" value="${c.rappel&&!c.rappelFait?c.rappel.slice(0,16):''}">
+              <button class="btn btn-p btn-sm" onclick="const v=document.getElementById('rappel-input-${c.id}').value;if(v)programmerRappel(${c.id},v);else alert('Choisissez une date et heure');" style="flex-shrink:0">
+                <i class="ti ti-bell-plus"></i> ${c.rappel&&!c.rappelFait?'Modifier':'Programmer'}
+              </button>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+            <button class="rappel-btn-sm" style="flex:none;padding:6px 11px;border-radius:6px;font-size:11px" onclick="programmerRappel(${c.id},'${new Date(Date.now()+3600000).toISOString().slice(0,16)}')"><i class="ti ti-clock-hour-3"></i> +1h</button>
+            <button class="rappel-btn-sm" style="flex:none;padding:6px 11px;border-radius:6px;font-size:11px" onclick="programmerRappel(${c.id},'${new Date(Date.now()+7200000).toISOString().slice(0,16)}')"><i class="ti ti-clock-hour-6"></i> +2h</button>
+            <button class="rappel-btn-sm" style="flex:none;padding:6px 11px;border-radius:6px;font-size:11px" onclick="const d=new Date();d.setDate(d.getDate()+1);d.setHours(9,0,0,0);programmerRappel(${c.id},d.toISOString().slice(0,16))"><i class="ti ti-calendar-plus"></i> Demain 9h</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="factions">
+        <button class="btn btn-sec" onclick="go('contacts')"><i class="ti ti-arrow-left"></i> Retour</button>
+        <button class="btn btn-p"><i class="ti ti-file-plus"></i> Générer devis</button>
+        <button class="btn btn-sec"><i class="ti ti-calendar-plus"></i> Planifier RDV</button>
+        ${isAdmin()?`<button class="btn btn-red" onclick="delContact(${c.id})"><i class="ti ti-trash"></i> Supprimer</button>`:''}
+      </div>
+    </div>`;
+    mc.appendChild(div);
+  }
+}
+
+
+// ═══════════════════════════════════════════
+// SYSTÈME DE RAPPELS TÉLÉPHONIQUES
+// ═══════════════════════════════════════════
+let rappelQueue = [];      // file d'attente des rappels à afficher
+let rappelActive = null;   // rappel en cours d'affichage
+let rappelTimer = null;    // intervalle de vérification
+
+function startRappelSystem(){
+  if(rappelTimer) clearInterval(rappelTimer);
+  rappelTimer = setInterval(checkRappels, 30000); // vérifie toutes les 30s
+  checkRappels(); // vérification immédiate
+}
+
+function checkRappels(){
+  if(!currentUser) return;
+  const now = new Date();
+  const contacts = visibleContacts();
+  contacts.forEach(c => {
+    if(!c.rappel) return;
+    const rappelDate = new Date(c.rappel);
+    const diff = now - rappelDate;
+    // Déclenche si l'heure est passée (dans les 30 dernières minutes)
+    if(diff >= 0 && diff < 1800000 && !c.rappelFait){
+      // Vérifie qu'il n'est pas déjà dans la queue ou affiché
+      if(!rappelQueue.find(r=>r.id===c.id) && (!rappelActive||rappelActive.id!==c.id)){
+        rappelQueue.push({...c});
+        // Notif navigateur
+        if('Notification'in window && Notification.permission==='granted'){
+          const n = new Notification('📞 Rappel — '+c.prenom+' '+c.nom, {
+            body: c.tel+' · '+c.offre+' · '+c.commercial,
+            requireInteraction: true,
+            tag: 'rappel-'+c.id
+          });
+          n.onclick = ()=>{ window.focus(); showNextRappel(); n.close(); };
+        }
+      }
+    }
+  });
+  if(!rappelActive && rappelQueue.length > 0) showNextRappel();
+}
+
+function showNextRappel(){
+  if(rappelQueue.length === 0){ rappelActive = null; return; }
+  rappelActive = rappelQueue.shift();
+  showRappelPopup(rappelActive);
+}
+
+function showRappelPopup(c){
+  // Supprime l'ancien popup s'il existe
+  const ex = document.getElementById('rappel-overlay'); if(ex) ex.remove();
+  
+  const rappelDate = c.rappel ? new Date(c.rappel) : null;
+  const dateStr = rappelDate ? rappelDate.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'}) : '';
+  const heureStr = rappelDate ? rappelDate.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}) : '';
+
+  const overlay = document.createElement('div');
+  overlay.id = 'rappel-overlay';
+  overlay.className = 'rappel-overlay';
+  overlay.innerHTML = `
+    <div class="rappel-card">
+      <div class="rappel-top">
+        <div class="rappel-badge">📞 Rappel téléphonique · ${heureStr}</div>
+        <div class="rappel-name">${c.prenom} ${c.nom}</div>
+        <div class="rappel-info">${c.offre} · ${c.ville} · Assigné à ${c.commercial}</div>
+        ${c.tel ? `<a class="rappel-tel" href="tel:${c.tel.replace(/\s/g,'')}">
+          <i class="ti ti-phone" style="font-size:20px"></i>
+          <span class="rappel-tel-num">${c.tel}</span>
+          <span style="font-size:11px;opacity:.8;margin-left:auto">Appeler ↗</span>
+        </a>` : ''}
+      </div>
+      <div class="rappel-body">
+        <div class="rappel-note">
+          <b>Statut :</b> ${c.statut} &nbsp;·&nbsp; <b>RFR :</b> ${c.rfr?c.rfr.toLocaleString('fr-FR')+' €':'—'} &nbsp;·&nbsp; <b>DPE :</b> ${c.dpe||'—'}<br>
+          ${c.notes?`<span style="color:#97A0AF">Note : ${c.notes.substring(0,80)}${c.notes.length>80?'…':''}</span>`:'<span style="color:#97A0AF">Aucune note</span>'}
+        </div>
+        <div class="rappel-actions">
+          <button class="rappel-btn-main rappel-btn-done" onclick="marquerRappele(${c.id})">
+            <i class="ti ti-phone-check"></i> Rappelé ✓
+          </button>
+          <div class="rappel-btn-row">
+            <button class="rappel-btn-sm rappel-btn-report" onclick="showReporter(${c.id})">
+              <i class="ti ti-clock"></i> Reporter
+            </button>
+            <button class="rappel-btn-sm rappel-btn-fiche" onclick="document.getElementById('rappel-overlay').remove();rappelActive=null;openFiche(${c.id})">
+              <i class="ti ti-user"></i> Voir fiche
+            </button>
+          </div>
+          ${rappelQueue.length>0?`<div class="rappel-counter">+${rappelQueue.length} autre(s) rappel(s) en attente</div>`:''}
+        </div>
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+  // Demande permission notif si pas encore fait
+  if('Notification'in window && Notification.permission==='default') Notification.requestPermission();
+}
+
+function marquerRappele(id){
+  state.contacts = state.contacts.map(c => c.id===id ? {...c, rappelFait:true, rappel:null, statut: c.statut==='Nouveau'?'Contacté':c.statut} : c);
+  save();
+  const overlay = document.getElementById('rappel-overlay'); if(overlay) overlay.remove();
+  rappelActive = null;
+  render();
+  setTimeout(showNextRappel, 500);
+}
+
+function showReporter(id){
+  const overlay = document.getElementById('rappel-overlay');
+  if(overlay) overlay.style.display='none';
+  
+  const now = new Date();
+  const plus1h = new Date(now.getTime()+3600000);
+  const plus2h = new Date(now.getTime()+7200000);
+  const demain = new Date(now); demain.setDate(demain.getDate()+1); demain.setHours(9,0,0,0);
+  const fmt2 = d => d.toLocaleString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+  const toISO = d => d.toISOString().slice(0,16);
+
+  const box = document.createElement('div');
+  box.className = 'rappel-overlay';
+  box.id = 'reporter-overlay';
+  box.innerHTML = `
+    <div class="reporter-card">
+      <div class="reporter-head">
+        <span><i class="ti ti-clock" style="margin-right:6px;color:var(--orange)"></i>Reporter le rappel</span>
+        <span style="cursor:pointer;color:var(--t3);font-size:16px" onclick="closeReporter(${id})">✕</span>
+      </div>
+      <div class="reporter-body">
+        <div class="reporter-opt" onclick="programmerRappel(${id},'${toISO(plus1h)}');closeReporter(0)">
+          <i class="ti ti-clock-hour-3"></i><span>Dans 1 heure — <b>${fmt2(plus1h)}</b></span>
+        </div>
+        <div class="reporter-opt" onclick="programmerRappel(${id},'${toISO(plus2h)}');closeReporter(0)">
+          <i class="ti ti-clock-hour-6"></i><span>Dans 2 heures — <b>${fmt2(plus2h)}</b></span>
+        </div>
+        <div class="reporter-opt" onclick="programmerRappel(${id},'${toISO(demain)}');closeReporter(0)">
+          <i class="ti ti-calendar-plus"></i><span>Demain matin — <b>${fmt2(demain)}</b></span>
+        </div>
+        <div class="reporter-custom">
+          <label>Date et heure personnalisée</label>
+          <input type="datetime-local" id="custom-rappel-date" min="${toISO(now)}">
+          <button class="btn btn-p btn-sm" style="margin-top:6px;width:100%;justify-content:center" onclick="const v=document.getElementById('custom-rappel-date').value;if(v){programmerRappel(${id},v);closeReporter(0);}else{alert('Choisissez une date');}">
+            Confirmer
+          </button>
+        </div>
+      </div>
+    </div>`;
+  document.body.appendChild(box);
+}
+
+function closeReporter(id){
+  const r = document.getElementById('reporter-overlay'); if(r) r.remove();
+  const o = document.getElementById('rappel-overlay');
+  if(o){ o.remove(); rappelActive=null; }
+  setTimeout(showNextRappel, 300);
+}
+
+function programmerRappel(id, dateStr){
+  state.contacts = state.contacts.map(c => c.id===id ? {...c, rappel:dateStr, rappelFait:false} : c);
+  save(); render();
+  // Feedback visuel
+  const msg = document.createElement('div');
+  msg.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#006644;color:#fff;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:500;z-index:600;box-shadow:0 4px 12px rgba(0,0,0,.2)';
+  msg.innerHTML='<i class="ti ti-check" style="margin-right:6px"></i>Rappel programmé !';
+  document.body.appendChild(msg);
+  setTimeout(()=>msg.remove(), 2500);
+}
+
+function supprimerRappel(id){
+  state.contacts = state.contacts.map(c => c.id===id ? {...c, rappel:null, rappelFait:false} : c);
+  save(); render();
+}
+
+// Start
+document.getElementById('login-inp').focus();
+</script>
+</body>
+</html>
