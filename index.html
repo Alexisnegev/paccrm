@@ -79,6 +79,8 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
 .hist-row{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:0.5px solid #e0e0d8;font-size:13px;}
 .hist-row:last-child{border-bottom:none;}
 .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1rem;}
+.stats-period-btn{padding:5px 14px;border:1.5px solid #e0e0e0;border-radius:20px;font-size:13px;font-weight:600;background:#fff;color:#555;cursor:pointer;transition:all .15s;}
+.stats-period-btn.act{background:#534AB7;color:#fff;border-color:#534AB7;}
 .stat-card{background:#fff;border:0.5px solid #e0e0d8;border-radius:12px;padding:1rem;}
 .stat-card-title{font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px;}
 .bar-chart{display:flex;flex-direction:column;gap:8px;}
@@ -349,6 +351,16 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
 
 <!-- STATS -->
 <div id="tab-stats" class="hidden">
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center;">
+    <span style="font-size:13px;font-weight:600;color:#555;">Période :</span>
+    <button class="stats-period-btn act" onclick="setStatsPeriod('today',this)">Aujourd'hui</button>
+    <button class="stats-period-btn" onclick="setStatsPeriod('week',this)">Cette semaine</button>
+    <button class="stats-period-btn" onclick="setStatsPeriod('month',this)">Ce mois</button>
+    <button class="stats-period-btn" onclick="setStatsPeriod('all',this)">Tout</button>
+    <input type="date" id="stats-date-from" style="padding:5px 8px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:13px;" onchange="setStatsPeriod('custom',null)">
+    <span style="font-size:12px;color:#888;">→</span>
+    <input type="date" id="stats-date-to" style="padding:5px 8px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:13px;" onchange="setStatsPeriod('custom',null)">
+  </div>
   <div class="stat-grid">
     <div class="stat-card">
       <div class="stat-card-title">Taux de contact</div>
@@ -942,21 +954,86 @@ function renderHistory(history){
 }
 
 // --- STATS ---
-function renderStats(){
-  const called=contacts.filter(c=>c.outcome);
-  const ok=contacts.filter(c=>c.outcome==='ok'||c.outcome==='hot').length;
-  const nok=contacts.filter(c=>c.outcome==='nok').length;
-  const vm=contacts.filter(c=>c.outcome==='vm').length;
-  const cb=contacts.filter(c=>c.outcome==='cb').length;
-  const tr=contacts.filter(c=>c.outcome==='tr').length;
-  const ne=contacts.filter(c=>c.outcome==='ne').length;
-  const ni=contacts.filter(c=>c.outcome==='ni').length;
-  const rate=called.length?Math.round(ok/called.length*100):null;
-  const durs=contacts.filter(c=>c.dur>0).map(c=>c.dur);
-  const avg=durs.length?Math.round(durs.reduce((a,b)=>a+b,0)/durs.length):null;
+let statsPeriod='today';
+let statsDateFrom='';
+let statsDateTo='';
+function setStatsPeriod(period,btn){
+  statsPeriod=period;
+  document.querySelectorAll('.stats-period-btn').forEach(b=>b.classList.remove('act'));
+  if(btn)btn.classList.add('act');
+  if(period!=='custom'){
+    document.getElementById('stats-date-from').value='';
+    document.getElementById('stats-date-to').value='';
+  }
+  renderStats();
+}
+function getStatsDateRange(){
+  const now=new Date();
+  const pad=n=>String(n).padStart(2,'0');
+  const toISO=d=>d.toISOString();
+  if(statsPeriod==='today'){
+    const start=new Date(now.getFullYear(),now.getMonth(),now.getDate(),0,0,0);
+    const end=new Date(now.getFullYear(),now.getMonth(),now.getDate(),23,59,59);
+    return{from:toISO(start),to:toISO(end)};
+  }
+  if(statsPeriod==='week'){
+    const day=now.getDay()||7;
+    const start=new Date(now);start.setDate(now.getDate()-day+1);start.setHours(0,0,0,0);
+    const end=new Date(now);end.setHours(23,59,59,999);
+    return{from:toISO(start),to:toISO(end)};
+  }
+  if(statsPeriod==='month'){
+    const start=new Date(now.getFullYear(),now.getMonth(),1,0,0,0);
+    const end=new Date(now);end.setHours(23,59,59,999);
+    return{from:toISO(start),to:toISO(end)};
+  }
+  if(statsPeriod==='custom'){
+    const f=document.getElementById('stats-date-from').value;
+    const t=document.getElementById('stats-date-to').value;
+    if(f&&t)return{from:new Date(f+'T00:00:00').toISOString(),to:new Date(t+'T23:59:59').toISOString()};
+  }
+  return null;
+}
+async function renderStats(){
+  const range=getStatsDateRange();
+  let rows=[];
+  if(range){
+    let params=`?called_at=gte.${range.from}&called_at=lte.${range.to}&order=called_at.desc&limit=2000`;
+    if(!isAdmin&&currentUser)params+=`&commercial=eq.${currentUser}`;
+    try{rows=await supa('GET','call_history','',params);}catch(e){rows=[];}
+  }else{
+    // "Tout" — utilise les contacts
+  }
+  const useHistory=!!range;
+  let ok,nok,vm,cb,tr,ne,ni,calledLen,avgDur;
+  if(useHistory){
+    ok=rows.filter(r=>r.outcome==='ok'||r.outcome==='hot').length;
+    nok=rows.filter(r=>r.outcome==='nok').length;
+    vm=rows.filter(r=>r.outcome==='vm').length;
+    cb=rows.filter(r=>r.outcome==='cb').length;
+    tr=rows.filter(r=>r.outcome==='tr').length;
+    ne=rows.filter(r=>r.outcome==='ne').length;
+    ni=rows.filter(r=>r.outcome==='ni').length;
+    calledLen=rows.length;
+    const durs=rows.filter(r=>r.dur>0).map(r=>r.dur);
+    avgDur=durs.length?Math.round(durs.reduce((a,b)=>a+b,0)/durs.length):null;
+  }else{
+    const called=contacts.filter(c=>c.outcome);
+    ok=contacts.filter(c=>c.outcome==='ok'||c.outcome==='hot').length;
+    nok=contacts.filter(c=>c.outcome==='nok').length;
+    vm=contacts.filter(c=>c.outcome==='vm').length;
+    cb=contacts.filter(c=>c.outcome==='cb').length;
+    tr=contacts.filter(c=>c.outcome==='tr').length;
+    ne=contacts.filter(c=>c.outcome==='ne').length;
+    ni=contacts.filter(c=>c.outcome==='ni').length;
+    calledLen=called.length;
+    const durs=contacts.filter(c=>c.dur>0).map(c=>c.dur);
+    avgDur=durs.length?Math.round(durs.reduce((a,b)=>a+b,0)/durs.length):null;
+  }
+  const rate=calledLen?Math.round(ok/calledLen*100):null;
   document.getElementById('st-rate').textContent=rate!==null?rate+'%':'—';
-  document.getElementById('st-rate-sub').textContent=called.length?ok+' contactés sur '+called.length+' appelés':'Aucun appel terminé';
-  document.getElementById('st-avg').textContent=avg!==null?fmtDur(avg):'—';
+  document.getElementById('st-rate-sub').textContent=calledLen?ok+' contactés sur '+calledLen+' appels':'Aucun appel';
+  document.getElementById('st-avg').textContent=avgDur!==null?fmtDur(avgDur):'—';
   const bars=[{label:'Contactés',val:ok,color:'#1D9E75'},{label:'Pas de rép.',val:nok,color:'#E24B4A'},{label:'Messagerie',val:vm,color:'#BA7517'},{label:'Rappels',val:cb,color:'#534AB7'},{label:'Transférés',val:tr,color:'#0C447C'},{label:'Pas éligible',val:ne,color:'#6B5EA8'},{label:'Pas intéressé',val:ni,color:'#C05A1F'}];
   const maxB=Math.max(...bars.map(b=>b.val),1);
   document.getElementById('bar-chart').innerHTML=bars.map(b=>`
@@ -968,27 +1045,38 @@ function renderStats(){
   if(adminBlock){
     if(isAdmin){
       adminBlock.style.display='';
-      // Par commercial
-      const coms=[...new Set(contacts.map(c=>c.commercial).filter(Boolean))];
-      const comTable=coms.map(com=>{
-        const cc=contacts.filter(c=>c.commercial===com);
-        const total=cc.length;
-        const done=cc.filter(c=>c.status==='done').length;
-        const okC=cc.filter(c=>c.outcome==='ok'||c.outcome==='hot').length;
-        const comColor=COM_COLORS[com]||'#888';
-        return`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:0.5px solid #f0f0e8;font-size:13px;"><span style="min-width:80px;font-weight:600;color:${comColor};">${com}</span><span style="color:#888;">${done}/${total} appelés</span><span style="color:#1D9E75;margin-left:auto;">${okC} contactés</span></div>`;
-      }).join('');
-      document.getElementById('com-stats-table').innerHTML=comTable||'<div style="color:#888;font-size:13px;padding:8px 0;">Aucune donnée</div>';
-      // Par statut global
-      const statusLabels={ok:'Contacté',hot:'Chaud',nok:'Pas de réponse',vm:'Messagerie',cb:'Rappel',tr:'Transféré',ne:'Pas éligible',ni:'Pas intéressé',pending:'En attente'};
-      const statusColors={ok:'#1D9E75',hot:'#D4920A',nok:'#E24B4A',vm:'#BA7517',cb:'#534AB7',tr:'#0C447C',ne:'#6B5EA8',ni:'#C05A1F',pending:'#888'};
-      const statusCounts={};
-      contacts.forEach(c=>{const k=c.outcome||'pending';statusCounts[k]=(statusCounts[k]||0)+1;});
-      const statusTable=Object.entries(statusCounts).sort((a,b)=>b[1]-a[1]).map(([k,v])=>{
-        const color=statusColors[k]||'#888';
-        return`<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:0.5px solid #f0f0e8;font-size:13px;"><span style="min-width:110px;color:${color};font-weight:600;">${statusLabels[k]||k}</span><span style="font-weight:600;">${v}</span></div>`;
-      }).join('');
-      document.getElementById('global-status-table').innerHTML=statusTable||'<div style="color:#888;font-size:13px;padding:8px 0;">Aucune donnée</div>';
+      if(useHistory){
+        // Par commercial depuis call_history
+        const coms=[...new Set(rows.map(r=>r.commercial).filter(Boolean))];
+        const comTable=coms.map(com=>{
+          const cc=rows.filter(r=>r.commercial===com);
+          const okC=cc.filter(r=>r.outcome==='ok'||r.outcome==='hot').length;
+          const comColor=COM_COLORS[com]||'#888';
+          return`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:0.5px solid #f0f0e8;font-size:13px;"><span style="min-width:80px;font-weight:600;color:${comColor};">${com}</span><span style="color:#888;">${cc.length} appels</span><span style="color:#1D9E75;margin-left:auto;">${okC} contactés</span></div>`;
+        }).join('');
+        document.getElementById('com-stats-table').innerHTML=comTable||'<div style="color:#888;font-size:13px;padding:8px 0;">Aucune donnée</div>';
+        // Par résultat
+        const rl={ok:'Contacté',hot:'Chaud',nok:'Pas de réponse',vm:'Messagerie',cb:'Rappel',tr:'Transféré',ne:'Pas éligible',ni:'Pas intéressé'};
+        const rc={ok:'#1D9E75',hot:'#D4920A',nok:'#E24B4A',vm:'#BA7517',cb:'#534AB7',tr:'#0C447C',ne:'#6B5EA8',ni:'#C05A1F'};
+        const counts={};rows.forEach(r=>{const k=r.outcome||'other';counts[k]=(counts[k]||0)+1;});
+        document.getElementById('global-status-table').innerHTML=Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:0.5px solid #f0f0e8;font-size:13px;"><span style="min-width:110px;color:${rc[k]||'#888'};font-weight:600;">${rl[k]||k}</span><span style="font-weight:600;">${v}</span></div>`).join('')||'<div style="color:#888;font-size:13px;padding:8px 0;">Aucune donnée</div>';
+      }else{
+        const coms=[...new Set(contacts.map(c=>c.commercial).filter(Boolean))];
+        const comTable=coms.map(com=>{
+          const cc=contacts.filter(c=>c.commercial===com);
+          const total=cc.length;
+          const done=cc.filter(c=>c.status==='done').length;
+          const okC=cc.filter(c=>c.outcome==='ok'||c.outcome==='hot').length;
+          const comColor=COM_COLORS[com]||'#888';
+          return`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:0.5px solid #f0f0e8;font-size:13px;"><span style="min-width:80px;font-weight:600;color:${comColor};">${com}</span><span style="color:#888;">${done}/${total} appelés</span><span style="color:#1D9E75;margin-left:auto;">${okC} contactés</span></div>`;
+        }).join('');
+        document.getElementById('com-stats-table').innerHTML=comTable||'<div style="color:#888;font-size:13px;padding:8px 0;">Aucune donnée</div>';
+        const statusLabels={ok:'Contacté',hot:'Chaud',nok:'Pas de réponse',vm:'Messagerie',cb:'Rappel',tr:'Transféré',ne:'Pas éligible',ni:'Pas intéressé',pending:'En attente'};
+        const statusColors={ok:'#1D9E75',hot:'#D4920A',nok:'#E24B4A',vm:'#BA7517',cb:'#534AB7',tr:'#0C447C',ne:'#6B5EA8',ni:'#C05A1F',pending:'#888'};
+        const statusCounts={};
+        contacts.forEach(c=>{const k=c.outcome||'pending';statusCounts[k]=(statusCounts[k]||0)+1;});
+        document.getElementById('global-status-table').innerHTML=Object.entries(statusCounts).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:0.5px solid #f0f0e8;font-size:13px;"><span style="min-width:110px;color:${statusColors[k]||'#888'};font-weight:600;">${statusLabels[k]||k}</span><span style="font-weight:600;">${v}</span></div>`).join('')||'<div style="color:#888;font-size:13px;padding:8px 0;">Aucune donnée</div>';
+      }
     }else{adminBlock.style.display='none';}
   }
 }
