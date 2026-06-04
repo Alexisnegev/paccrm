@@ -221,6 +221,7 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
       </div>
       <div style="margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
         <a id="tel-link" href="#" class="btn tel hidden"><i class="ti ti-device-mobile"></i> Appeler</a>
+        <button id="email-post-btn" onclick="sendPostCallEmail()" class="btn hidden" style="background:#534AB7;color:#fff;border:none;cursor:pointer;"><i class="ti ti-mail"></i> Email post-entretien</button>
         <div class="badge idle" id="st-badge"><span class="dot" id="st-dot"></span><span id="st-txt">En attente</span></div>
       </div>
     </div>
@@ -682,6 +683,7 @@ function loadUI(){
   const tl=document.getElementById('tel-link');
   tl.href='tel:'+(c.phone||'').replace(/\s/g,'');
   tl.classList.remove('hidden');
+  document.getElementById('email-post-btn').classList.remove('hidden');
   setStatus('idle');secs=c.dur||0;updateTimer();
   const histDiv=document.getElementById('cal-history');
   if(histDiv&&c.phone){
@@ -750,6 +752,7 @@ function nextContact(){
     document.getElementById('cal-av').textContent='✓';
     document.getElementById('btn-start').classList.add('hidden');
     document.getElementById('tel-link').classList.add('hidden');
+    document.getElementById('email-post-btn').classList.add('hidden');
     setStatus('idle');updateStats();return;
   }
   curIdx=next;loadUI();
@@ -1079,6 +1082,58 @@ async function saveSharedNote(){
   if(val===(c.shared_notes||''))return;
   c.shared_notes=val;
   try{await supa('PATCH','contacts',{shared_notes:val},`?id=eq.${c.id}`);}catch(e){}
+}
+function sendPostCallEmail(){
+  const c=contacts[curIdx];if(!c)return;
+  const prenom=(c.name||'').split(' ')[0]||'';
+  const commercial=c.commercial||currentUser||'Votre conseiller IP5';
+  const to=c.email||'';
+  const subject='Suite à notre entretien — IP5 Énergie';
+  const body=
+`Bonjour ${prenom},
+
+Suite à notre entretien téléphonique, je vous confirme les informations concernant votre projet de pompe à chaleur.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌡️ VOTRE PROJET PAC À 0€
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Grâce aux aides CEE (Certificats d'Économies d'Énergie) et MaPrimeRénov', votre pompe à chaleur peut être installée SANS RESTE À CHARGE.
+
+✅ Ce qui est inclus :
+• Fourniture et installation de la pompe à chaleur
+• Dépose de votre ancien système de chauffage
+• Mise en service et formation à l'utilisation
+• Gestion complète de votre dossier CEE
+
+💡 Les bénéfices :
+• -70% sur votre facture de chauffage
+• Énergie renouvelable, écologique
+• Fonctionnement jusqu'à -15°C
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📄 DOCUMENTS À PRÉPARER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Pour la constitution de votre dossier CEE, merci de préparer :
+• Titre de propriété ou attestation de propriété
+• Dernière facture de chauffage (gaz ou fioul)
+• Avis d'imposition N-1
+• Pièce d'identité
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⏭️ PROCHAINE ÉTAPE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Un technicien RGE va vous contacter pour programmer une visite technique gratuite et sans engagement à votre domicile. Cette visite permet de dimensionner précisément votre installation.
+
+En cas de question, n'hésitez pas à me contacter.
+
+Cordialement,
+${commercial}
+IP5 Énergie · Certifié RGE · QualiPAC
+📧 contact@ip5energie.com`;
+  window.open('https://mail.google.com/mail/?view=cm&to='+encodeURIComponent(to)+'&su='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body),'_blank');
 }
 function openEditContact(id){
   const c=contacts.find(x=>x.id===id);if(!c)return;
