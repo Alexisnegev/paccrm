@@ -360,6 +360,10 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
     <input type="date" id="stats-date-from" style="padding:5px 8px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:13px;" onchange="setStatsPeriod('custom',null)">
     <span style="font-size:12px;color:#888;">→</span>
     <input type="date" id="stats-date-to" style="padding:5px 8px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:13px;" onchange="setStatsPeriod('custom',null)">
+    <select id="stats-filter-com" onchange="renderStats()" style="padding:5px 10px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:13px;font-weight:600;color:#555;margin-left:8px;">
+      <option value="">👥 Tous les commerciaux</option>
+      <option>Mebarek</option><option>Megane</option><option>Jonas</option><option>Alexis</option><option>Carole</option>
+    </select>
   </div>
   <div class="stat-grid">
     <div class="stat-card">
@@ -1028,10 +1032,12 @@ function getStatsDateRange(){
 }
 async function renderStats(){
   const range=getStatsDateRange();
+  const filterCom=(document.getElementById('stats-filter-com')||{}).value||'';
+  const comFilter=filterCom||((!isAdmin&&currentUser)?currentUser:'');
   let rows=[];
   if(range){
     let params=`?called_at=gte.${range.from}&called_at=lte.${range.to}&order=called_at.desc&limit=2000`;
-    if(!isAdmin&&currentUser)params+=`&commercial=eq.${currentUser}`;
+    if(comFilter)params+=`&commercial=eq.${comFilter}`;
     try{rows=await supa('GET','call_history','',params);}catch(e){rows=[];}
   }else{
     // "Tout" — utilise les contacts
@@ -1050,16 +1056,17 @@ async function renderStats(){
     const durs=rows.filter(r=>r.dur>0).map(r=>r.dur);
     avgDur=durs.length?Math.round(durs.reduce((a,b)=>a+b,0)/durs.length):null;
   }else{
-    const called=contacts.filter(c=>c.outcome);
-    ok=contacts.filter(c=>c.outcome==='ok'||c.outcome==='hot').length;
-    nok=contacts.filter(c=>c.outcome==='nok').length;
-    vm=contacts.filter(c=>c.outcome==='vm').length;
-    cb=contacts.filter(c=>c.outcome==='cb').length;
-    tr=contacts.filter(c=>c.outcome==='tr').length;
-    ne=contacts.filter(c=>c.outcome==='ne').length;
-    ni=contacts.filter(c=>c.outcome==='ni').length;
+    const src=comFilter?contacts.filter(c=>c.commercial===comFilter):contacts;
+    const called=src.filter(c=>c.outcome);
+    ok=src.filter(c=>c.outcome==='ok'||c.outcome==='hot').length;
+    nok=src.filter(c=>c.outcome==='nok').length;
+    vm=src.filter(c=>c.outcome==='vm').length;
+    cb=src.filter(c=>c.outcome==='cb').length;
+    tr=src.filter(c=>c.outcome==='tr').length;
+    ne=src.filter(c=>c.outcome==='ne').length;
+    ni=src.filter(c=>c.outcome==='ni').length;
     calledLen=called.length;
-    const durs=contacts.filter(c=>c.dur>0).map(c=>c.dur);
+    const durs=src.filter(c=>c.dur>0).map(c=>c.dur);
     avgDur=durs.length?Math.round(durs.reduce((a,b)=>a+b,0)/durs.length):null;
   }
   const rate=calledLen?Math.round(ok/calledLen*100):null;
