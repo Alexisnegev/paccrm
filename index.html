@@ -223,7 +223,7 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
       </div>
       <div style="margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
         <button id="tel-link" onclick="launchPhoneGsCall()" class="btn tel hidden"><i class="ti ti-phone"></i> Lancer l'appel</button>
-        <button id="email-post-btn" onclick="sendPostCallEmail()" class="btn hidden" style="background:#534AB7;color:#fff;border:none;cursor:pointer;"><i class="ti ti-mail"></i> Email post-entretien</button>
+        <button id="email-post-btn" onclick="openEmailModal()" class="btn hidden" style="background:#534AB7;color:#fff;border:none;cursor:pointer;"><i class="ti ti-mail"></i> Email ▾</button>
         <div class="badge idle" id="st-badge"><span class="dot" id="st-dot"></span><span id="st-txt">En attente</span></div>
       </div>
     </div>
@@ -388,6 +388,16 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
   </div>
 </div>
 
+
+<div id="email-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:18px;padding:28px;width:90%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,.2);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <div style="font-weight:800;font-size:16px;color:#1a1a2e;">📧 Choisir un template</div>
+      <button onclick="closeEmailModal()" style="background:none;border:none;cursor:pointer;font-size:20px;color:#888;">✕</button>
+    </div>
+    <div id="email-template-list" style="display:flex;flex-direction:column;gap:10px;"></div>
+  </div>
+</div>
 <div class="save-toast" id="save-toast"><i class="ti ti-cloud-check"></i> Synchronisé</div>
 
 <div id="edit-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:9998;align-items:center;justify-content:center;">
@@ -1210,58 +1220,81 @@ async function saveSharedNote(){
   c.shared_notes=val;
   try{await supa('PATCH','contacts',{shared_notes:val},`?id=eq.${c.id}`);}catch(e){}
 }
-function sendPostCallEmail(){
+const EMAIL_TEMPLATES={
+  post_entretien:{
+    label:'Post-entretien téléphonique',
+    icon:'📞',
+    color:'#0C447C',
+    subject:()=>'Suite à notre échange — IP5 Énergie',
+    body:(c,com)=>`Bonjour ${c.name||''},\n\nRavi d'avoir pu m'entretenir avec vous aujourd'hui !\n\nPour que l'on puisse avancer ensemble sur ce projet, pourriez-vous m'envoyer la photo de votre avis d'imposition le plus rapidement possible ? C'est la pièce essentielle pour obtenir la gratuité complète de l'installation.\n\n📱 Vous pouvez simplement le prendre en photo et me l'envoyer par email à : contact@ip5energie.com ou par téléphone au 06 95 92 04 09\n\nJe reste disponible pour toute question.\n\nBien cordialement,\n${com}\nIP5 Énergie · contact@ip5energie.com`
+  },
+  docs_manquants:{
+    label:'Documents manquants — Relance',
+    icon:'📋',
+    color:'#BA7517',
+    subject:()=>'Votre dossier IP5 Énergie — Documents en attente',
+    body:(c,com)=>`Bonjour ${c.name.split(' ')[0]||''},\n\nJe me permets de vous relancer concernant votre dossier de pompe à chaleur à 0€.\n\nPour débloquer votre installation et maintenir votre place dans notre planning, nous avons besoin des documents suivants :\n\n📌 Documents manquants :\n• Avis d'imposition N-1\n• Titre de propriété\n• Dernière facture de chauffage\n\n⚠️ Important : Les aides CEE sont limitées. Un dossier incomplet risque de perdre sa priorité.\n\nVous pouvez simplement nous les envoyer par email à contact@ip5energie.com ou les photographier et me les envoyer directement.\n\nJe reste disponible pour toute question.\n\nCordialement,\n${com}\nIP5 Énergie · contact@ip5energie.com`
+  },
+  avis_imposition:{
+    label:"Urgence — Avis d'imposition",
+    icon:'⚡',
+    color:'#E24B4A',
+    subject:()=>"Action requise — Avis d'imposition pour votre dossier IP5",
+    body:(c,com)=>`Bonjour ${c.name.split(' ')[0]||''},\n\nVotre dossier de pompe à chaleur est presque complet ! Il nous manque uniquement votre avis d'imposition N-1 pour finaliser votre demande d'aides CEE.\n\n📱 C'est très simple :\n1. Connectez-vous sur impots.gouv.fr\n2. Téléchargez votre dernier avis d'imposition\n3. Envoyez-le en photo à : contact@ip5energie.com\n\n⏰ Plus vite nous recevons ce document, plus vite nous pouvons bloquer votre date d'installation.\n\nMerci de nous l'envoyer aujourd'hui si possible !\n\nCordialement,\n${com}\nIP5 Énergie · contact@ip5energie.com`
+  },
+  vt_confirmee:{
+    label:'Confirmation visite technique',
+    icon:'🏠',
+    color:'#534AB7',
+    subject:()=>'Confirmation de votre visite technique — IP5 Énergie',
+    body:(c,com,vtDate)=>`Bonjour ${c.name.split(' ')[0]||''},\n\nNous confirmons votre visite technique gratuite${vtDate?' le '+vtDate:''}.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🏠 DÉTAILS DE VOTRE VISITE\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nUn technicien certifié RGE se rendra à votre domicile pour :\n• Évaluer votre installation actuelle\n• Dimensionner précisément votre PAC\n• Confirmer votre éligibilité définitive\n• Vous présenter le matériel qui sera installé\n\n📌 À avoir le jour de la visite :\n• Vos documents de chauffage\n• Accès au local technique (chaudière, tableau électrique)\n\nEn cas d'empêchement, contactez-nous au plus vite.\n\nCordialement,\n${com}\nIP5 Énergie · contact@ip5energie.com`
+  },
+  installation_confirmee:{
+    label:'Confirmation date d\'installation',
+    icon:'🔧',
+    color:'#1D9E75',
+    subject:()=>'Votre installation PAC est confirmée — IP5 Énergie',
+    body:(c,com,poseDate)=>`Bonjour ${c.name.split(' ')[0]||''},\n\nExcellente nouvelle ! Votre installation de pompe à chaleur est confirmée${poseDate?' pour le '+poseDate:''}.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🔧 LE JOUR DE L'INSTALLATION\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nNos techniciens interviendront sur une journée complète :\n• Dépose de votre ancien système de chauffage\n• Installation et raccordement de la pompe à chaleur\n• Mise en service et tests\n• Formation à l'utilisation\n\n✅ Pensez à :\n• Dégager l'accès au local technique\n• Être présent ou représenté pendant l'installation\n• Avoir accès au tableau électrique\n\n💰 Rappel : votre reste à charge est de 0€. Aucun paiement ne vous sera demandé.\n\nÀ très bientôt,\n${com}\nIP5 Énergie · contact@ip5energie.com`
+  },
+  relance:{
+    label:'Relance — Sans réponse',
+    icon:'📵',
+    color:'#888',
+    subject:()=>'Votre projet pompe à chaleur — IP5 Énergie',
+    body:(c,com)=>`Bonjour ${c.name.split(' ')[0]||''},\n\nJe n'ai pas réussi à vous joindre par téléphone ces derniers jours concernant votre projet de pompe à chaleur à 0€.\n\nJe voulais simplement vous rappeler que :\n\n✅ Votre installation reste à 0€ grâce aux aides CEE\n⏰ Les fonds sont limités et s'épuisent\n📅 Votre dossier est en attente de votre confirmation\n\nSi vous êtes toujours intéressé, n'hésitez pas à me rappeler ou à répondre à cet email.\n\nSi votre situation a changé, faites-le moi savoir, je comprendrai tout à fait.\n\nCordialement,\n${com}\nIP5 Énergie · contact@ip5energie.com`
+  }
+};
+
+function openEmailModal(){
   const c=contacts[curIdx];if(!c)return;
-  const prenom=(c.name||'').split(' ')[0]||'';
-  const commercial=c.commercial||currentUser||'Votre conseiller IP5';
+  const vtDate=getOppDateVT&&getOppDateVT(c.id)||'';
+  const poseDate=getOppDatePose&&getOppDatePose(c.id)||'';
+  const com=c.commercial||currentUser||'Votre conseiller IP5';
+  const list=document.getElementById('email-template-list');
+  list.innerHTML=Object.entries(EMAIL_TEMPLATES).map(([key,t])=>`
+    <button onclick="sendEmailTemplate('${key}')" style="display:flex;align-items:center;gap:12px;padding:14px 16px;border:1.5px solid #e8e8f0;border-radius:12px;background:#fff;cursor:pointer;text-align:left;width:100%;transition:all .15s;" onmouseover="this.style.borderColor='${t.color}';this.style.background='#fafafa'" onmouseout="this.style.borderColor='#e8e8f0';this.style.background='#fff'">
+      <span style="font-size:24px;">${t.icon}</span>
+      <span style="font-size:14px;font-weight:600;color:#1a1a2e;">${t.label}</span>
+    </button>`).join('');
+  const modal=document.getElementById('email-modal');
+  modal.style.display='flex';
+}
+function closeEmailModal(){
+  document.getElementById('email-modal').style.display='none';
+}
+function sendEmailTemplate(key){
+  closeEmailModal();
+  const c=contacts[curIdx];if(!c)return;
+  const t=EMAIL_TEMPLATES[key];if(!t)return;
+  const com=c.commercial||currentUser||'Votre conseiller IP5';
+  const vtDate=getOppDateVT&&getOppDateVT(c.id)||'';
+  const poseDate=getOppDatePose&&getOppDatePose(c.id)||'';
+  const subject=t.subject(c,com);
+  const body=t.body(c,com,vtDate||poseDate);
   const to=c.email||'';
-  const subject='Suite à notre entretien — IP5 Énergie';
-  const body=
-`Bonjour ${prenom},
-
-Suite à notre entretien téléphonique, je vous confirme les informations concernant votre projet de pompe à chaleur.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌡️ VOTRE PROJET PAC À 0€
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Grâce aux aides CEE (Certificats d'Économies d'Énergie) et MaPrimeRénov', votre pompe à chaleur peut être installée SANS RESTE À CHARGE.
-
-✅ Ce qui est inclus :
-• Fourniture et installation de la pompe à chaleur
-• Dépose de votre ancien système de chauffage
-• Mise en service et formation à l'utilisation
-• Gestion complète de votre dossier CEE
-
-💡 Les bénéfices :
-• -70% sur votre facture de chauffage
-• Énergie renouvelable, écologique
-• Fonctionnement jusqu'à -15°C
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📄 DOCUMENTS À PRÉPARER
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Pour la constitution de votre dossier CEE, merci de préparer :
-• Titre de propriété ou attestation de propriété
-• Dernière facture de chauffage (gaz ou fioul)
-• Avis d'imposition N-1
-• Pièce d'identité
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⏭️ PROCHAINE ÉTAPE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Un technicien RGE va vous contacter pour programmer une visite technique gratuite et sans engagement à votre domicile. Cette visite permet de dimensionner précisément votre installation.
-
-En cas de question, n'hésitez pas à me contacter.
-
-Cordialement,
-${commercial}
-IP5 Énergie · Certifié RGE · QualiPAC
-📧 contact@ip5energie.com`;
   window.open('https://mail.google.com/mail/?view=cm&to='+encodeURIComponent(to)+'&su='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body),'_blank');
 }
+function sendPostCallEmail(){openEmailModal();}
 function openEditContact(id){
   const c=contacts.find(x=>x.id===id);if(!c)return;
   document.getElementById('edit-id').value=id;
