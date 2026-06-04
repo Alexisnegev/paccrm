@@ -729,8 +729,7 @@ async function launchPhoneGsCall(){
   const num=(c.phone||'').replace(/\s/g,'');
   const ext=PHONE_GS.extensions[currentUser];
   if(!ext){
-    // Pas d'extension configurée (ex: Megane) — fallback tel:
-    window.open('tel:'+num,'_self');
+    showToast('⚠️ Pas d extension configurée pour '+currentUser);
     startCall();
     return;
   }
@@ -745,13 +744,12 @@ async function launchPhoneGsCall(){
       showToast('✅ Appel lancé — votre téléphone va sonner');
       startCall();
     }else{
-      showToast('⚠️ Erreur phone.gs — appel manuel');
-      window.open('tel:'+num,'_self');
+      const txt=await res.text();
+      showToast('⚠️ Erreur phone.gs: '+res.status);
       startCall();
     }
   }catch(e){
-    showToast('⚠️ Erreur réseau — appel manuel');
-    window.open('tel:'+num,'_self');
+    showToast('⚠️ Erreur réseau: '+e.message);
     startCall();
   }
 }
