@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CRM Appel Automatique</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23534AB7'/><path d='M35 25h30a6 6 0 0 1 6 6v38a6 6 0 0 1-6 6H35a6 6 0 0 1-6-6V31a6 6 0 0 1 6-6z' fill='white'/><rect x='42' y='32' width='16' height='2' rx='1' fill='%23534AB7'/><circle cx='50' cy='68' r='3' fill='%23534AB7'/><rect x='38' y='38' width='24' height='24' rx='2' fill='%23534AB7' opacity='0.15'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23534AB7'/><text y='72' x='50' text-anchor='middle' font-size='60'>📞</text></svg>">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -194,13 +194,9 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
 <div id="objectif-bar" style="margin:8px 0 4px;padding:10px 14px;background:#F5F4FF;border-radius:10px;border:1.5px solid #534AB7;">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
     <span style="font-size:12px;font-weight:700;color:#534AB7;">🎯 Objectif journalier</span>
-    <span style="font-size:12px;color:#534AB7;font-weight:600;"><span id="obj-done">0</span> / <span id="obj-target">50</span> appels
-      <button onclick="setObjectif()" style="margin-left:6px;background:none;border:1px solid #534AB7;border-radius:8px;font-size:10px;color:#534AB7;padding:1px 6px;cursor:pointer;">✏️</button>
-    </span>
+    <span style="font-size:12px;color:#534AB7;font-weight:600;"><span id="obj-done">0</span> / <span id="obj-target">50</span> appels <button onclick="setObjectif()" style="margin-left:6px;background:none;border:1px solid #534AB7;border-radius:8px;font-size:10px;color:#534AB7;padding:1px 6px;cursor:pointer;">✏️</button></span>
   </div>
-  <div style="background:#E0DEFF;border-radius:6px;height:8px;overflow:hidden;">
-    <div id="obj-bar" style="height:100%;background:#534AB7;border-radius:6px;width:0%;transition:width .4s;"></div>
-  </div>
+  <div style="background:#E0DEFF;border-radius:6px;height:8px;overflow:hidden;"><div id="obj-bar" style="height:100%;background:#534AB7;border-radius:6px;width:0%;transition:width .4s;"></div></div>
 </div>
 
 <div class="tabs">
@@ -229,9 +225,9 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
       </div>
     </div>
     <div class="timer" id="timer">00:00</div>
-    <textarea class="notes" id="notes" placeholder="Notes personnelles (privées)..."></textarea>
+    <textarea class="notes" id="notes" placeholder="Notes..."></textarea>
     <div style="margin-top:6px;">
-      <div style="font-size:11px;font-weight:600;color:#1D9E75;margin-bottom:3px;">📌 Note partagée (visible par tous)</div>
+      <div style="font-size:11px;font-weight:600;color:#1D9E75;margin-bottom:3px;">📌 Note partagée</div>
       <textarea id="shared-notes" placeholder="Note visible par toute l'équipe..." style="width:100%;border:1.5px solid #1D9E75;border-radius:8px;padding:6px 10px;font-size:12px;font-family:inherit;resize:vertical;min-height:40px;box-sizing:border-box;" onblur="saveSharedNote()"></textarea>
     </div>
     <div id="cal-history" style="margin:8px 0;display:none;"></div>
@@ -271,14 +267,6 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
 
 <!-- CONTACTS -->
 <div id="tab-liste" class="hidden">
-  <div id="import-csv-bar" class="hidden" style="margin-bottom:8px;display:flex;align-items:center;gap:10px;background:#F0FFF8;border:1.5px solid #1D9E75;border-radius:10px;padding:8px 12px;">
-    <i class="ti ti-file-import" style="color:#1D9E75;font-size:18px;"></i>
-    <span style="font-size:12px;color:#1D9E75;font-weight:600;flex:1;">Importer des contacts via CSV</span>
-    <label style="cursor:pointer;background:#1D9E75;color:#fff;border-radius:8px;padding:5px 12px;font-size:12px;font-weight:600;">
-      <i class="ti ti-upload"></i> Choisir fichier
-      <input type="file" accept=".csv" onchange="importCSV(this)" style="display:none;">
-    </label>
-  </div>
   <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
     <input type="text" id="srch" placeholder="Rechercher..." oninput="onFilterChange()" style="flex:1;max-width:200px;">
     <input type="text" id="srch-cp" placeholder="Code postal / ville..." oninput="onFilterChange()" style="flex:1;max-width:160px;">
@@ -311,6 +299,13 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
     <button class="btn pr" onclick="assignSelected()"><i class="ti ti-user-check"></i> Confirmer</button>
     <button class="btn" onclick="clearSelection()"><i class="ti ti-x"></i> Annuler</button>
   </div>
+  <div id="import-csv-bar" class="hidden" style="margin-bottom:8px;display:flex;align-items:center;gap:10px;background:#F0FFF8;border:1.5px solid #1D9E75;border-radius:10px;padding:8px 12px;">
+    <span style="font-size:12px;color:#1D9E75;font-weight:600;flex:1;">📤 Importer des contacts via CSV</span>
+    <label style="cursor:pointer;background:#1D9E75;color:#fff;border-radius:8px;padding:5px 12px;font-size:12px;font-weight:600;">
+      <i class="ti ti-upload"></i> Choisir fichier
+      <input type="file" accept=".csv" onchange="importCSV(this)" style="display:none;">
+    </label>
+  </div>
   <div class="clist-wrap">
     <div style="display:flex;align-items:center;gap:8px;padding:8px 14px;border-bottom:0.5px solid #e0e0d8;background:#f9f9f6;" id="sel-all-row" class="hidden">
       <input type="checkbox" id="sel-all" onchange="toggleSelectAll(this)" style="width:15px;height:15px;cursor:pointer;">
@@ -325,7 +320,7 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
 <div id="tab-historique" class="hidden">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
     <div class="sec-title" style="margin-bottom:0;">Journal des appels</div>
-    <button class="btn" onclick="exportHistCSV()" style="font-size:12px;padding:5px 12px;"><i class="ti ti-download"></i> Export CSV</button>
+    <button class="btn" style="font-size:12px;padding:5px 12px;" onclick="exportHistCSV()"><i class="ti ti-download"></i> Export CSV</button>
   </div>
   <div id="hist-wrap"></div>
   <div id="no-hist" style="color:#888;font-size:14px;padding:1rem 0;display:none;">Aucun appel enregistré.</div>
@@ -342,11 +337,11 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
       <option value="appel_poseur">Appel Poseur</option>
       <option value="vt_programme">VT Programmé</option>
       <option value="pose_programmee">Pose programmée</option>
-      <option value="installe">Installé</option>
+      <option value="installe">Installé ✅</option>
       <option value="pas_bon">Pas bon ❌</option>
     </select>
   </div>
-  <div id="opp-pipeline" style="display:none;margin-bottom:10px;padding:10px 14px;background:#F0FFF8;border:1.5px solid #1D9E75;border-radius:10px;font-size:13px;color:#1D9E75;font-weight:700;"></div>
+  <div id="opp-pipeline" style="display:none;padding:8px 14px;margin-bottom:8px;background:#F5F4FF;border-radius:10px;font-size:13px;color:#534AB7;font-weight:500;"></div>
   <div id="opp-list"></div>
   <div id="no-opp" style="color:#888;font-size:14px;padding:1rem 0;">Aucune opportunité — marquez un contact comme "Contacté" pour le voir ici.</div>
 </div>
@@ -369,52 +364,39 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
     <div class="stat-card-title">Répartition résultats</div>
     <div class="bar-chart" id="bar-chart"></div>
   </div>
-  <div id="admin-stats-block" style="display:none;">
-    <div class="stat-card" style="margin-bottom:12px;">
-      <div class="stat-card-title">📊 Par commercial</div>
-      <div id="com-stats-table"></div>
-    </div>
-    <div class="stat-card" style="margin-bottom:12px;">
-      <div class="stat-card-title">🗂 Contacts par statut (global)</div>
-      <div id="global-status-table"></div>
-    </div>
-  </div>
 </div>
+  <div id="admin-stats-block" style="display:none;">
+    <div class="stat-card" style="margin-bottom:12px;"><div class="stat-card-title">📊 Par commercial</div><div id="com-stats-table"></div></div>
+    <div class="stat-card" style="margin-bottom:12px;"><div class="stat-card-title">🗂 Contacts par statut</div><div id="global-status-table"></div></div>
+  </div>
 </div>
 
 <div class="save-toast" id="save-toast"><i class="ti ti-cloud-check"></i> Synchronisé</div>
 
-
-<!-- Modale édition contact -->
 <div id="edit-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:9998;align-items:center;justify-content:center;">
-  <div style="background:#fff;border-radius:14px;padding:1.5rem;width:90%;max-width:400px;box-shadow:0 8px 32px rgba(0,0,0,.2);">
-    <div style="font-size:16px;font-weight:700;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center;">
-      <span><i class="ti ti-pencil"></i> Modifier le contact</span>
+  <div style="background:#fff;border-radius:16px;padding:28px;width:90%;max-width:480px;max-height:90vh;overflow-y:auto;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <div style="font-weight:700;font-size:16px;">Modifier le contact</div>
       <button onclick="closeEditContact()" style="background:none;border:none;cursor:pointer;font-size:20px;color:#888;">✕</button>
     </div>
     <input type="hidden" id="edit-id">
-    <div class="field"><label>Nom *</label><input type="text" id="edit-name"></div>
-    <div class="field"><label>Téléphone *</label><input type="text" id="edit-phone"></div>
-    <div class="field"><label>Société</label><input type="text" id="edit-company"></div>
-    <div class="field"><label>Email</label><input type="text" id="edit-email"></div>
-    <div class="field"><label>Adresse</label><input type="text" id="edit-adresse"></div>
-    <div class="field"><label>Attribuer à</label>
-      <select id="edit-commercial">
-        <option value="">— Non attribué —</option>
-        <option value="Mebarek">Mebarek</option>
-        <option value="Megane">Megane</option>
-        <option value="Jonas">Jonas</option>
-        <option value="Alexis">Alexis</option>
-        <option value="Carole">Carole</option>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <input id="edit-name" placeholder="Nom *" style="padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px;">
+      <input id="edit-phone" placeholder="Téléphone *" style="padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px;">
+      <input id="edit-company" placeholder="Société" style="padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px;">
+      <input id="edit-email" placeholder="Email" style="padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px;">
+      <input id="edit-adresse" placeholder="Adresse" style="padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px;">
+      <select id="edit-commercial" style="padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px;">
+        <option value="">— Commercial —</option>
+        <option>Mebarek</option><option>Megane</option><option>Jonas</option><option>Alexis</option><option>Carole</option>
       </select>
     </div>
-    <div style="display:flex;gap:8px;margin-top:1rem;">
+    <div style="display:flex;gap:10px;margin-top:20px;">
       <button class="btn" style="flex:1;" onclick="closeEditContact()">Annuler</button>
       <button class="btn sc" style="flex:1;" onclick="saveEditContact()"><i class="ti ti-check"></i> Enregistrer</button>
     </div>
   </div>
 </div>
-
 <!-- Modale ajout contact -->
 <div id="add-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:9998;align-items:center;justify-content:center;">
   <div style="background:#fff;border-radius:14px;padding:1.5rem;width:90%;max-width:400px;box-shadow:0 8px 32px rgba(0,0,0,.2);">
@@ -479,53 +461,6 @@ async function updateExtraData(){
   btn.disabled=false;btn.innerHTML='<i class="ti ti-refresh"></i> Mettre à jour données';
   alert(`✅ Mise à jour terminée !\n${done} contacts mis à jour.${errors?' \n⚠️ '+errors+' erreurs.':''}`);
   await loadContacts();
-}
-
-
-// --- ÉDITION / SUPPRESSION CONTACT ---
-function openEditContact(id){
-  const c=contacts.find(x=>x.id===id);if(!c)return;
-  document.getElementById('edit-id').value=id;
-  document.getElementById('edit-name').value=c.name||'';
-  document.getElementById('edit-phone').value=c.phone||'';
-  document.getElementById('edit-company').value=c.company||'';
-  document.getElementById('edit-email').value=c.email||'';
-  document.getElementById('edit-adresse').value=c.adresse||'';
-  document.getElementById('edit-commercial').value=c.commercial||'';
-  document.getElementById('edit-modal').style.display='flex';
-  setTimeout(()=>document.getElementById('edit-name').focus(),100);
-}
-function closeEditContact(){document.getElementById('edit-modal').style.display='none';}
-async function saveEditContact(){
-  const id=parseInt(document.getElementById('edit-id').value);
-  const name=document.getElementById('edit-name').value.trim();
-  const phone=document.getElementById('edit-phone').value.trim();
-  const company=document.getElementById('edit-company').value.trim();
-  const email=document.getElementById('edit-email').value.trim();
-  const adresse=document.getElementById('edit-adresse').value.trim();
-  const commercial=document.getElementById('edit-commercial').value;
-  if(!name||!phone){alert('Nom et téléphone obligatoires.');return;}
-  const btn=document.querySelector('#edit-modal .btn.sc');
-  btn.disabled=true;btn.textContent='Enregistrement...';
-  try{
-    await supa('PATCH','contacts',{name,phone,company,email,adresse,commercial},`?id=eq.${id}`);
-    const c=contacts.find(x=>x.id===id);
-    if(c){c.name=name;c.phone=phone;c.company=company;c.email=email;c.adresse=adresse;c.commercial=commercial;}
-    closeEditContact();renderList();if(curIdx>=0&&contacts[curIdx]?.id===id)loadUI();
-    showToast('✅ Contact modifié !');
-  }catch(e){alert('Erreur: '+e.message);}
-  finally{btn.disabled=false;btn.innerHTML='<i class="ti ti-check"></i> Enregistrer';}
-}
-async function deleteContact(id){
-  const c=contacts.find(x=>x.id===id);
-  if(!confirm(`Supprimer "${c?.name||id}" ?
-Cette action est irréversible.`))return;
-  try{
-    await supa('DELETE','contacts',null,`?id=eq.${id}`);
-    contacts=contacts.filter(x=>x.id!==id);
-    renderList();updateStats();updateOppCount();
-    showToast('🗑 Contact supprimé');
-  }catch(e){alert('Erreur: '+e.message);}
 }
 
 // --- AJOUT CONTACT ---
@@ -667,8 +602,9 @@ function login(user){
     document.getElementById('btn-assign').classList.remove('hidden');
     document.getElementById('btn-update-data').classList.remove('hidden');
     document.getElementById('filter-com').classList.remove('hidden');
+    const importBar=document.getElementById('import-csv-bar');
+    if(importBar)importBar.classList.remove('hidden');
     document.getElementById('sel-all-row').classList.remove('hidden');
-    document.getElementById('import-csv-bar').classList.remove('hidden');
   }
   initApp();
 }
@@ -747,30 +683,22 @@ function loadUI(){
   tl.href='tel:'+(c.phone||'').replace(/\s/g,'');
   tl.classList.remove('hidden');
   setStatus('idle');secs=c.dur||0;updateTimer();
-
-  // Historique du contact
   const histDiv=document.getElementById('cal-history');
-  histDiv.style.display='none';histDiv.innerHTML='';
-  if(c.phone){
+  if(histDiv&&c.phone){
+    histDiv.style.display='none';histDiv.innerHTML='';
     supa('GET','call_history','',`?phone=eq.${encodeURIComponent(c.phone)}&order=called_at.desc&limit=10`).then(rows=>{
       if(!rows||!rows.length)return;
       const OLABELS={ok:'✅ Contacté',hot:'🔥 Chaud',nok:'❌ Pas de rép.',vm:'📵 Messagerie',cb:'🔔 Rappel',tr:'↗ Transféré',ne:'🚫 Pas éligible',ni:'👋 Pas intéressé'};
       const OCOLORS={ok:'#1D9E75',hot:'#D4920A',nok:'#E24B4A',vm:'#BA7517',cb:'#534AB7',tr:'#0C447C',ne:'#6B5EA8',ni:'#C05A1F'};
-      histDiv.innerHTML=`<div style="font-size:11px;font-weight:600;color:#888;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;">Historique</div>`
-        +rows.map(r=>{
-          const raw=r.called_at;
-          const d=new Date(/Z|[+-]\d{2}:?\d{2}$/.test(raw)?raw:raw+'Z');
-          const dateStr=d.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'2-digit',timeZone:'Europe/Paris'});
-          const timeStr=d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Paris'});
-          const label=OLABELS[r.outcome]||r.outcome||'Appel';
-          const color=OCOLORS[r.outcome]||'#888';
-          const who=r.commercial?` · ${r.commercial}`:'';
-          return`<div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:0.5px solid #f0f0e8;font-size:12px;">
-            <span style="color:#aaa;white-space:nowrap;">${dateStr} ${timeStr}</span>
-            <span style="color:${color};font-weight:600;">${label}</span>
-            <span style="color:#bbb;font-size:11px;">${who}</span>
-          </div>`;
-        }).join('');
+      histDiv.innerHTML=`<div style="font-size:11px;font-weight:600;color:#888;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;">Historique</div>`+rows.map(r=>{
+        const raw=r.called_at;
+        const d=new Date(/Z|[+-]\d{2}:?\d{2}$/.test(raw)?raw:raw+'Z');
+        const dateStr=d.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'2-digit',timeZone:'Europe/Paris'});
+        const timeStr=d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Paris'});
+        const label=OLABELS[r.outcome]||r.outcome||'Appel';
+        const color=OCOLORS[r.outcome]||'#888';
+        return`<div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:0.5px solid #f0f0e8;font-size:12px;"><span style="color:#aaa;white-space:nowrap;">${dateStr} ${timeStr}</span><span style="color:${color};font-weight:600;">${label}</span><span style="color:#bbb;font-size:11px;">${r.commercial?'· '+r.commercial:''}</span></div>`;
+      }).join('');
       histDiv.style.display='';
     }).catch(()=>{});
   }
@@ -837,10 +765,8 @@ function updateTimer(){const m=Math.floor(secs/60).toString().padStart(2,'0');co
 async function updateStats(){
   const tot=contacts.length,done=contacts.filter(c=>c.status==='done').length;
   const ok=contacts.filter(c=>c.outcome==='ok').length,nok=contacts.filter(c=>c.outcome==='nok'||c.outcome==='vm').length,cb=contacts.filter(c=>c.outcome==='cb').length;
-  const nonAppeles=contacts.filter(c=>c.commercial&&(!c.status||c.status==='pending')&&(isAdmin||c.commercial===currentUser)).length;
   document.getElementById('s-tot').textContent=tot;document.getElementById('s-done').textContent=done;
   document.getElementById('s-ok').textContent=ok;document.getElementById('s-nok').textContent=nok;document.getElementById('s-cb').textContent=cb;
-  document.getElementById('s-non-appeles').textContent=nonAppeles;
   document.getElementById('prog').style.width=tot?Math.round((done+cb)/tot*100)+'%':'0%';
   // Qualifiés du jour (ok + hot) depuis call_history
   try{
@@ -853,7 +779,6 @@ async function updateStats(){
     const allRows=await supa('GET','call_history','',qparams);
     const calledToday=allRows?allRows.length:0;
     document.getElementById('s-called-today').textContent=calledToday;
-    // Objectif journalier
     const objKey='objectif_'+(isAdmin?'admin':currentUser);
     const objTarget=parseInt(localStorage.getItem(objKey)||'50');
     document.getElementById('obj-target').textContent=objTarget;
@@ -862,36 +787,31 @@ async function updateStats(){
     document.getElementById('obj-bar').style.width=pct+'%';
     document.getElementById('obj-bar').style.background=pct>=100?'#1D9E75':'#534AB7';
   }catch(e){}
-}
-async function saveSharedNote(){
-  const c=contacts[curIdx];if(!c)return;
-  const val=document.getElementById('shared-notes').value;
-  if(val===( c.shared_notes||''))return;
-  c.shared_notes=val;
-  try{await supa('PATCH','contacts',{shared_notes:val},`?id=eq.${c.id}`);}catch(e){}
-}
-function setObjectif(){
-  const objKey='objectif_'+(isAdmin?'admin':currentUser);
-  const cur=localStorage.getItem(objKey)||'50';
-  const val=prompt('Objectif journalier (nombre d\'appels) :',cur);
-  if(val&&!isNaN(parseInt(val))){localStorage.setItem(objKey,parseInt(val));updateStats();}
+  const nonAppeles=contacts.filter(c=>c.commercial&&(!c.status||c.status==='pending')&&(isAdmin||c.commercial===currentUser)).length;
+  document.getElementById('s-non-appeles').textContent=nonAppeles;
 }
 
 // --- LISTE ---
 function getFiltered(){
   const q=(document.getElementById('srch')||{value:''}).value.toLowerCase();
-  const qcp=(document.getElementById('srch-cp')||{value:''}).value.toLowerCase();
   const f=(document.getElementById('filter')||{value:''}).value;
   const fc=(document.getElementById('filter-com')||{value:''}).value;
   return contacts.filter(c=>{
     if(q&&!c.name.toLowerCase().includes(q)&&!(c.phone||'').includes(q)&&!(c.company||'').toLowerCase().includes(q))return false;
-    if(qcp){const addr=(c.adresse||'').toLowerCase();if(!addr.includes(qcp))return false;}
     if(f==='pending'&&c.status!=='pending')return false;
     if(f==='done'&&c.status!=='done')return false;
     if(f==='cb'&&c.outcome!=='cb')return false;
     if(fc&&c.commercial!==fc)return false;
+    const qcp=(document.getElementById('srch-cp')||{value:''}).value.toLowerCase();
+    if(qcp){const addr=(c.adresse||'').toLowerCase();if(!addr.includes(qcp))return false;}
     return true;
   });
+}
+function setObjectif(){
+  const objKey='objectif_'+(isAdmin?'admin':currentUser);
+  const cur=localStorage.getItem(objKey)||'50';
+  const val=prompt('Objectif journalier :',cur);
+  if(val&&!isNaN(parseInt(val))){localStorage.setItem(objKey,parseInt(val));updateStats();}
 }
 function onFilterChange(){currentPage=0;renderList();}
 function renderList(){
@@ -910,14 +830,13 @@ function renderList(){
     const comColor=COM_COLORS[c.commercial]||'#888';
     const comtag=c.commercial?`<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:${comColor}22;color:${comColor};margin-left:4px;">${c.commercial}</span>`:'';
     const cbtag=c.outcome==='cb'?`<span class="ctag cb"><i class="ti ti-clock"></i>${fmtDT(c.cb_date,c.cb_time)}</span>`:'';
-    const sharedtag=c.shared_notes?`<span style="font-size:10px;padding:2px 7px;border-radius:10px;background:#E8F5EE;color:#1D9E75;font-weight:500;" title="${c.shared_notes.replace(/"/g,'&quot;')}">📌 ${c.shared_notes.length>30?c.shared_notes.slice(0,30)+'…':c.shared_notes}</span>`:'';
     const outlabel=c.outcome&&labels[c.outcome]?`<span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:${colors[c.outcome]}18;color:${colors[c.outcome]};"><i class="ti ${icons[c.outcome]}" style="font-size:10px;"></i>${labels[c.outcome]}</span>`:'';
     let si=isCur?'<i class="ti ti-phone" style="font-size:13px;color:#534AB7"></i>':'';
     el.innerHTML+=`<div class="crow${isCur?' cur':''}${c.enabled===false?' dis':''}${isSel?' cur':''}">
       ${isAdmin?`<input type="checkbox" ${isSel?'checked':''} onchange="toggleSelect(${c.id},this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">`:'<div style="width:15px;flex-shrink:0;"></div>'}
       <div class="cav" style="background:${b};color:${f}">${ini(c.name)}</div>
       <div style="flex:1;min-width:0;">
-        <div class="cname">${c.name}${comtag}${outlabel}${cbtag}${sharedtag}</div>
+        <div class="cname">${c.name}${comtag}${outlabel}${cbtag}</div>
         <div class="cmeta">${c.phone||''}${c.company?' · '+c.company:''}</div>
       </div>
       <div style="flex-shrink:0;">${si}</div>
@@ -976,6 +895,10 @@ function renderCBList(){
   const wrap=document.getElementById('cb-list-wrap');const none=document.getElementById('no-cb');
   if(!cbs.length){wrap.innerHTML='';none.style.display='';return;}
   none.style.display='none';
+  const totalPipeline=opps.reduce((sum,c)=>{const m=parseFloat(getOppMontant(c.id)||0);return sum+m;},0);
+  const pipeDiv=document.getElementById('opp-pipeline');
+  pipeDiv.style.display='';
+  pipeDiv.innerHTML=`💶 Pipeline total : <strong>${totalPipeline>0?totalPipeline.toLocaleString('fr-FR')+' €':'—'}</strong> &nbsp;·&nbsp; ${opps.length} dossier${opps.length>1?'s':''}`;
   const today=todayStr();
   wrap.innerHTML='<div class="cb-list">'+cbs.map(c=>{
     const past=c.cb_date<today,soon=c.cb_date===today;
@@ -1037,75 +960,34 @@ function renderStats(){
     <div class="bar-item"><div class="bar-label">${b.label}</div>
     <div class="bar-wrap"><div class="bar-fill" style="width:${Math.round(b.val/maxB*100)}%;background:${b.color};"></div></div>
     <div class="bar-val" style="color:${b.color};">${b.val}</div></div>`).join('');
-
-  // Admin : tableau par commercial + global par statut
+  // Admin stats block
   const adminBlock=document.getElementById('admin-stats-block');
-  if(!isAdmin){adminBlock.style.display='none';return;}
-  adminBlock.style.display='';
-
-  // Tableau par commercial
-  const outcomes=[
-    {key:'pending',label:'Non appelés',color:'#E24B4A'},
-    {key:'ok',label:'Contactés',color:'#1D9E75'},
-    {key:'hot',label:'🔥 Chauds',color:'#D4920A'},
-    {key:'cb',label:'Rappels',color:'#534AB7'},
-    {key:'nok',label:'Pas de rép.',color:'#888'},
-    {key:'vm',label:'Messagerie',color:'#BA7517'},
-    {key:'tr',label:'Transférés',color:'#0C447C'},
-    {key:'ne',label:'Pas éligible',color:'#6B5EA8'},
-    {key:'ni',label:'Pas intéressé',color:'#C05A1F'},
-  ];
-  const thStyle='padding:6px 10px;font-size:11px;color:#888;font-weight:600;text-align:center;white-space:nowrap;';
-  const tdStyle='padding:5px 8px;font-size:12px;text-align:center;';
-  let tableHTML=`<div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;">
-    <thead><tr>
-      <th style="${thStyle}text-align:left;">Commercial</th>
-      <th style="${thStyle}">Total</th>
-      ${outcomes.map(o=>`<th style="${thStyle}color:${o.color};">${o.label}</th>`).join('')}
-    </tr></thead><tbody>`;
-  COMMERCIAUX.forEach(name=>{
-    const cc=contacts.filter(c=>c.commercial===name);
-    if(!cc.length)return;
-    const color=COM_COLORS[name]||'#888';
-    const pending=cc.filter(c=>!c.outcome||c.status==='pending').length;
-    tableHTML+=`<tr style="border-top:0.5px solid #e0e0d8;">
-      <td style="${tdStyle}text-align:left;"><span style="font-weight:700;color:${color};">${name}</span></td>
-      <td style="${tdStyle}font-weight:600;">${cc.length}</td>
-      <td style="${tdStyle}color:#E24B4A;font-weight:600;">${pending}</td>
-      ${outcomes.slice(1).map(o=>{
-        const n=cc.filter(c=>c.outcome===o.key).length;
-        return`<td style="${tdStyle}${n>0?'color:'+o.color+';font-weight:600;':'color:#ccc;'}">${n||'—'}</td>`;
-      }).join('')}
-    </tr>`;
-  });
-  tableHTML+='</tbody></table></div>';
-  document.getElementById('com-stats-table').innerHTML=tableHTML;
-
-  // Global par statut
-  const allOutcomes=[
-    {key:null,label:'Non appelés',color:'#E24B4A',fn:c=>!c.outcome||c.status==='pending'},
-    {key:'ok',label:'Contactés',color:'#1D9E75',fn:c=>c.outcome==='ok'},
-    {key:'hot',label:'🔥 Chauds',color:'#D4920A',fn:c=>c.outcome==='hot'},
-    {key:'cb',label:'Rappels',color:'#534AB7',fn:c=>c.outcome==='cb'},
-    {key:'nok',label:'Pas de réponse',color:'#888',fn:c=>c.outcome==='nok'},
-    {key:'vm',label:'Messagerie',color:'#BA7517',fn:c=>c.outcome==='vm'},
-    {key:'tr',label:'Transférés',color:'#0C447C',fn:c=>c.outcome==='tr'},
-    {key:'ne',label:'Pas éligibles',color:'#6B5EA8',fn:c=>c.outcome==='ne'},
-    {key:'ni',label:'Pas intéressés',color:'#C05A1F',fn:c=>c.outcome==='ni'},
-  ];
-  const total=contacts.length;
-  document.getElementById('global-status-table').innerHTML=allOutcomes.map(o=>{
-    const n=contacts.filter(o.fn).length;
-    const pct=total?Math.round(n/total*100):0;
-    return`<div style="display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:0.5px solid #f0f0e8;">
-      <div style="width:110px;font-size:12px;color:${o.color};font-weight:600;">${o.label}</div>
-      <div style="flex:1;background:#f5f5f0;border-radius:4px;height:10px;overflow:hidden;">
-        <div style="width:${pct}%;background:${o.color};height:100%;border-radius:4px;"></div>
-      </div>
-      <div style="width:40px;text-align:right;font-size:13px;font-weight:700;color:${o.color};">${n}</div>
-      <div style="width:35px;text-align:right;font-size:11px;color:#aaa;">${pct}%</div>
-    </div>`;
-  }).join('');
+  if(adminBlock){
+    if(isAdmin){
+      adminBlock.style.display='';
+      // Par commercial
+      const coms=[...new Set(contacts.map(c=>c.commercial).filter(Boolean))];
+      const comTable=coms.map(com=>{
+        const cc=contacts.filter(c=>c.commercial===com);
+        const total=cc.length;
+        const done=cc.filter(c=>c.status==='done').length;
+        const okC=cc.filter(c=>c.outcome==='ok'||c.outcome==='hot').length;
+        const comColor=COM_COLORS[com]||'#888';
+        return`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:0.5px solid #f0f0e8;font-size:13px;"><span style="min-width:80px;font-weight:600;color:${comColor};">${com}</span><span style="color:#888;">${done}/${total} appelés</span><span style="color:#1D9E75;margin-left:auto;">${okC} contactés</span></div>`;
+      }).join('');
+      document.getElementById('com-stats-table').innerHTML=comTable||'<div style="color:#888;font-size:13px;padding:8px 0;">Aucune donnée</div>';
+      // Par statut global
+      const statusLabels={ok:'Contacté',hot:'Chaud',nok:'Pas de réponse',vm:'Messagerie',cb:'Rappel',tr:'Transféré',ne:'Pas éligible',ni:'Pas intéressé',pending:'En attente'};
+      const statusColors={ok:'#1D9E75',hot:'#D4920A',nok:'#E24B4A',vm:'#BA7517',cb:'#534AB7',tr:'#0C447C',ne:'#6B5EA8',ni:'#C05A1F',pending:'#888'};
+      const statusCounts={};
+      contacts.forEach(c=>{const k=c.outcome||'pending';statusCounts[k]=(statusCounts[k]||0)+1;});
+      const statusTable=Object.entries(statusCounts).sort((a,b)=>b[1]-a[1]).map(([k,v])=>{
+        const color=statusColors[k]||'#888';
+        return`<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:0.5px solid #f0f0e8;font-size:13px;"><span style="min-width:110px;color:${color};font-weight:600;">${statusLabels[k]||k}</span><span style="font-weight:600;">${v}</span></div>`;
+      }).join('');
+      document.getElementById('global-status-table').innerHTML=statusTable||'<div style="color:#888;font-size:13px;padding:8px 0;">Aucune donnée</div>';
+    }else{adminBlock.style.display='none';}
+  }
 }
 
 // --- TABS ---
@@ -1135,12 +1017,8 @@ function renderOpportunites(){
   if(filterStage)opps=opps.filter(c=>getOppStage(c.id)===filterStage);
   const wrap=document.getElementById('opp-list');
   const none=document.getElementById('no-opp');
-  if(!opps.length){wrap.innerHTML='';none.style.display='';document.getElementById('opp-pipeline').style.display='none';return;}
+  if(!opps.length){wrap.innerHTML='';none.style.display='';return;}
   none.style.display='none';
-  const totalPipeline=opps.reduce((sum,c)=>{const m=parseFloat(getOppMontant(c.id)||0);return sum+m;},0);
-  const pipeDiv=document.getElementById('opp-pipeline');
-  pipeDiv.style.display='';
-  pipeDiv.innerHTML=`💶 Pipeline total : <strong>${totalPipeline>0?totalPipeline.toLocaleString('fr-FR')+' €':'—'}</strong> &nbsp;·&nbsp; ${opps.length} dossier${opps.length>1?'s':''}`;
   const stageOrder=['docs_demandes','docs_recus','appel_poseur','vt_programme','pose_programmee','installe','pas_bon'];
   opps.sort((a,b)=>stageOrder.indexOf(getOppStage(a.id))-stageOrder.indexOf(getOppStage(b.id)));
   wrap.innerHTML='<div class="clist-wrap">'+opps.map(c=>{
@@ -1151,10 +1029,10 @@ function renderOpportunites(){
     const dateVT=getOppDateVT(c.id);
     const datePose=getOppDatePose(c.id);
     const montant=getOppMontant(c.id);
-    const comColor=COM_COLORS[c.commercial]||'#888';
-    const comtag=c.commercial?`<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:${comColor}22;color:${comColor};">${c.commercial}</span>`:'';
     const poseurBadge=poseur&&POSEURS[poseur]?`<span style="font-size:10px;padding:2px 9px;border-radius:20px;font-weight:700;background:${POSEURS[poseur].color};color:#fff;white-space:nowrap;">${POSEURS[poseur].label}</span>`:'';
     const poseurOptions=`<option value="">— Poseur —</option>`+Object.entries(POSEURS).map(([k,v])=>`<option value="${k}"${poseur===k?' selected':''}>${v.label}</option>`).join('');
+    const comColor=COM_COLORS[c.commercial]||'#888';
+    const comtag=c.commercial?`<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:${comColor}22;color:${comColor};">${c.commercial}</span>`:'';
     return`<div style="padding:12px 14px;border-bottom:0.5px solid #e0e0d8;">
       <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
         <div style="flex:1;min-width:0;">
@@ -1164,10 +1042,9 @@ function renderOpportunites(){
         <select onchange="setOppStage(${c.id},this.value)" style="height:28px;font-size:12px;width:auto;border-color:${s.color};color:${s.color};font-weight:600;">
           ${Object.entries(OPP_STAGES).map(([k,v])=>`<option value="${k}"${stage===k?' selected':''}>${v.label}</option>`).join('')}
         </select>
-        <select onchange="setOppPoseur(${c.id},this.value)" style="height:28px;font-size:12px;width:auto;border-radius:20px;border:2px solid ${poseur&&POSEURS[poseur]?POSEURS[poseur].color:'#ccc'};color:${poseur&&POSEURS[poseur]?POSEURS[poseur].color:'#888'};font-weight:600;padding:0 6px;">
-          ${poseurOptions}
-        </select>
         <a href="tel:${(c.phone||'').replace(/\s/g,'')}" class="btn tel" style="padding:4px 10px;font-size:12px;"><i class="ti ti-phone"></i></a>
+        <select onchange="setOppPoseur(${c.id},this.value)" style="height:28px;font-size:12px;width:auto;">${poseurOptions}</select>
+        <button onclick="openContactFromOpp(${c.id})" style="padding:4px 10px;font-size:12px;border:0.5px solid #534AB7;color:#534AB7;background:transparent;border-radius:8px;cursor:pointer;"><i class="ti ti-external-link"></i> Ouvrir</button>
       </div>
       <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;align-items:center;">
         <label style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">🗓 VT <input type="date" value="${dateVT}" onchange="setOppDateVT(${c.id},this.value)" style="font-size:11px;border:0.5px solid #e0e0d8;border-radius:6px;padding:2px 6px;"></label>
@@ -1179,6 +1056,13 @@ function renderOpportunites(){
   }).join('')+'</div>';
 }
 
+function openContactFromOpp(id){
+  const i=contacts.findIndex(c=>c.id===id);
+  if(i===-1)return;
+  curIdx=i;
+  loadUI();
+  showTab('appel',document.querySelectorAll('.tab')[0]);
+}
 function showTab(name,el){
   ['appel','rappels','liste','opportunites','historique','stats'].forEach(t=>document.getElementById('tab-'+t).classList[t===name?'remove':'add']('hidden'));
   document.querySelectorAll('.tab').forEach(b=>b.classList.remove('act'));el.classList.add('act');
@@ -1189,34 +1073,66 @@ function showTab(name,el){
   if(name==='stats')renderStats();
 }
 
-// --- CSV EXPORT ---
-function exportCSV(){
-  let csv='Nom;Téléphone;Société;Commercial;Résultat;Notes\n';
-  const labels={ok:'Contacté',hot:'🔥 Chaud',nok:'Pas de réponse',vm:'Messagerie',cb:'Rappel',tr:'Transféré',ne:'Pas éligible',ni:'Pas intéressé'};
-  contacts.forEach(c=>{csv+=`"${c.name}";"${c.phone}";"${c.company||''}";"${c.commercial||''}";"${labels[c.outcome]||'Non appelé'}";"${(c.notes||'').replace(/"/g,"'")}"\n`;});
-  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
-  const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='appels_export.csv';a.click();URL.revokeObjectURL(url);
+async function saveSharedNote(){
+  const c=contacts[curIdx];if(!c)return;
+  const val=document.getElementById('shared-notes').value;
+  if(val===(c.shared_notes||''))return;
+  c.shared_notes=val;
+  try{await supa('PATCH','contacts',{shared_notes:val},`?id=eq.${c.id}`);}catch(e){}
 }
-
+function openEditContact(id){
+  const c=contacts.find(x=>x.id===id);if(!c)return;
+  document.getElementById('edit-id').value=id;
+  document.getElementById('edit-name').value=c.name||'';
+  document.getElementById('edit-phone').value=c.phone||'';
+  document.getElementById('edit-company').value=c.company||'';
+  document.getElementById('edit-email').value=c.email||'';
+  document.getElementById('edit-adresse').value=c.adresse||'';
+  document.getElementById('edit-commercial').value=c.commercial||'';
+  document.getElementById('edit-modal').style.display='flex';
+}
+function closeEditContact(){document.getElementById('edit-modal').style.display='none';}
+async function saveEditContact(){
+  const id=parseInt(document.getElementById('edit-id').value);
+  const name=document.getElementById('edit-name').value.trim();
+  const phone=document.getElementById('edit-phone').value.trim();
+  const company=document.getElementById('edit-company').value.trim();
+  const email=document.getElementById('edit-email').value.trim();
+  const adresse=document.getElementById('edit-adresse').value.trim();
+  const commercial=document.getElementById('edit-commercial').value;
+  if(!name||!phone){alert('Nom et téléphone obligatoires.');return;}
+  try{
+    await supa('PATCH','contacts',{name,phone,company,email,adresse,commercial},`?id=eq.${id}`);
+    const c=contacts.find(x=>x.id===id);
+    if(c){c.name=name;c.phone=phone;c.company=company;c.email=email;c.adresse=adresse;c.commercial=commercial;}
+    closeEditContact();renderList();
+    showToast('✅ Contact modifié !');
+  }catch(e){alert('Erreur: '+e.message);}
+}
+async function deleteContact(id){
+  const c=contacts.find(x=>x.id===id);
+  if(!confirm(`Supprimer "${c?.name||id}" ?\nCette action est irréversible.`))return;
+  try{
+    await supa('DELETE','contacts',null,`?id=eq.${id}`);
+    contacts=contacts.filter(x=>x.id!==id);
+    renderList();updateStats();
+    showToast('🗑 Contact supprimé');
+  }catch(e){alert('Erreur: '+e.message);}
+}
+// --- CSV IMPORT ---
 function importCSV(input){
   const file=input.files[0];if(!file)return;
   const reader=new FileReader();
   reader.onload=async function(e){
     const text=e.target.result;
     const lines=text.split('\n').map(l=>l.trim()).filter(l=>l);
-    if(!lines.length){alert('Fichier vide.');return;}
-    // Détection séparateur
+    if(!lines.length)return;
     const sep=lines[0].includes(';')?';':',';
     const headers=lines[0].split(sep).map(h=>h.replace(/^"|"$/g,'').trim().toLowerCase());
+    const aliases={name:['nom','name'],phone:['telephone','téléphone','tel','phone'],company:['societe','société','company'],commercial:['commercial'],email:['email','mail'],adresse:['adresse','address']};
     const colMap={};
-    const aliases={name:['nom','name'],phone:['telephone','téléphone','tel','phone'],company:['societe','société','company','entreprise'],commercial:['commercial','agent'],email:['email','mail'],adresse:['adresse','address']};
-    Object.entries(aliases).forEach(([key,alts])=>{
-      const idx=headers.findIndex(h=>alts.includes(h));
-      if(idx>=0)colMap[key]=idx;
-    });
-    if(colMap.name===undefined||colMap.phone===undefined){
-      alert('Colonnes "Nom" et "Téléphone" obligatoires dans le CSV.');return;
-    }
+    Object.entries(aliases).forEach(([key,alts])=>{const idx=headers.findIndex(h=>alts.includes(h));if(idx>=0)colMap[key]=idx;});
+    if(colMap.name===undefined||colMap.phone===undefined){alert('Colonnes Nom et Téléphone obligatoires.');return;}
     const newContacts=[];
     for(let i=1;i<lines.length;i++){
       const cols=lines[i].split(sep).map(c=>c.replace(/^"|"$/g,'').trim());
@@ -1228,43 +1144,45 @@ function importCSV(input){
       if(colMap.adresse!==undefined)obj.adresse=cols[colMap.adresse]||'';
       newContacts.push(obj);
     }
-    if(!newContacts.length){alert('Aucun contact valide trouvé.');return;}
+    if(!newContacts.length){alert('Aucun contact valide.');return;}
     if(!confirm(`Importer ${newContacts.length} contacts ?`))return;
-    try{
-      // Insérer par lots de 100
-      let done=0;
-      for(let i=0;i<newContacts.length;i+=100){
-        await supa('POST','contacts',newContacts.slice(i,i+100));
-        done+=Math.min(100,newContacts.length-i);
-      }
-      showToast(`✅ ${done} contacts importés !`);
-      input.value='';
-      await loadContacts();
-    }catch(err){alert('Erreur import: '+err.message);}
+    let done=0;
+    for(let i=0;i<newContacts.length;i+=100){await supa('POST','contacts',newContacts.slice(i,i+100));done+=Math.min(100,newContacts.length-i);}
+    showToast(`✅ ${done} contacts importés !`);
+    input.value='';
+    await loadContacts();
   };
   reader.readAsText(file,'UTF-8');
 }
+// --- CSV EXPORT ---
+function exportCSV(){
+  let csv='Nom;Téléphone;Société;Commercial;Résultat;Notes\n';
+  const labels={ok:'Contacté',hot:'🔥 Chaud',nok:'Pas de réponse',vm:'Messagerie',cb:'Rappel',tr:'Transféré',ne:'Pas éligible',ni:'Pas intéressé'};
+  contacts.forEach(c=>{csv+=`"${c.name}";"${c.phone}";"${c.company||''}";"${c.commercial||''}";"${labels[c.outcome]||'Non appelé'}";"${(c.notes||'').replace(/"/g,"'")}"\n`;});
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='appels_export.csv';a.click();URL.revokeObjectURL(url);
+}
 
+// --- EXPORT HISTORIQUE ---
 async function exportHistCSV(){
   try{
     let params='?order=called_at.desc&limit=1000';
     if(!isAdmin&&currentUser)params+=`&commercial=eq.${encodeURIComponent(currentUser)}`;
     const rows=await supa('GET','call_history','',params);
-    if(!rows||!rows.length){alert('Aucun historique à exporter.');return;}
+    if(!rows||!rows.length){alert('Aucun historique.');return;}
     const labels={ok:'Contacté',hot:'Chaud',nok:'Pas de réponse',vm:'Messagerie',cb:'Rappel',tr:'Transféré',ne:'Pas éligible',ni:'Pas intéressé'};
-    let csv='Date;Heure;Nom;Téléphone;Société;Commercial;Résultat;Durée(s);Notes\n';
+    let csv='Date;Heure;Nom;Téléphone;Société;Commercial;Résultat;Durée(s)\n';
     rows.forEach(r=>{
       const raw=r.called_at;
       const d=new Date(/Z|[+-]\d{2}:?\d{2}$/.test(raw)?raw:raw+'Z');
       const date=d.toLocaleDateString('fr-FR',{timeZone:'Europe/Paris'});
       const time=d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Paris'});
-      csv+=`"${date}";"${time}";"${r.contact_name||''}";"${r.phone||''}";"${r.company||''}";"${r.commercial||''}";"${labels[r.outcome]||r.outcome||''}";"${r.dur||0}";"${(r.notes||'').replace(/"/g,"'")}"\n`;
+      csv+=`"${date}";"${time}";"${r.contact_name||''}";"${r.phone||''}";"${r.company||''}";"${r.commercial||''}";"${labels[r.outcome]||r.outcome||''}";"${r.dur||0}"\n`;
     });
-    const blob=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8'});
-    const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='historique_appels.csv';a.click();URL.revokeObjectURL(url);
-  }catch(e){alert('Erreur export: '+e.message);}
+    const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});
+    const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='historique.csv';a.click();URL.revokeObjectURL(url);
+  }catch(e){alert('Erreur: '+e.message);}
 }
-
 // Init
 const _savedUser=sessionStorage.getItem('crm_user');
 if(_savedUser) login(_savedUser);
