@@ -159,7 +159,7 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
       <button class="login-btn" onclick="login('Jonas')">Jonas</button>
       <button class="login-btn" onclick="login('Alexis')">Alexis</button>
       <button class="login-btn" onclick="login('Carole')">Carole</button>
-      <button class="login-btn admin" onclick="login('admin')">👑 Mode administrateur</button>
+      <button class="login-btn admin" onclick="loginAdmin()">👑 Mode administrateur</button>
     </div>
   </div>
 </div>
@@ -200,6 +200,7 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
   <div class="stat" style="border:1.5px solid #E24B4A;background:#FFF5F5;"><div class="stat-l" style="color:#E24B4A;font-weight:600;">⏳ Attribués non appelés</div><div class="stat-v" style="color:#E24B4A;" id="s-non-appeles">0</div></div>
   <div class="stat" style="border:1.5px solid #D4920A;background:#FFFBF0;cursor:pointer;" onclick="showTab('opportunites',document.querySelectorAll('.tab')[3]);setTimeout(()=>setOppTab('vt',document.querySelector('.opp-subtab[data-tab=vt]')),50)"><div class="stat-l" style="color:#D4920A;font-weight:600;">🏠 VT programmées</div><div class="stat-v" style="color:#D4920A;" id="s-vt">0</div></div>
   <div class="stat" style="border:1.5px solid #1D9E75;background:#F0FBF7;cursor:pointer;" onclick="showTab('opportunites',document.querySelectorAll('.tab')[3]);setTimeout(()=>setOppTab('pose',document.querySelector('.opp-subtab[data-tab=pose]')),50)"><div class="stat-l" style="color:#1D9E75;font-weight:600;">🔧 Installations programmées</div><div class="stat-v" style="color:#1D9E75;" id="s-pose">0</div></div>
+  <div class="stat hidden" id="stat-ca" style="border:1.5px solid #26215C;background:#EEEDFE;grid-column:span 2;"><div class="stat-l" style="color:#26215C;font-weight:600;">💶 CA Prévisionnel (opportunités)</div><div class="stat-v" style="color:#26215C;font-size:22px;" id="s-ca">—</div></div>
 </div>
 <div class="pbw"><div class="pb" id="prog" style="width:0%"></div></div>
 <div id="objectif-bar" style="margin:8px 0 4px;padding:10px 14px;background:#F5F4FF;border-radius:10px;border:1.5px solid #534AB7;">
@@ -631,6 +632,11 @@ let currentPage=0;const PAGE_SIZE=50;
 let filteredContacts=[];
 
 // --- LOGIN ---
+function loginAdmin(){
+  const code=prompt('Code administrateur :');
+  if(code==='1306'){login('admin');}
+  else if(code!==null){alert('Code incorrect.');}
+}
 function login(user){
   currentUser=user;isAdmin=(user==='admin');
   document.body.style.background=COM_BG[user]||'#F8FAFC';
@@ -645,6 +651,7 @@ function login(user){
     document.getElementById('btn-assign').classList.remove('hidden');
     document.getElementById('btn-update-data').classList.remove('hidden');
     document.getElementById('filter-com').classList.remove('hidden');
+    document.getElementById('stat-ca').classList.remove('hidden');
     const importBar=document.getElementById('import-csv-bar');
     if(importBar)importBar.classList.remove('hidden');
     document.getElementById('sel-all-row').classList.remove('hidden');
@@ -1214,6 +1221,11 @@ function updateOppCount(){
   const cp=document.getElementById('cnt-pose');if(cp)cp.textContent=poseCount||'';
   const sv=document.getElementById('s-vt');if(sv)sv.textContent=vtCount;
   const sp=document.getElementById('s-pose');if(sp)sp.textContent=poseCount;
+  // CA prévisionnel
+  let totalCA=0;
+  all.forEach(c=>{const m=parseFloat(getOppMontant(c.id));if(!isNaN(m)&&m>0)totalCA+=m;});
+  const sca=document.getElementById('s-ca');
+  if(sca)sca.textContent=totalCA>0?totalCA.toLocaleString('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0}):'—';
 }
 function renderOpportunites(){
   const all=contacts.filter(c=>getOppData(c.id).qualified===true||c.outcome==='ok'||c.outcome==='hot');
