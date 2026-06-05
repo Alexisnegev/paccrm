@@ -799,15 +799,14 @@ async function endCall(){
   callActive=false;clearInterval(timerInt);
   const c=contacts[curIdx];
   c.dur=secs;c.notes=document.getElementById('notes').value;
-  const out=selOut_||'nok';
-  const prevOutcome=c.outcome;
-  // Si contact déjà opportunité (ok/hot) + rappel → garder son statut opportunité
-  if(out==='cb'&&(prevOutcome==='ok'||prevOutcome==='hot')){
-    c.outcome=prevOutcome;c.status='done';
-  }else{
-    c.outcome=out;c.status=out==='cb'?'cb':'done';
-  }
+  const out=selOut_||'nok';c.outcome=out;
+  c.status=out==='cb'?'cb':'done';
   if(out==='cb'){c.cb_date=document.getElementById('cb-date').value;c.cb_time=document.getElementById('cb-time').value;c.cb_reason=document.getElementById('cb-reason').value;}
+  // Si qualifié (ok/hot) → marquer qualified dans opp_data
+  if(out==='ok'||out==='hot'){
+    let d=getOppData(c.id);d.qualified=true;c.opp_data=JSON.stringify(d);
+    try{supa('PATCH','contacts',{opp_data:c.opp_data},`?id=eq.${c.id}`);}catch(e){}
+  }
   setStatus('ended');
   document.getElementById('btn-end').classList.add('hidden');
   document.getElementById('btn-skip').classList.add('hidden');
@@ -974,7 +973,7 @@ async function assignSelected(){
 
 // --- RAPPELS ---
 function renderCBList(){
-  const cbs=contacts.filter(c=>c.cb_date&&(c.outcome==='cb'||c.outcome==='ok'||c.outcome==='hot')).sort((a,b)=>(a.cb_date+a.cb_time).localeCompare(b.cb_date+b.cb_time));
+  const cbs=contacts.filter(c=>c.outcome==='cb'&&c.cb_date).sort((a,b)=>(a.cb_date+a.cb_time).localeCompare(b.cb_date+b.cb_time));
   const wrap=document.getElementById('cb-list-wrap');const none=document.getElementById('no-cb');
   if(!cbs.length){wrap.innerHTML='';none.style.display='';return;}
   none.style.display='none';
@@ -1203,7 +1202,7 @@ function setOppTab(tab,el){
   renderOpportunites();
 }
 function updateOppCount(){
-  const all=contacts.filter(c=>c.outcome==='ok'||c.outcome==='hot');
+  const all=contacts.filter(c=>getOppData(c.id).qualified===true||c.outcome==='ok'||c.outcome==='hot');
   const vtCount=all.filter(c=>getOppStage(c.id)==='vt_programme').length;
   const poseCount=all.filter(c=>getOppStage(c.id)==='pose_programmee'||getOppStage(c.id)==='installe').length;
   const attenteCount=all.filter(c=>getOppStage(c.id)==='attente_conf_vt').length;
@@ -1217,7 +1216,7 @@ function updateOppCount(){
   const sp=document.getElementById('s-pose');if(sp)sp.textContent=poseCount;
 }
 function renderOpportunites(){
-  const all=contacts.filter(c=>c.outcome==='ok'||c.outcome==='hot');
+  const all=contacts.filter(c=>getOppData(c.id).qualified===true||c.outcome==='ok'||c.outcome==='hot');
   updateOppCount();
   let opps;
   if(currentOppTab==='vt'){
