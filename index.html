@@ -500,9 +500,15 @@ async function updateExtraData(){
     }));
     btn.innerHTML=`<span class="spinner"></span> ${Math.min(i+batchSize,UPDATE_DATA.length)}/${UPDATE_DATA.length}...`;
   }
-  btn.disabled=false;btn.innerHTML='<i class="ti ti-refresh"></i> Mettre à jour données';
+  btn.disabled=false;btn.innerHTML='<i class="ti ti-refresh"></i> Màj email/adresse';
   alert(`✅ Mise à jour terminée !\n${done} contacts mis à jour.${errors?' \n⚠️ '+errors+' erreurs.':''}`);
+  // Sauvegarder les stades avant rechargement
+  while(pendingSaves>0)await new Promise(r=>setTimeout(r,100));
+  const oppBackup={};contacts.forEach(c=>{if(c.opp_data&&c.opp_data!=='{}')oppBackup[c.id]=c.opp_data;});
   await loadContacts();
+  // Restaurer les stades après rechargement
+  contacts.forEach(c=>{if(oppBackup[c.id])c.opp_data=oppBackup[c.id];});
+  renderOpportunites();updateOppCount();
 }
 
 // --- AJOUT CONTACT ---
@@ -1166,15 +1172,18 @@ function getOppData(id){
     return d;
   }catch(e){return {};}
 }
+let pendingSaves=0;
 async function saveOppField(id,key,val){
+  pendingSaves++;
   const c=contacts.find(x=>x.id===id);
-  if(!c)return;
+  if(!c){pendingSaves--;return;}
   let d=getOppData(id);
   d[key]=val;
   c.opp_data=JSON.stringify(d);
   showToast('💾 Sauvegarde...');
   try{await supa('PATCH','contacts',{opp_data:c.opp_data},`?id=eq.${c.id}`);showToast('✅ Sauvegardé');}
   catch(e){showToast('⚠️ Erreur sauvegarde');}
+  finally{pendingSaves--;}
 }
 function getOppPoseur(id){return getOppData(id).poseur||'';}
 function setOppPoseur(id,val){saveOppField(id,'poseur',val);renderOpportunites();}
