@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0229)file:///Users/alexissitbonmac2/Library/Application%20Support/Claude/local-agent-mode-sessions/5ab59b19-89dd-4741-8d5d-fff5dd4602ef/4b66a17c-53cf-4942-a2d0-a15a1cc0a7cd/local_2bf69529-4683-4ad3-b70e-8409be3af678/outputs/index.html -->
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CRM Appel Automatique</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23534AB7'/><text y='72' x='50' text-anchor='middle' font-size='60'>📞</text></svg>">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 100 100&#39;&gt;&lt;rect width=&#39;100&#39; height=&#39;100&#39; rx=&#39;20&#39; fill=&#39;%23534AB7&#39;/&gt;&lt;text y=&#39;72&#39; x=&#39;50&#39; text-anchor=&#39;middle&#39; font-size=&#39;60&#39;&gt;%F0%9F%93%9E&lt;/text&gt;&lt;/svg&gt;">
+<link rel="stylesheet" href="./CRM Appel Automatique_files/tabler-icons.min.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f0;color:#1a1a1a;min-height:100vh;padding:1.5rem;}
@@ -137,22 +137,29 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
   .wrap{max-width:100%;}
   .stat-v{font-size:17px;}
 }
+.opp-subtab{padding:5px 14px;border:1.5px solid #e0e0d8;border-radius:20px;font-size:12px;font-weight:600;background:#fff;color:#555;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.opp-subtab:hover{background:#f5f5f0;}
+.opp-subtab.act[data-tab="opp"]{background:#534AB7;color:#fff;border-color:#534AB7;}
+.opp-subtab.act[data-tab="vt"]{background:#D4920A;color:#fff;border-color:#D4920A;}
+.opp-subtab.act[data-tab="pose"]{background:#1D9E75;color:#fff;border-color:#1D9E75;}
+.opp-subtab.act[data-tab="attente"]{background:#9C6BB5;color:#fff;border-color:#9C6BB5;}
+.opp-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:8px 14px;margin-top:4px;}
 </style>
 </head>
-<body>
+<body style="background: rgb(12, 26, 46);">
 
-<div class="login-overlay" id="login-overlay">
+<div class="login-overlay" id="login-overlay" style="display: none;">
   <div class="login-box">
     <div style="font-size:36px;margin-bottom:10px;">📞</div>
     <div class="login-title">CRM Appel Automatique</div>
     <div class="login-sub" id="login-sub">Qui êtes-vous ?</div>
     <div class="login-grid" id="login-grid">
-      <button class="login-btn" onclick="login('Mebarek')">Mebarek</button>
-      <button class="login-btn" onclick="login('Megane')">Megane</button>
-      <button class="login-btn" onclick="login('Jonas')">Jonas</button>
-      <button class="login-btn" onclick="login('Alexis')">Alexis</button>
-      <button class="login-btn" onclick="login('Carole')">Carole</button>
-      <button class="login-btn admin" onclick="login('admin')">👑 Mode administrateur</button>
+      <button class="login-btn" onclick="login(&#39;Mebarek&#39;)">Mebarek</button>
+      <button class="login-btn" onclick="login(&#39;Megane&#39;)">Megane</button>
+      <button class="login-btn" onclick="login(&#39;Jonas&#39;)">Jonas</button>
+      <button class="login-btn" onclick="login(&#39;Alexis&#39;)">Alexis</button>
+      <button class="login-btn" onclick="login(&#39;Carole&#39;)">Carole</button>
+      <button class="login-btn admin" onclick="login(&#39;admin&#39;)">👑 Mode administrateur</button>
     </div>
   </div>
 </div>
@@ -161,9 +168,9 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
 <div class="hd">
   <div class="title" style="display:flex;align-items:center;gap:10px;"><svg width="90" height="36" viewBox="0 0 90 36" xmlns="http://www.w3.org/2000/svg">
   <!-- Arc teal extérieur -->
-  <path d="M18,4 A16,16 0 1,0 18,32" fill="none" stroke="#2AAABF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M18,4 A16,16 0 1,0 18,32" fill="none" stroke="#2AAABF" stroke-width="4" stroke-linecap="round"></path>
   <!-- Arc gris intérieur -->
-  <path d="M14,9 A10,10 0 1,0 14,27" fill="none" stroke="#4A6272" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M14,9 A10,10 0 1,0 14,27" fill="none" stroke="#4A6272" stroke-width="3.5" stroke-linecap="round"></path>
   <!-- IP5 -->
   <text x="30" y="22" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#4A6272">IP5</text>
   <!-- Conseils -->
@@ -177,54 +184,57 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
     <button class="btn sc" onclick="openAddContact()"><i class="ti ti-user-plus"></i> Ajouter contact</button>
     <button class="btn" onclick="exportCSV()"><i class="ti ti-download"></i> Exporter</button>
     <button class="btn pr hidden" id="btn-import-init" onclick="importInitialContacts()"><i class="ti ti-database-import"></i> Importer contacts</button>
-    <button class="btn am hidden" id="btn-update-data" onclick="updateExtraData()"><i class="ti ti-refresh"></i> Mettre à jour données</button>
-    <button class="btn pr hidden" id="btn-assign"><i class="ti ti-users"></i> Attribuer</button>
-  </div>
+    <button class="btn am" id="btn-update-data" onclick="updateExtraData()"><i class="ti ti-refresh"></i> Mettre à jour données</button>
+    <button class="btn pr" id="btn-assign"><i class="ti ti-users"></i> Attribuer</button>
+    <button class="btn" id="btn-migrate" onclick="migrateLocalStorageToSupabase()" style="background:#9C6BB5;border-color:#9C6BB5;color:#fff;"><i class="ti ti-database-export"></i> Récupérer données locales</button>
+  <div style="font-size: 13px; font-weight: 600; padding: 4px 12px; border-radius: 20px; background: rgb(26, 26, 26); color: rgb(255, 255, 255); display: flex; align-items: center; gap: 6px;">👑 Admin<button onclick="logout()" style="background:none;border:none;cursor:pointer;font-size:11px;color:inherit;opacity:.7;padding:0;margin-left:4px;">✕</button></div></div>
 </div>
 
 <div class="stats">
-  <div class="stat"><div class="stat-l">Total</div><div class="stat-v" id="s-tot">0</div></div>
-  <div class="stat"><div class="stat-l">Appelés</div><div class="stat-v" id="s-done">0</div></div>
-  <div class="stat"><div class="stat-l">Contactés</div><div class="stat-v g" id="s-ok">0</div></div>
-  <div class="stat"><div class="stat-l">Sans réponse</div><div class="stat-v r" id="s-nok">0</div></div>
-  <div class="stat"><div class="stat-l">Rappels</div><div class="stat-v p" id="s-cb">0</div></div>
-  <div class="stat" style="border:1.5px solid #D4920A;background:#FFFBF0;"><div class="stat-l" style="color:#D4920A;font-weight:600;">🔥 Qualifiés aujourd'hui</div><div class="stat-v" style="color:#D4920A;" id="s-qualif">0</div></div>
-  <div class="stat" style="border:1.5px solid #534AB7;background:#F5F4FF;"><div class="stat-l" style="color:#534AB7;font-weight:600;">📞 Appelés aujourd'hui</div><div class="stat-v" style="color:#534AB7;" id="s-called-today">0</div></div>
-  <div class="stat" style="border:1.5px solid #E24B4A;background:#FFF5F5;"><div class="stat-l" style="color:#E24B4A;font-weight:600;">⏳ Attribués non appelés</div><div class="stat-v" style="color:#E24B4A;" id="s-non-appeles">0</div></div>
+  <div class="stat"><div class="stat-l">Total</div><div class="stat-v" id="s-tot">1646</div></div>
+  <div class="stat"><div class="stat-l">Appelés</div><div class="stat-v" id="s-done">145</div></div>
+  <div class="stat"><div class="stat-l">Contactés</div><div class="stat-v g" id="s-ok">3</div></div>
+  <div class="stat"><div class="stat-l">Sans réponse</div><div class="stat-v r" id="s-nok">76</div></div>
+  <div class="stat"><div class="stat-l">Rappels</div><div class="stat-v p" id="s-cb">6</div></div>
+  <div class="stat" style="border:1.5px solid #D4920A;background:#FFFBF0;"><div class="stat-l" style="color:#D4920A;font-weight:600;">🔥 Qualifiés aujourd'hui</div><div class="stat-v" style="color:#D4920A;" id="s-qualif">1</div></div>
+  <div class="stat" style="border:1.5px solid #534AB7;background:#F5F4FF;"><div class="stat-l" style="color:#534AB7;font-weight:600;">📞 Appelés aujourd'hui</div><div class="stat-v" style="color:#534AB7;" id="s-called-today">15</div></div>
+  <div class="stat" style="border:1.5px solid #E24B4A;background:#FFF5F5;"><div class="stat-l" style="color:#E24B4A;font-weight:600;">⏳ Attribués non appelés</div><div class="stat-v" style="color:#E24B4A;" id="s-non-appeles">42</div></div>
+  <div class="stat" style="border:1.5px solid #D4920A;background:#FFFBF0;cursor:pointer;" onclick="showTab(&#39;opportunites&#39;,document.querySelectorAll(&#39;.tab&#39;)[3]);setTimeout(()=&gt;setOppTab(&#39;vt&#39;,document.querySelector(&#39;.opp-subtab[data-tab=vt]&#39;)),50)"><div class="stat-l" style="color:#D4920A;font-weight:600;">🏠 VT programmées</div><div class="stat-v" style="color:#D4920A;" id="s-vt">1</div></div>
+  <div class="stat" style="border:1.5px solid #1D9E75;background:#F0FBF7;cursor:pointer;" onclick="showTab(&#39;opportunites&#39;,document.querySelectorAll(&#39;.tab&#39;)[3]);setTimeout(()=&gt;setOppTab(&#39;pose&#39;,document.querySelector(&#39;.opp-subtab[data-tab=pose]&#39;)),50)"><div class="stat-l" style="color:#1D9E75;font-weight:600;">🔧 Installations programmées</div><div class="stat-v" style="color:#1D9E75;" id="s-pose">0</div></div>
 </div>
-<div class="pbw"><div class="pb" id="prog" style="width:0%"></div></div>
+<div class="pbw"><div class="pb" id="prog" style="width: 9%;"></div></div>
 <div id="objectif-bar" style="margin:8px 0 4px;padding:10px 14px;background:#F5F4FF;border-radius:10px;border:1.5px solid #534AB7;">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
     <span style="font-size:12px;font-weight:700;color:#534AB7;">🎯 Objectif journalier</span>
-    <span style="font-size:12px;color:#534AB7;font-weight:600;"><span id="obj-done">0</span> / <span id="obj-target">50</span> appels <button onclick="setObjectif()" style="margin-left:6px;background:none;border:1px solid #534AB7;border-radius:8px;font-size:10px;color:#534AB7;padding:1px 6px;cursor:pointer;">✏️</button></span>
+    <span style="font-size:12px;color:#534AB7;font-weight:600;"><span id="obj-done">15</span> / <span id="obj-target">100</span> appels <button onclick="setObjectif()" style="margin-left:6px;background:none;border:1px solid #534AB7;border-radius:8px;font-size:10px;color:#534AB7;padding:1px 6px;cursor:pointer;">✏️</button></span>
   </div>
-  <div style="background:#E0DEFF;border-radius:6px;height:8px;overflow:hidden;"><div id="obj-bar" style="height:100%;background:#534AB7;border-radius:6px;width:0%;transition:width .4s;"></div></div>
+  <div style="background:#E0DEFF;border-radius:6px;height:8px;overflow:hidden;"><div id="obj-bar" style="height: 100%; background: rgb(83, 74, 183); border-radius: 6px; width: 15%; transition: width 0.4s;"></div></div>
 </div>
 
 <div class="tabs">
-  <button class="tab act" onclick="showTab('appel',this)">Appel en cours</button>
-  <button class="tab" onclick="showTab('rappels',this)">Rappels</button>
-  <button class="tab" onclick="showTab('liste',this)">Contacts</button>
-  <button class="tab" onclick="showTab('opportunites',this)">🏆 Opportunités <span id="opp-count" style="background:#1D9E75;color:#fff;border-radius:10px;padding:1px 6px;font-size:10px;margin-left:3px;"></span></button>
-  <button class="tab" onclick="showTab('historique',this)">Historique</button>
-  <button class="tab" onclick="showTab('stats',this)">Stats</button>
+  <button class="tab" onclick="showTab(&#39;appel&#39;,this)">Appel en cours</button>
+  <button class="tab" onclick="showTab(&#39;rappels&#39;,this)">Rappels</button>
+  <button class="tab" onclick="showTab(&#39;liste&#39;,this)">Contacts</button>
+  <button class="tab act" onclick="showTab(&#39;opportunites&#39;,this)">🏆 Opportunités <span id="opp-count" style="background:#1D9E75;color:#fff;border-radius:10px;padding:1px 6px;font-size:10px;margin-left:3px;">8</span></button>
+  <button class="tab" onclick="showTab(&#39;historique&#39;,this)">Historique</button>
+  <button class="tab" onclick="showTab(&#39;stats&#39;,this)">Stats</button>
 </div>
 
 <!-- APPEL -->
-<div id="tab-appel">
+<div id="tab-appel" class="hidden">
   <div class="panel">
     <div class="row">
-      <div class="av" id="cal-av" style="background:#CECBF6;color:#3C3489;">--</div>
+      <div class="av" id="cal-av" style="background: rgb(192, 221, 151); color: rgb(39, 80, 10);">GQ</div>
       <div>
-        <div class="cal-name" id="cal-name">Aucun appel en cours</div>
-        <div class="cal-sub" id="cal-phone">—</div>
+        <div class="cal-name" id="cal-name">GILES QUENTIN</div>
+        <div class="cal-sub" id="cal-phone">06 42 54 38 89</div>
         <div class="cal-sub" id="cal-co"></div>
         <div class="cal-sub" id="cal-extra" style="margin-top:4px;display:flex;flex-wrap:wrap;gap:6px;"></div>
       </div>
       <div style="margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-        <button id="tel-link" onclick="launchPhoneGsCall()" class="btn tel hidden"><i class="ti ti-phone"></i> Lancer l'appel</button>
-        <button id="email-post-btn" onclick="openEmailModal()" class="btn hidden" style="background:#534AB7;color:#fff;border:none;cursor:pointer;"><i class="ti ti-mail"></i> Email ▾</button>
-        <button id="whatsapp-btn" onclick="openWhatsAppModal()" class="btn hidden" style="background:#25D366;color:#fff;border:none;cursor:pointer;"><i class="ti ti-brand-whatsapp"></i> WhatsApp ▾</button>
+        <button id="tel-link" onclick="launchPhoneGsCall()" class="btn tel"><i class="ti ti-phone"></i> Lancer l'appel</button>
+        <button id="email-post-btn" onclick="openEmailModal()" class="btn" style="background:#534AB7;color:#fff;border:none;cursor:pointer;"><i class="ti ti-mail"></i> Email ▾</button>
+        <button id="whatsapp-btn" onclick="openWhatsAppModal()" class="btn" style="background:#25D366;color:#fff;border:none;cursor:pointer;"><i class="ti ti-brand-whatsapp"></i> WhatsApp ▾</button>
         <div class="badge idle" id="st-badge"><span class="dot" id="st-dot"></span><span id="st-txt">En attente</span></div>
       </div>
     </div>
@@ -232,19 +242,19 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
     <textarea class="notes" id="notes" placeholder="Notes..."></textarea>
     <div style="margin-top:6px;">
       <div style="font-size:11px;font-weight:600;color:#1D9E75;margin-bottom:3px;">📌 Note partagée</div>
-      <textarea id="shared-notes" placeholder="Note visible par toute l'équipe..." style="width:100%;border:1.5px solid #1D9E75;border-radius:8px;padding:6px 10px;font-size:12px;font-family:inherit;resize:vertical;min-height:40px;box-sizing:border-box;" onblur="saveSharedNote()"></textarea>
+      <textarea id="shared-notes" placeholder="Note visible par toute l&#39;équipe..." style="width:100%;border:1.5px solid #1D9E75;border-radius:8px;padding:6px 10px;font-size:12px;font-family:inherit;resize:vertical;min-height:40px;box-sizing:border-box;" onblur="saveSharedNote()"></textarea>
     </div>
     <div id="cal-history" style="margin:8px 0;display:none;"></div>
     <div class="sec-title">Résultat</div>
     <div class="ob-row">
-      <button class="ob" id="ob-ok" onclick="selOut('ok')"><i class="ti ti-check"></i> Contacté</button>
-      <button class="ob" id="ob-hot" onclick="selOut('hot')">🔥 Chaud</button>
-      <button class="ob" id="ob-nok" onclick="selOut('nok')"><i class="ti ti-x"></i> Pas de réponse</button>
-      <button class="ob" id="ob-vm" onclick="selOut('vm')"><i class="ti ti-message"></i> Messagerie</button>
-      <button class="ob" id="ob-cb" onclick="selOut('cb')"><i class="ti ti-clock"></i> Rappel</button>
-      <button class="ob" id="ob-tr" onclick="selOut('tr')"><i class="ti ti-transfer"></i> Transféré</button>
-      <button class="ob" id="ob-ne" onclick="selOut('ne')"><i class="ti ti-ban"></i> Pas éligible</button>
-      <button class="ob" id="ob-ni" onclick="selOut('ni')"><i class="ti ti-thumb-down"></i> Pas intéressé</button>
+      <button class="ob" id="ob-ok" onclick="selOut(&#39;ok&#39;)"><i class="ti ti-check"></i> Contacté</button>
+      <button class="ob" id="ob-hot" onclick="selOut(&#39;hot&#39;)">🔥 Chaud</button>
+      <button class="ob" id="ob-nok" onclick="selOut(&#39;nok&#39;)"><i class="ti ti-x"></i> Pas de réponse</button>
+      <button class="ob" id="ob-vm" onclick="selOut(&#39;vm&#39;)"><i class="ti ti-message"></i> Messagerie</button>
+      <button class="ob" id="ob-cb" onclick="selOut(&#39;cb&#39;)"><i class="ti ti-clock"></i> Rappel</button>
+      <button class="ob" id="ob-tr" onclick="selOut(&#39;tr&#39;)"><i class="ti ti-transfer"></i> Transféré</button>
+      <button class="ob" id="ob-ne" onclick="selOut(&#39;ne&#39;)"><i class="ti ti-ban"></i> Pas éligible</button>
+      <button class="ob" id="ob-ni" onclick="selOut(&#39;ni&#39;)"><i class="ti ti-thumb-down"></i> Pas intéressé</button>
     </div>
     <div id="cb-form" class="hidden" style="background:#f5f5f0;border-radius:8px;padding:12px;margin-bottom:1rem;">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
@@ -280,7 +290,7 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
       <option value="done">Appelés</option>
       <option value="cb">Rappels</option>
     </select>
-    <select id="filter-com" onchange="onFilterChange()" style="width:auto;" class="hidden">
+    <select id="filter-com" onchange="onFilterChange()" style="width:auto;" class="">
       <option value="">Tous commerciaux</option>
       <option value="Mebarek">Mebarek</option>
       <option value="Megane">Megane</option>
@@ -303,7 +313,7 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
     <button class="btn pr" onclick="assignSelected()"><i class="ti ti-user-check"></i> Confirmer</button>
     <button class="btn" onclick="clearSelection()"><i class="ti ti-x"></i> Annuler</button>
   </div>
-  <div id="import-csv-bar" class="hidden" style="margin-bottom:8px;display:flex;align-items:center;gap:10px;background:#F0FFF8;border:1.5px solid #1D9E75;border-radius:10px;padding:8px 12px;">
+  <div id="import-csv-bar" class="" style="margin-bottom:8px;display:flex;align-items:center;gap:10px;background:#F0FFF8;border:1.5px solid #1D9E75;border-radius:10px;padding:8px 12px;">
     <span style="font-size:12px;color:#1D9E75;font-weight:600;flex:1;">📤 Importer des contacts via CSV</span>
     <label style="cursor:pointer;background:#1D9E75;color:#fff;border-radius:8px;padding:5px 12px;font-size:12px;font-weight:600;">
       <i class="ti ti-upload"></i> Choisir fichier
@@ -311,13 +321,566 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
     </label>
   </div>
   <div class="clist-wrap">
-    <div style="display:flex;align-items:center;gap:8px;padding:8px 14px;border-bottom:0.5px solid #e0e0d8;background:#f9f9f6;" id="sel-all-row" class="hidden">
+    <div style="display:flex;align-items:center;gap:8px;padding:8px 14px;border-bottom:0.5px solid #e0e0d8;background:#f9f9f6;" id="sel-all-row" class="">
       <input type="checkbox" id="sel-all" onchange="toggleSelectAll(this)" style="width:15px;height:15px;cursor:pointer;">
       <span style="font-size:12px;color:#888;">Tout sélectionner (page)</span>
     </div>
-    <div id="clist"><div style="padding:2rem;text-align:center;color:#888;"><span class="spinner"></span> Chargement...</div></div>
+    <div id="clist"><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(1,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#CECBF6;color:#3C3489">RT</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">ROUBY THOMAS<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">06 21 57 53 17</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0621575317" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(1)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(1)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(0)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(2,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#9FE1CB;color:#085041">SL</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">SNC LE TREFLE<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">07 78 95 02 31</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0778950231" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(2)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(2)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(1)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(3,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#F5C4B3;color:#712B13">MD</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">MARIE DAVID<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">06 60 03 65 93</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0660036593" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(3)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(3)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(2)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(4,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#B5D4F4;color:#0C447C">DA</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">DEVILLARD ALAIN<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">06 50 71 68 49</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0650716849" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(4)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(4)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(3)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(5,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#FAC775;color:#633806">EC</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">EURL CTA PAK<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">06 66 83 47 71</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0666834771" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(5)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(5)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(4)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(6,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#F4C0D1;color:#72243E">TD</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">TALON DANIEL<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">06 83 55 08 66</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0683550866" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(6)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(6)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(5)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(7,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#C0DD97;color:#27500A">AJ</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">AU JARDIN DE LA TENDRESSE<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">06 73 60 31 30</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0673603130" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(7)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(7)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(6)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(8,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#D3D1C7;color:#444441">SC</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">SAIYAN CORP<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">06 73 55 95 92</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0673559592" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(8)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(8)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(7)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(9,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#CECBF6;color:#3C3489">C</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">CAMARG'ANIM<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">06 22 12 29 64</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0622122964" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(9)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(9)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(8)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(10,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#9FE1CB;color:#085041">LP</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">LES PINS<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">06 25 33 50 79</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0625335079" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(10)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(10)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(9)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(11,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#F5C4B3;color:#712B13">PR</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">PATISSOU ROMAIN<span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">06 27 58 53 88</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0627585388" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(11)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(11)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(10)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(12,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#B5D4F4;color:#0C447C">TA</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">TONIO AMARAL<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#0C447C22;color:#0C447C;margin-left:4px;">Alexis</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">06 82 18 23 42</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0682182342" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(12)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(12)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(11)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(13,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#FAC775;color:#633806">ED</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">EARL DU TAULAT<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#0C447C22;color:#0C447C;margin-left:4px;">Alexis</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">06 80 75 56 17</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0680755617" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(13)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(13)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(12)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(14,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#F4C0D1;color:#72243E">B</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">BRIGADIER<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">07 83 47 12 10</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0783471210" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(14)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(14)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(13)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(15,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#C0DD97;color:#27500A">GQ</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">GILES QUENTIN</div>
+        <div class="cmeta">06 42 54 38 89</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0642543889" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(15)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(15)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(14)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(16,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#D3D1C7;color:#444441">ED</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">EARL DOMAINE DE TAILLEFER</div>
+        <div class="cmeta">06 37 69 36 11</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0637693611" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(16)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(16)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(15)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(17,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#CECBF6;color:#3C3489">A</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">Adri'aubrac<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">06 47 87 45 95</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0647874595" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(17)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(17)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(16)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(18,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#9FE1CB;color:#085041">CY</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">CHARLET YOHAN<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta"></div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(18)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(18)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(17)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(19,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#F5C4B3;color:#712B13">VL</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">VIOLETTE LYONS</div>
+        <div class="cmeta">06 95 86 46 45</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0695864645" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(19)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(19)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(18)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(20,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#B5D4F4;color:#0C447C">SM</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">SARL MELVIN</div>
+        <div class="cmeta">06 46 16 01 01</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0646160101" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(20)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(20)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(19)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(21,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#FAC775;color:#633806">PJ</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">PUT JEAN MICHEL<span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">06 81 25 53 97</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0681255397" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(21)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(21)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(20)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(22,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#F4C0D1;color:#72243E">SD</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">SCI DU CAMMAS</div>
+        <div class="cmeta"></div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(22)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(22)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(21)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(23,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#C0DD97;color:#27500A">GR</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">GAEC RECONNU DE LA SOURCE</div>
+        <div class="cmeta"></div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(23)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(23)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(22)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(24,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#D3D1C7;color:#444441">B</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">BOSLOUBET-CHANTEGROS<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">06 42 61 59 93</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0642615993" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(24)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(24)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(23)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(25,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#CECBF6;color:#3C3489">FP</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">FORNARO PATRICK<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#1D9E7518;color:#1D9E75;"><i class="ti ti-check" style="font-size:10px;"></i>Contacté</span></div>
+        <div class="cmeta">07 61 99 41 73</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0761994173" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(25)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(25)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(24)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(26,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#9FE1CB;color:#085041">HB</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">HOCHE BERTRAND</div>
+        <div class="cmeta">06 81 79 73 41</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0681797341" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(26)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(26)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(25)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(27,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#F5C4B3;color:#712B13">GD</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">GAEC DU COLOMBIER-DAL</div>
+        <div class="cmeta">06 80 73 23 29</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0680732329" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(27)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(27)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(26)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(28,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#B5D4F4;color:#0C447C">H</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">HOURAT<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#6B5EA818;color:#6B5EA8;"><i class="ti ti-ban" style="font-size:10px;"></i>Pas éligible</span></div>
+        <div class="cmeta">06 80 93 48 97</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0680934897" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(28)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(28)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(27)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(29,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#FAC775;color:#633806">LV</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">LES VERGERS DU TICOL</div>
+        <div class="cmeta">06 77 15 97 78</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0677159778" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(29)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(29)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(28)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(30,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#F4C0D1;color:#72243E">GD</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">GAEC DE FREIWALD<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#6B5EA818;color:#6B5EA8;"><i class="ti ti-ban" style="font-size:10px;"></i>Pas éligible</span></div>
+        <div class="cmeta">06 79 74 29 79</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0679742979" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(30)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(30)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(29)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(31,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#C0DD97;color:#27500A">DF</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">DE FURIA LORENZO<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">06 17 27 68 89</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0617276889" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(31)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(31)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(30)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(32,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#D3D1C7;color:#444441">MA</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">MICHEL ALAIN<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#6B5EA818;color:#6B5EA8;"><i class="ti ti-ban" style="font-size:10px;"></i>Pas éligible</span></div>
+        <div class="cmeta">07 83 22 85 05</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0783228505" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(32)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(32)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(31)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(33,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#CECBF6;color:#3C3489">EL</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">EARL LA RENNE<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">06 88 10 45 59</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0688104559" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(33)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(33)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(32)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(34,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#9FE1CB;color:#085041">CC</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">CARRAU CEDRIC<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#E24B4A22;color:#E24B4A;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#D4920A18;color:#D4920A;"><i class="ti ti-flame" style="font-size:10px;"></i>🔥 Chaud</span></div>
+        <div class="cmeta">06 73 15 20 08</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0673152008" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(34)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(34)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(33)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(35,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#F5C4B3;color:#712B13">SD</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">SARL DE BELBEZE<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">06 64 20 19 35</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0664201935" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(35)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(35)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(34)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(36,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#B5D4F4;color:#0C447C">GV</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">GAEC VEYRAC<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#E24B4A22;color:#E24B4A;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#D4920A18;color:#D4920A;"><i class="ti ti-flame" style="font-size:10px;"></i>🔥 Chaud</span></div>
+        <div class="cmeta">06 87 73 65 13</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0687736513" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(36)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(36)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(35)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(37,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#FAC775;color:#633806">BD</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">BLANC DAMIEN<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#E24B4A22;color:#E24B4A;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#BA751718;color:#BA7517;"><i class="ti ti-message" style="font-size:10px;"></i>Messagerie</span></div>
+        <div class="cmeta">06 08 84 90 96</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0608849096" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(37)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(37)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(36)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(38,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#F4C0D1;color:#72243E">GR</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">GAEC RECONNU LA VIEILLE GRANGE</div>
+        <div class="cmeta">06 38 22 14 43</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0638221443" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(38)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(38)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(37)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(39,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#C0DD97;color:#27500A">SD</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">SCEA DES 3 L</div>
+        <div class="cmeta">06 51 53 08 67</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0651530867" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(39)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(39)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(38)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(40,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#D3D1C7;color:#444441">CT</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">CARRAU THIERRY<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#E24B4A22;color:#E24B4A;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">06 98 81 75 03</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0698817503" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(40)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(40)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(39)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(41,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#CECBF6;color:#3C3489">GL</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">GAYET LOIC<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#C05A1F18;color:#C05A1F;"><i class="ti ti-thumb-down" style="font-size:10px;"></i>Pas intéressé</span></div>
+        <div class="cmeta">06 73 64 60 75</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0673646075" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(41)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(41)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(40)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(42,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#9FE1CB;color:#085041">BF</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">BEZY FLORIAN<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#C05A1F18;color:#C05A1F;"><i class="ti ti-thumb-down" style="font-size:10px;"></i>Pas intéressé</span></div>
+        <div class="cmeta">06 78 56 68 39</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0678566839" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(42)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(42)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(41)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(43,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#F5C4B3;color:#712B13">SP</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">SCEA PROCEA<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#C05A1F18;color:#C05A1F;"><i class="ti ti-thumb-down" style="font-size:10px;"></i>Pas intéressé</span></div>
+        <div class="cmeta">07 86 48 63 34</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0786486334" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(43)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(43)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(42)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(44,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#B5D4F4;color:#0C447C">ER</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">EARL RIVIERE HAUTE<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#E24B4A22;color:#E24B4A;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#6B5EA818;color:#6B5EA8;"><i class="ti ti-ban" style="font-size:10px;"></i>Pas éligible</span></div>
+        <div class="cmeta">07 86 48 63 34</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0786486334" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(44)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(44)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(43)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(45,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#FAC775;color:#633806">BB</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">BIENFAIT BENJAMIN<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#E24B4A22;color:#E24B4A;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#C05A1F18;color:#C05A1F;"><i class="ti ti-thumb-down" style="font-size:10px;"></i>Pas intéressé</span></div>
+        <div class="cmeta">06 24 33 44 01</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0624334401" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(45)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(45)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(44)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(46,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#F4C0D1;color:#72243E">L</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">LOUBIERE<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#E24B4A22;color:#E24B4A;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#BA751718;color:#BA7517;"><i class="ti ti-message" style="font-size:10px;"></i>Messagerie</span></div>
+        <div class="cmeta">06 88 34 02 53</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0688340253" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(46)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(46)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(45)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(47,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#C0DD97;color:#27500A">GD</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">GAEC DE BELLEVUE<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#E24B4A22;color:#E24B4A;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#1D9E7518;color:#1D9E75;"><i class="ti ti-check" style="font-size:10px;"></i>Contacté</span></div>
+        <div class="cmeta">06 88 34 02 53</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0688340253" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(47)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(47)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(46)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(48,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#D3D1C7;color:#444441">FJ</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">FRECAULT JEAN<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">06 64 91 57 92</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0664915792" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(48)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(48)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(47)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(49,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#CECBF6;color:#3C3489">MA</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">MERIGARD AURELIEN<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#6B5EA818;color:#6B5EA8;"><i class="ti ti-ban" style="font-size:10px;"></i>Pas éligible</span></div>
+        <div class="cmeta">06 74 17 63 48</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0674176348" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(49)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(49)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(48)"><i class="ti ti-arrow-right"></i></button>
+    </div><div class="crow">
+      <input type="checkbox" onchange="toggleSelect(50,this.checked)" style="width:15px;height:15px;cursor:pointer;flex-shrink:0;">
+      <div class="cav" style="background:#9FE1CB;color:#085041">GD</div>
+      <div style="flex:1;min-width:0;">
+        <div class="cname">GAEC DE STE MARGUERITE<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;margin-left:4px;">Mebarek</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
+        <div class="cmeta">06 74 75 93 99</div>
+      </div>
+      <div style="flex-shrink:0;"></div>
+      <a href="tel:0674759399" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
+      <button class="btn am" style="padding:3px 9px;font-size:12px;" onclick="openEditContact(50)"><i class="ti ti-pencil"></i></button><button class="btn dn" style="padding:3px 9px;font-size:12px;" onclick="deleteContact(50)"><i class="ti ti-trash"></i></button>
+      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(49)"><i class="ti ti-arrow-right"></i></button>
+    </div></div>
   </div>
-  <div id="pagination" style="display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 0;"></div>
+  <div id="pagination" style="display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 0;">
+    <button class="btn" onclick="goPage(-1)" disabled=""><i class="ti ti-chevron-left"></i></button>
+    <span style="font-size:13px;color:#555;">Page 1/33 <span style="color:#888;">(1646 contacts)</span></span>
+    <button class="btn" onclick="goPage(1)"><i class="ti ti-chevron-right"></i></button></div>
 </div>
 
 <!-- HISTORIQUE -->
@@ -331,36 +894,162 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
 </div>
 
 <!-- OPPORTUNITÉS -->
-<div id="tab-opportunites" class="hidden">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
-    <div class="sec-title" style="margin-bottom:0;">Contacts qualifiés</div>
-    <select id="opp-filter-stage" onchange="renderOpportunites()" style="width:auto;font-size:12px;height:32px;">
-      <option value="">Tous les stades</option>
-      <option value="docs_demandes">Docs demandés</option>
-      <option value="docs_recus">Docs reçus</option>
-      <option value="appel_poseur">Appel Poseur</option>
-      <option value="vt_programme">VT Programmé</option>
-      <option value="pose_programmee">Pose programmée</option>
-      <option value="installe">Installé ✅</option>
-      <option value="pas_bon">Pas bon ❌</option>
-    </select>
+<div id="tab-opportunites" class="">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+    <button class="opp-subtab act" data-tab="opp" onclick="setOppTab(&#39;opp&#39;,this)">🏆 Opportunités <span id="cnt-opp" style="background:#534AB7;color:#fff;border-radius:10px;padding:1px 6px;font-size:10px;margin-left:3px;">7</span></button>
+    <button class="opp-subtab" data-tab="attente" onclick="setOppTab(&#39;attente&#39;,this)">⏳ Attente conf. VT <span id="cnt-attente" style="background:#9C6BB5;color:#fff;border-radius:10px;padding:1px 6px;font-size:10px;margin-left:3px;"></span></button>
+    <button class="opp-subtab" data-tab="vt" onclick="setOppTab(&#39;vt&#39;,this)">🏠 VT programmées <span id="cnt-vt" style="background:#D4920A;color:#fff;border-radius:10px;padding:1px 6px;font-size:10px;margin-left:3px;">1</span></button>
+    <button class="opp-subtab" data-tab="pose" onclick="setOppTab(&#39;pose&#39;,this)">🔧 Installations <span id="cnt-pose" style="background:#1D9E75;color:#fff;border-radius:10px;padding:1px 6px;font-size:10px;margin-left:3px;"></span></button>
   </div>
   <div id="opp-pipeline" style="display:none;padding:8px 14px;margin-bottom:8px;background:#F5F4FF;border-radius:10px;font-size:13px;color:#534AB7;font-weight:500;"></div>
-  <div id="opp-list"></div>
-  <div id="no-opp" style="color:#888;font-size:14px;padding:1rem 0;">Aucune opportunité — marquez un contact comme "Contacté" pour le voir ici.</div>
+  <div id="opp-list"><div class="clist-wrap"><div style="padding:12px 14px;border-bottom:0.5px solid #e0e0d8;">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:14px;font-weight:600;">FORNARO PATRICK <span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;">Mebarek</span> </div>
+          <div style="font-size:12px;color:#888;margin-top:2px;">07 61 99 41 73</div>
+        </div>
+        <select onchange="setOppStage(25,this.value)" style="height:28px;font-size:12px;width:auto;border-color:#BA7517;color:#BA7517;font-weight:600;">
+          <option value="docs_demandes" selected="">Docs demandés</option><option value="docs_recus">Docs reçus</option><option value="appel_poseur">Appel Poseur</option><option value="attente_conf_vt">⏳ Attente conf. VT</option><option value="vt_programme">VT Programmé</option><option value="pose_programmee">Pose programmée</option><option value="installe">Installé ✅</option><option value="pas_bon">Pas bon ❌</option>
+        </select>
+        <a href="tel:0761994173" class="btn tel" style="padding:4px 10px;font-size:12px;"><i class="ti ti-phone"></i></a>
+        <select onchange="setOppPoseur(25,this.value)" style="height:28px;font-size:12px;width:auto;"><option value="">— Poseur —</option><option value="george">George</option><option value="renobat">Renobat</option><option value="renovaid">Renovaid</option></select>
+        <button onclick="openContactFromOpp(25)" style="padding:4px 10px;font-size:12px;border:0.5px solid #534AB7;color:#534AB7;background:transparent;border-radius:8px;cursor:pointer;"><i class="ti ti-external-link"></i> Ouvrir</button>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;align-items:center;">
+        <label style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">🗓 VT <input type="date" value="" onchange="setOppDateVT(25,this.value)" style="font-size:11px;border:0.5px solid #e0e0d8;border-radius:6px;padding:2px 6px;"></label>
+        <label style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">🔧 Pose <input type="date" value="" onchange="setOppDatePose(25,this.value)" style="font-size:11px;border:0.5px solid #e0e0d8;border-radius:6px;padding:2px 6px;"></label>
+        <label style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">💶 <input type="number" value="" placeholder="Montant €" onchange="setOppMontant(25,this.value)" style="font-size:11px;border:0.5px solid #e0e0d8;border-radius:6px;padding:2px 6px;width:90px;"> €</label>
+      </div>
+      <textarea placeholder="Notes sur l&#39;opportunité..." style="width:100%;margin-top:8px;border:0.5px solid #e0e0d8;border-radius:8px;padding:6px 10px;font-size:12px;font-family:inherit;resize:vertical;min-height:48px;" onchange="setOppNote(25,this.value)"></textarea>
+    </div><div style="padding:12px 14px;border-bottom:0.5px solid #e0e0d8;">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:14px;font-weight:600;">CARRAU CEDRIC <span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#E24B4A22;color:#E24B4A;">Carole</span> </div>
+          <div style="font-size:12px;color:#888;margin-top:2px;">06 73 15 20 08</div>
+        </div>
+        <select onchange="setOppStage(34,this.value)" style="height:28px;font-size:12px;width:auto;border-color:#BA7517;color:#BA7517;font-weight:600;">
+          <option value="docs_demandes" selected="">Docs demandés</option><option value="docs_recus">Docs reçus</option><option value="appel_poseur">Appel Poseur</option><option value="attente_conf_vt">⏳ Attente conf. VT</option><option value="vt_programme">VT Programmé</option><option value="pose_programmee">Pose programmée</option><option value="installe">Installé ✅</option><option value="pas_bon">Pas bon ❌</option>
+        </select>
+        <a href="tel:0673152008" class="btn tel" style="padding:4px 10px;font-size:12px;"><i class="ti ti-phone"></i></a>
+        <select onchange="setOppPoseur(34,this.value)" style="height:28px;font-size:12px;width:auto;"><option value="">— Poseur —</option><option value="george">George</option><option value="renobat">Renobat</option><option value="renovaid">Renovaid</option></select>
+        <button onclick="openContactFromOpp(34)" style="padding:4px 10px;font-size:12px;border:0.5px solid #534AB7;color:#534AB7;background:transparent;border-radius:8px;cursor:pointer;"><i class="ti ti-external-link"></i> Ouvrir</button>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;align-items:center;">
+        <label style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">🗓 VT <input type="date" value="" onchange="setOppDateVT(34,this.value)" style="font-size:11px;border:0.5px solid #e0e0d8;border-radius:6px;padding:2px 6px;"></label>
+        <label style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">🔧 Pose <input type="date" value="" onchange="setOppDatePose(34,this.value)" style="font-size:11px;border:0.5px solid #e0e0d8;border-radius:6px;padding:2px 6px;"></label>
+        <label style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">💶 <input type="number" value="" placeholder="Montant €" onchange="setOppMontant(34,this.value)" style="font-size:11px;border:0.5px solid #e0e0d8;border-radius:6px;padding:2px 6px;width:90px;"> €</label>
+      </div>
+      <textarea placeholder="Notes sur l&#39;opportunité..." style="width:100%;margin-top:8px;border:0.5px solid #e0e0d8;border-radius:8px;padding:6px 10px;font-size:12px;font-family:inherit;resize:vertical;min-height:48px;" onchange="setOppNote(34,this.value)"></textarea>
+    </div><div style="padding:12px 14px;border-bottom:0.5px solid #e0e0d8;">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:14px;font-weight:600;">GAEC VEYRAC <span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#E24B4A22;color:#E24B4A;">Carole</span> </div>
+          <div style="font-size:12px;color:#888;margin-top:2px;">06 87 73 65 13</div>
+        </div>
+        <select onchange="setOppStage(36,this.value)" style="height:28px;font-size:12px;width:auto;border-color:#BA7517;color:#BA7517;font-weight:600;">
+          <option value="docs_demandes" selected="">Docs demandés</option><option value="docs_recus">Docs reçus</option><option value="appel_poseur">Appel Poseur</option><option value="attente_conf_vt">⏳ Attente conf. VT</option><option value="vt_programme">VT Programmé</option><option value="pose_programmee">Pose programmée</option><option value="installe">Installé ✅</option><option value="pas_bon">Pas bon ❌</option>
+        </select>
+        <a href="tel:0687736513" class="btn tel" style="padding:4px 10px;font-size:12px;"><i class="ti ti-phone"></i></a>
+        <select onchange="setOppPoseur(36,this.value)" style="height:28px;font-size:12px;width:auto;"><option value="">— Poseur —</option><option value="george">George</option><option value="renobat">Renobat</option><option value="renovaid">Renovaid</option></select>
+        <button onclick="openContactFromOpp(36)" style="padding:4px 10px;font-size:12px;border:0.5px solid #534AB7;color:#534AB7;background:transparent;border-radius:8px;cursor:pointer;"><i class="ti ti-external-link"></i> Ouvrir</button>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;align-items:center;">
+        <label style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">🗓 VT <input type="date" value="" onchange="setOppDateVT(36,this.value)" style="font-size:11px;border:0.5px solid #e0e0d8;border-radius:6px;padding:2px 6px;"></label>
+        <label style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">🔧 Pose <input type="date" value="" onchange="setOppDatePose(36,this.value)" style="font-size:11px;border:0.5px solid #e0e0d8;border-radius:6px;padding:2px 6px;"></label>
+        <label style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">💶 <input type="number" value="" placeholder="Montant €" onchange="setOppMontant(36,this.value)" style="font-size:11px;border:0.5px solid #e0e0d8;border-radius:6px;padding:2px 6px;width:90px;"> €</label>
+      </div>
+      <textarea placeholder="Notes sur l&#39;opportunité..." style="width:100%;margin-top:8px;border:0.5px solid #e0e0d8;border-radius:8px;padding:6px 10px;font-size:12px;font-family:inherit;resize:vertical;min-height:48px;" onchange="setOppNote(36,this.value)"></textarea>
+    </div><div style="padding:12px 14px;border-bottom:0.5px solid #e0e0d8;">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:14px;font-weight:600;">GAEC DE BELLEVUE <span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#E24B4A22;color:#E24B4A;">Carole</span> </div>
+          <div style="font-size:12px;color:#888;margin-top:2px;">06 88 34 02 53</div>
+        </div>
+        <select onchange="setOppStage(47,this.value)" style="height:28px;font-size:12px;width:auto;border-color:#BA7517;color:#BA7517;font-weight:600;">
+          <option value="docs_demandes" selected="">Docs demandés</option><option value="docs_recus">Docs reçus</option><option value="appel_poseur">Appel Poseur</option><option value="attente_conf_vt">⏳ Attente conf. VT</option><option value="vt_programme">VT Programmé</option><option value="pose_programmee">Pose programmée</option><option value="installe">Installé ✅</option><option value="pas_bon">Pas bon ❌</option>
+        </select>
+        <a href="tel:0688340253" class="btn tel" style="padding:4px 10px;font-size:12px;"><i class="ti ti-phone"></i></a>
+        <select onchange="setOppPoseur(47,this.value)" style="height:28px;font-size:12px;width:auto;"><option value="">— Poseur —</option><option value="george">George</option><option value="renobat">Renobat</option><option value="renovaid">Renovaid</option></select>
+        <button onclick="openContactFromOpp(47)" style="padding:4px 10px;font-size:12px;border:0.5px solid #534AB7;color:#534AB7;background:transparent;border-radius:8px;cursor:pointer;"><i class="ti ti-external-link"></i> Ouvrir</button>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;align-items:center;">
+        <label style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">🗓 VT <input type="date" value="" onchange="setOppDateVT(47,this.value)" style="font-size:11px;border:0.5px solid #e0e0d8;border-radius:6px;padding:2px 6px;"></label>
+        <label style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">🔧 Pose <input type="date" value="" onchange="setOppDatePose(47,this.value)" style="font-size:11px;border:0.5px solid #e0e0d8;border-radius:6px;padding:2px 6px;"></label>
+        <label style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">💶 <input type="number" value="" placeholder="Montant €" onchange="setOppMontant(47,this.value)" style="font-size:11px;border:0.5px solid #e0e0d8;border-radius:6px;padding:2px 6px;width:90px;"> €</label>
+      </div>
+      <textarea placeholder="Notes sur l&#39;opportunité..." style="width:100%;margin-top:8px;border:0.5px solid #e0e0d8;border-radius:8px;padding:6px 10px;font-size:12px;font-family:inherit;resize:vertical;min-height:48px;" onchange="setOppNote(47,this.value)"></textarea>
+    </div><div style="padding:12px 14px;border-bottom:0.5px solid #e0e0d8;">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:14px;font-weight:600;">EARL LARTIGUE <span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#E24B4A22;color:#E24B4A;">Carole</span> <span style="font-size:10px;padding:2px 9px;border-radius:20px;font-weight:700;background:#1D9E75;color:#fff;white-space:nowrap;">Renovaid</span></div>
+          <div style="font-size:12px;color:#888;margin-top:2px;">06 11 86 22 04</div>
+        </div>
+        <select onchange="setOppStage(113,this.value)" style="height:28px;font-size:12px;width:auto;border-color:#BA7517;color:#BA7517;font-weight:600;">
+          <option value="docs_demandes" selected="">Docs demandés</option><option value="docs_recus">Docs reçus</option><option value="appel_poseur">Appel Poseur</option><option value="attente_conf_vt">⏳ Attente conf. VT</option><option value="vt_programme">VT Programmé</option><option value="pose_programmee">Pose programmée</option><option value="installe">Installé ✅</option><option value="pas_bon">Pas bon ❌</option>
+        </select>
+        <a href="tel:0611862204" class="btn tel" style="padding:4px 10px;font-size:12px;"><i class="ti ti-phone"></i></a>
+        <select onchange="setOppPoseur(113,this.value)" style="height:28px;font-size:12px;width:auto;"><option value="">— Poseur —</option><option value="george">George</option><option value="renobat">Renobat</option><option value="renovaid" selected="">Renovaid</option></select>
+        <button onclick="openContactFromOpp(113)" style="padding:4px 10px;font-size:12px;border:0.5px solid #534AB7;color:#534AB7;background:transparent;border-radius:8px;cursor:pointer;"><i class="ti ti-external-link"></i> Ouvrir</button>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;align-items:center;">
+        <label style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">🗓 VT <input type="date" value="" onchange="setOppDateVT(113,this.value)" style="font-size:11px;border:0.5px solid #e0e0d8;border-radius:6px;padding:2px 6px;"></label>
+        <label style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">🔧 Pose <input type="date" value="" onchange="setOppDatePose(113,this.value)" style="font-size:11px;border:0.5px solid #e0e0d8;border-radius:6px;padding:2px 6px;"></label>
+        <label style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">💶 <input type="number" value="" placeholder="Montant €" onchange="setOppMontant(113,this.value)" style="font-size:11px;border:0.5px solid #e0e0d8;border-radius:6px;padding:2px 6px;width:90px;"> €</label>
+      </div>
+      <textarea placeholder="Notes sur l&#39;opportunité..." style="width:100%;margin-top:8px;border:0.5px solid #e0e0d8;border-radius:8px;padding:6px 10px;font-size:12px;font-family:inherit;resize:vertical;min-height:48px;" onchange="setOppNote(113,this.value)"></textarea>
+    </div><div style="padding:12px 14px;border-bottom:0.5px solid #e0e0d8;">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:14px;font-weight:600;">GAEC RECONNU GOMARIN <span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#534AB722;color:#534AB7;">Mebarek</span> </div>
+          <div style="font-size:12px;color:#888;margin-top:2px;">06 74 04 93 21</div>
+        </div>
+        <select onchange="setOppStage(189,this.value)" style="height:28px;font-size:12px;width:auto;border-color:#BA7517;color:#BA7517;font-weight:600;">
+          <option value="docs_demandes" selected="">Docs demandés</option><option value="docs_recus">Docs reçus</option><option value="appel_poseur">Appel Poseur</option><option value="attente_conf_vt">⏳ Attente conf. VT</option><option value="vt_programme">VT Programmé</option><option value="pose_programmee">Pose programmée</option><option value="installe">Installé ✅</option><option value="pas_bon">Pas bon ❌</option>
+        </select>
+        <a href="tel:0674049321" class="btn tel" style="padding:4px 10px;font-size:12px;"><i class="ti ti-phone"></i></a>
+        <select onchange="setOppPoseur(189,this.value)" style="height:28px;font-size:12px;width:auto;"><option value="">— Poseur —</option><option value="george">George</option><option value="renobat">Renobat</option><option value="renovaid">Renovaid</option></select>
+        <button onclick="openContactFromOpp(189)" style="padding:4px 10px;font-size:12px;border:0.5px solid #534AB7;color:#534AB7;background:transparent;border-radius:8px;cursor:pointer;"><i class="ti ti-external-link"></i> Ouvrir</button>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;align-items:center;">
+        <label style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">🗓 VT <input type="date" value="2026-06-04" onchange="setOppDateVT(189,this.value)" style="font-size:11px;border:0.5px solid #e0e0d8;border-radius:6px;padding:2px 6px;"></label>
+        <label style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">🔧 Pose <input type="date" value="" onchange="setOppDatePose(189,this.value)" style="font-size:11px;border:0.5px solid #e0e0d8;border-radius:6px;padding:2px 6px;"></label>
+        <label style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">💶 <input type="number" value="" placeholder="Montant €" onchange="setOppMontant(189,this.value)" style="font-size:11px;border:0.5px solid #e0e0d8;border-radius:6px;padding:2px 6px;width:90px;"> €</label>
+      </div>
+      <textarea placeholder="Notes sur l&#39;opportunité..." style="width:100%;margin-top:8px;border:0.5px solid #e0e0d8;border-radius:8px;padding:6px 10px;font-size:12px;font-family:inherit;resize:vertical;min-height:48px;" onchange="setOppNote(189,this.value)"></textarea>
+    </div><div style="padding:12px 14px;border-bottom:0.5px solid #e0e0d8;">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:14px;font-weight:600;">COLLET <span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#E24B4A22;color:#E24B4A;">Carole</span> </div>
+          <div style="font-size:12px;color:#888;margin-top:2px;">06 83 36 47 83</div>
+        </div>
+        <select onchange="setOppStage(352,this.value)" style="height:28px;font-size:12px;width:auto;border-color:#BA7517;color:#BA7517;font-weight:600;">
+          <option value="docs_demandes" selected="">Docs demandés</option><option value="docs_recus">Docs reçus</option><option value="appel_poseur">Appel Poseur</option><option value="attente_conf_vt">⏳ Attente conf. VT</option><option value="vt_programme">VT Programmé</option><option value="pose_programmee">Pose programmée</option><option value="installe">Installé ✅</option><option value="pas_bon">Pas bon ❌</option>
+        </select>
+        <a href="tel:0683364783" class="btn tel" style="padding:4px 10px;font-size:12px;"><i class="ti ti-phone"></i></a>
+        <select onchange="setOppPoseur(352,this.value)" style="height:28px;font-size:12px;width:auto;"><option value="">— Poseur —</option><option value="george">George</option><option value="renobat">Renobat</option><option value="renovaid">Renovaid</option></select>
+        <button onclick="openContactFromOpp(352)" style="padding:4px 10px;font-size:12px;border:0.5px solid #534AB7;color:#534AB7;background:transparent;border-radius:8px;cursor:pointer;"><i class="ti ti-external-link"></i> Ouvrir</button>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;align-items:center;">
+        <label style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">🗓 VT <input type="date" value="" onchange="setOppDateVT(352,this.value)" style="font-size:11px;border:0.5px solid #e0e0d8;border-radius:6px;padding:2px 6px;"></label>
+        <label style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">🔧 Pose <input type="date" value="" onchange="setOppDatePose(352,this.value)" style="font-size:11px;border:0.5px solid #e0e0d8;border-radius:6px;padding:2px 6px;"></label>
+        <label style="font-size:11px;color:#888;display:flex;align-items:center;gap:4px;">💶 <input type="number" value="" placeholder="Montant €" onchange="setOppMontant(352,this.value)" style="font-size:11px;border:0.5px solid #e0e0d8;border-radius:6px;padding:2px 6px;width:90px;"> €</label>
+      </div>
+      <textarea placeholder="Notes sur l&#39;opportunité..." style="width:100%;margin-top:8px;border:0.5px solid #e0e0d8;border-radius:8px;padding:6px 10px;font-size:12px;font-family:inherit;resize:vertical;min-height:48px;" onchange="setOppNote(352,this.value)"></textarea>
+    </div></div></div>
+  <div id="no-opp" style="color: rgb(136, 136, 136); font-size: 14px; padding: 1rem 0px; display: none;">Aucune opportunité.</div>
 </div>
 
 <!-- STATS -->
 <div id="tab-stats" class="hidden">
   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center;">
     <span style="font-size:13px;font-weight:600;color:#555;">Période :</span>
-    <button class="stats-period-btn act" onclick="setStatsPeriod('today',this)">Aujourd'hui</button>
-    <button class="stats-period-btn" onclick="setStatsPeriod('week',this)">Cette semaine</button>
-    <button class="stats-period-btn" onclick="setStatsPeriod('month',this)">Ce mois</button>
-    <button class="stats-period-btn" onclick="setStatsPeriod('all',this)">Tout</button>
-    <input type="date" id="stats-date-from" style="padding:5px 8px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:13px;" onchange="setStatsPeriod('custom',null)">
+    <button class="stats-period-btn act" onclick="setStatsPeriod(&#39;today&#39;,this)">Aujourd'hui</button>
+    <button class="stats-period-btn" onclick="setStatsPeriod(&#39;week&#39;,this)">Cette semaine</button>
+    <button class="stats-period-btn" onclick="setStatsPeriod(&#39;month&#39;,this)">Ce mois</button>
+    <button class="stats-period-btn" onclick="setStatsPeriod(&#39;all&#39;,this)">Tout</button>
+    <input type="date" id="stats-date-from" style="padding:5px 8px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:13px;" onchange="setStatsPeriod(&#39;custom&#39;,null)">
     <span style="font-size:12px;color:#888;">→</span>
-    <input type="date" id="stats-date-to" style="padding:5px 8px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:13px;" onchange="setStatsPeriod('custom',null)">
+    <input type="date" id="stats-date-to" style="padding:5px 8px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:13px;" onchange="setStatsPeriod(&#39;custom&#39;,null)">
     <select id="stats-filter-com" onchange="renderStats()" style="padding:5px 10px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:13px;font-weight:600;color:#555;margin-left:8px;">
       <option value="">👥 Tous les commerciaux</option>
       <option>Mebarek</option><option>Megane</option><option>Jonas</option><option>Alexis</option><option>Carole</option>
@@ -642,6 +1331,7 @@ function login(user){
   if(isAdmin){
     document.getElementById('btn-assign').classList.remove('hidden');
     document.getElementById('btn-update-data').classList.remove('hidden');
+    document.getElementById('btn-migrate').classList.remove('hidden');
     document.getElementById('filter-com').classList.remove('hidden');
     const importBar=document.getElementById('import-csv-bar');
     if(importBar)importBar.classList.remove('hidden');
@@ -863,6 +1553,7 @@ async function updateStats(){
   }catch(e){}
   const nonAppeles=contacts.filter(c=>c.commercial&&(!c.status||c.status==='pending')&&(isAdmin||c.commercial===currentUser)).length;
   document.getElementById('s-non-appeles').textContent=nonAppeles;
+  updateOppCount();
 }
 
 // --- LISTE ---
@@ -1146,34 +1837,87 @@ async function renderStats(){
 // --- TABS ---
 // --- OPPORTUNITÉS ---
 const POSEURS={george:{label:'George',color:'#E24B4A'},renobat:{label:'Renobat',color:'#534AB7'},renovaid:{label:'Renovaid',color:'#1D9E75'}};
-function getOppPoseur(id){return localStorage.getItem('opp_poseur_'+id)||'';}
-function setOppPoseur(id,val){localStorage.setItem('opp_poseur_'+id,val);renderOpportunites();}
-function getOppDateVT(id){return localStorage.getItem('opp_vt_'+id)||'';}
-function setOppDateVT(id,val){localStorage.setItem('opp_vt_'+id,val);}
-function getOppDatePose(id){return localStorage.getItem('opp_pose_'+id)||'';}
-function setOppDatePose(id,val){localStorage.setItem('opp_pose_'+id,val);}
-function getOppMontant(id){return localStorage.getItem('opp_montant_'+id)||'';}
-function setOppMontant(id,val){localStorage.setItem('opp_montant_'+id,val);renderOpportunites();}
-const OPP_STAGES={docs_demandes:{label:'Docs demandés',color:'#BA7517'},docs_recus:{label:'Docs reçus',color:'#0C447C'},appel_poseur:{label:'Appel Poseur',color:'#534AB7'},vt_programme:{label:'VT Programmé',color:'#D4920A'},pose_programmee:{label:'Pose programmée',color:'#1D9E75'},installe:{label:'Installé ✅',color:'#1D9E75'},pas_bon:{label:'Pas bon ❌',color:'#E24B4A'}};
-function getOppStage(id){return localStorage.getItem('opp_stage_'+id)||'docs_demandes';}
-function setOppStage(id,stage){localStorage.setItem('opp_stage_'+id,stage);renderOpportunites();updateOppCount();}
-function getOppNote(id){return localStorage.getItem('opp_note_'+id)||'';}
-function setOppNote(id,val){localStorage.setItem('opp_note_'+id,val);}
+// --- OPP DATA → Supabase (colonne opp_data JSON sur la table contacts) ---
+function getOppData(id){
+  const c=contacts.find(x=>x.id===id);
+  if(!c)return {};
+  // Migration : si des données existent en localStorage, on les rapatrie
+  try{
+    const d=JSON.parse(c.opp_data||'{}');
+    // fallback localStorage pour migration one-shot
+    if(!d.stage){const ls=localStorage.getItem('opp_stage_'+id);if(ls)d.stage=ls;}
+    if(!d.poseur){const ls=localStorage.getItem('opp_poseur_'+id);if(ls)d.poseur=ls;}
+    if(!d.date_vt){const ls=localStorage.getItem('opp_vt_'+id);if(ls)d.date_vt=ls;}
+    if(!d.date_pose){const ls=localStorage.getItem('opp_pose_'+id);if(ls)d.date_pose=ls;}
+    if(!d.montant){const ls=localStorage.getItem('opp_montant_'+id);if(ls)d.montant=ls;}
+    if(!d.note){const ls=localStorage.getItem('opp_note_'+id);if(ls)d.note=ls;}
+    return d;
+  }catch(e){return {};}
+}
+async function saveOppField(id,key,val){
+  const c=contacts.find(x=>x.id===id);
+  if(!c)return;
+  let d=getOppData(id);
+  d[key]=val;
+  c.opp_data=JSON.stringify(d);
+  showToast('💾 Sauvegarde...');
+  try{await supa('PATCH','contacts',{opp_data:c.opp_data},`?id=eq.${c.id}`);showToast('✅ Sauvegardé');}
+  catch(e){showToast('⚠️ Erreur sauvegarde');}
+}
+function getOppPoseur(id){return getOppData(id).poseur||'';}
+function setOppPoseur(id,val){saveOppField(id,'poseur',val);renderOpportunites();}
+function getOppDateVT(id){return getOppData(id).date_vt||'';}
+function setOppDateVT(id,val){saveOppField(id,'date_vt',val);}
+function getOppDatePose(id){return getOppData(id).date_pose||'';}
+function setOppDatePose(id,val){saveOppField(id,'date_pose',val);}
+function getOppMontant(id){return getOppData(id).montant||'';}
+function setOppMontant(id,val){saveOppField(id,'montant',val);renderOpportunites();}
+const OPP_STAGES={docs_demandes:{label:'Docs demandés',color:'#BA7517'},docs_recus:{label:'Docs reçus',color:'#0C447C'},appel_poseur:{label:'Appel Poseur',color:'#534AB7'},attente_conf_vt:{label:'⏳ Attente conf. VT',color:'#9C6BB5'},vt_programme:{label:'VT Programmé',color:'#D4920A'},pose_programmee:{label:'Pose programmée',color:'#1D9E75'},installe:{label:'Installé ✅',color:'#1D9E75'},pas_bon:{label:'Pas bon ❌',color:'#E24B4A'}};
+function getOppStage(id){return getOppData(id).stage||localStorage.getItem('opp_stage_'+id)||'docs_demandes';}
+function setOppStage(id,stage){saveOppField(id,'stage',stage);renderOpportunites();updateOppCount();}
+function getOppNote(id){return getOppData(id).note||localStorage.getItem('opp_note_'+id)||'';}
+function setOppNote(id,val){saveOppField(id,'note',val);}
+let currentOppTab='opp';
+function setOppTab(tab,el){
+  currentOppTab=tab;
+  document.querySelectorAll('.opp-subtab').forEach(b=>b.classList.remove('act'));
+  if(el)el.classList.add('act');
+  renderOpportunites();
+}
 function updateOppCount(){
-  const opps=contacts.filter(c=>c.outcome==='ok'||c.outcome==='hot');
-  const el=document.getElementById('opp-count');
-  if(el)el.textContent=opps.length||'';
+  const all=contacts.filter(c=>c.outcome==='ok'||c.outcome==='hot');
+  const vtCount=all.filter(c=>getOppStage(c.id)==='vt_programme').length;
+  const poseCount=all.filter(c=>getOppStage(c.id)==='pose_programmee'||getOppStage(c.id)==='installe').length;
+  const attenteCount=all.filter(c=>getOppStage(c.id)==='attente_conf_vt').length;
+  const oppCount=all.filter(c=>!['vt_programme','pose_programmee','installe','attente_conf_vt'].includes(getOppStage(c.id))).length;
+  const el=document.getElementById('opp-count');if(el)el.textContent=all.length||'';
+  const co=document.getElementById('cnt-opp');if(co)co.textContent=oppCount||'';
+  const ca=document.getElementById('cnt-attente');if(ca)ca.textContent=attenteCount||'';
+  const cv=document.getElementById('cnt-vt');if(cv)cv.textContent=vtCount||'';
+  const cp=document.getElementById('cnt-pose');if(cp)cp.textContent=poseCount||'';
+  const sv=document.getElementById('s-vt');if(sv)sv.textContent=vtCount;
+  const sp=document.getElementById('s-pose');if(sp)sp.textContent=poseCount;
 }
 function renderOpportunites(){
-  const filterStage=(document.getElementById('opp-filter-stage')||{}).value||'';
-  let opps=contacts.filter(c=>c.outcome==='ok'||c.outcome==='hot');
-  if(filterStage)opps=opps.filter(c=>getOppStage(c.id)===filterStage);
+  const all=contacts.filter(c=>c.outcome==='ok'||c.outcome==='hot');
+  updateOppCount();
+  let opps;
+  if(currentOppTab==='vt'){
+    opps=all.filter(c=>getOppStage(c.id)==='vt_programme');
+  }else if(currentOppTab==='pose'){
+    opps=all.filter(c=>getOppStage(c.id)==='pose_programmee'||getOppStage(c.id)==='installe');
+  }else if(currentOppTab==='attente'){
+    opps=all.filter(c=>getOppStage(c.id)==='attente_conf_vt');
+  }else{
+    opps=all.filter(c=>!['vt_programme','pose_programmee','installe','attente_conf_vt'].includes(getOppStage(c.id)));
+  }
   const wrap=document.getElementById('opp-list');
   const none=document.getElementById('no-opp');
   if(!opps.length){wrap.innerHTML='';none.style.display='';return;}
   none.style.display='none';
-  const stageOrder=['docs_demandes','docs_recus','appel_poseur','vt_programme','pose_programmee','installe','pas_bon'];
+  const stageOrder=['docs_demandes','docs_recus','appel_poseur','attente_conf_vt','vt_programme','pose_programmee','installe','pas_bon'];
   opps.sort((a,b)=>stageOrder.indexOf(getOppStage(a.id))-stageOrder.indexOf(getOppStage(b.id)));
+  const sectionColor=currentOppTab==='vt'?'#D4920A':currentOppTab==='pose'?'#1D9E75':'#534AB7';
   wrap.innerHTML='<div class="clist-wrap">'+opps.map(c=>{
     const stage=getOppStage(c.id);
     const s=OPP_STAGES[stage]||OPP_STAGES.docs_demandes;
@@ -1207,6 +1951,36 @@ function renderOpportunites(){
       <textarea placeholder="Notes sur l'opportunité..." style="width:100%;margin-top:8px;border:0.5px solid #e0e0d8;border-radius:8px;padding:6px 10px;font-size:12px;font-family:inherit;resize:vertical;min-height:48px;" onchange="setOppNote(${c.id},this.value)">${note}</textarea>
     </div>`;
   }).join('')+'</div>';
+}
+
+async function migrateLocalStorageToSupabase(){
+  const btn=document.getElementById('btn-migrate');
+  if(btn){btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Migration en cours...';}
+  let migrated=0,skipped=0,errors=0;
+  for(const c of contacts){
+    const stage=localStorage.getItem('opp_stage_'+c.id);
+    const poseur=localStorage.getItem('opp_poseur_'+c.id);
+    const date_vt=localStorage.getItem('opp_vt_'+c.id);
+    const date_pose=localStorage.getItem('opp_pose_'+c.id);
+    const montant=localStorage.getItem('opp_montant_'+c.id);
+    const note=localStorage.getItem('opp_note_'+c.id);
+    if(!stage&&!poseur&&!date_vt&&!date_pose&&!montant&&!note){skipped++;continue;}
+    const d={};
+    if(stage)d.stage=stage;
+    if(poseur)d.poseur=poseur;
+    if(date_vt)d.date_vt=date_vt;
+    if(date_pose)d.date_pose=date_pose;
+    if(montant)d.montant=montant;
+    if(note)d.note=note;
+    c.opp_data=JSON.stringify(d);
+    try{
+      await supa('PATCH','contacts',{opp_data:c.opp_data},`?id=eq.${c.id}`);
+      migrated++;
+    }catch(e){errors++;}
+  }
+  if(btn){btn.disabled=false;btn.innerHTML='✅ Migration terminée';}
+  alert(`Migration terminée !\n✅ ${migrated} contacts récupérés\n⏭ ${skipped} sans données locales${errors?'\n⚠️ '+errors+' erreurs':''}`);
+  renderOpportunites();updateOppCount();
 }
 
 function openContactFromOpp(id){
@@ -1528,5 +2302,5 @@ async function exportHistCSV(){
 const _savedUser=sessionStorage.getItem('crm_user');
 if(_savedUser) login(_savedUser);
 </script>
-</body>
-</html>
+
+</body></html>
