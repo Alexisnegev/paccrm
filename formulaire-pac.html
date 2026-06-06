@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pompe à chaleur à 0 € — IP5 Énergie</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:Arial,Helvetica,sans-serif;background:#f0f4f8;min-height:100vh;}
+.hero{background:#2AAABF;padding:2.5rem 1rem;text-align:center;}
+.logo{color:#fff;font-size:22px;font-weight:700;margin-bottom:1rem;}
+.logo em{font-weight:400;font-size:17px;}
+.hero h1{color:#fff;font-size:28px;font-weight:800;margin-bottom:0.5rem;}
+.hero .price{color:#fff;font-size:56px;font-weight:900;line-height:1;}
+.hero p{color:rgba(255,255,255,0.85);font-size:14px;margin-top:6px;}
+.card{max-width:520px;margin:2rem auto;background:#fff;border-radius:12px;border:1px solid #e0e0e0;padding:2rem;}
+.card h2{color:#4A6272;font-size:18px;font-weight:700;margin-bottom:1.5rem;text-align:center;}
+.field{margin-bottom:1rem;}
+label{display:block;font-size:13px;color:#4A6272;font-weight:600;margin-bottom:5px;}
+input,select{width:100%;padding:11px 14px;border:1.5px solid #d0d8e0;border-radius:8px;font-size:15px;color:#333;outline:none;transition:border .15s;}
+input:focus,select:focus{border-color:#2AAABF;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.check-row{display:flex;align-items:center;gap:10px;background:#f7fdfc;border:1.5px solid #2AAABF;border-radius:8px;padding:12px 14px;cursor:pointer;}
+.check-row input[type=checkbox]{width:18px;height:18px;accent-color:#2AAABF;flex-shrink:0;}
+.check-row span{font-size:14px;color:#4A6272;}
+.btn-submit{width:100%;background:#2AAABF;color:#fff;border:none;border-radius:8px;padding:16px;font-size:17px;font-weight:700;cursor:pointer;margin-top:1rem;transition:background .15s;}
+.btn-submit:hover{background:#1d8fa3;}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed;}
+.benefits{max-width:520px;margin:1.5rem auto 0;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 1rem;}
+.benefit{background:#fff;border-radius:10px;padding:14px;border:1px solid #e0e0e0;text-align:center;}
+.benefit .icon{font-size:24px;margin-bottom:6px;}
+.benefit p{font-size:12px;color:#4A6272;font-weight:600;}
+.footer{text-align:center;padding:1.5rem;color:#aaa;font-size:12px;}
+@media(max-width:480px){.row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="logo">IP5 <em>Conseils</em></div>
+  <h1>Votre pompe à chaleur</h1>
+  <div class="price">0 €</div>
+  <p>installée chez vous · grâce aux aides CEE</p>
+</div>
+<div class="benefits">
+  <div class="benefit"><div class="icon">✅</div><p>Sans avance de frais</p></div>
+  <div class="benefit"><div class="icon">🏠</div><p>Visite technique gratuite</p></div>
+  <div class="benefit"><div class="icon">💶</div><p>Économies jusqu'à 70%</p></div>
+  <div class="benefit"><div class="icon">🏅</div><p>Techniciens RGE certifiés</p></div>
+</div>
+<div class="card" id="form-card">
+  <h2>Je veux en bénéficier gratuitement</h2>
+  <form id="lead-form" onsubmit="submitForm(event)">
+    <div class="row">
+      <div class="field"><label>Prénom *</label><input type="text" id="f-prenom" placeholder="Jean" required></div>
+      <div class="field"><label>Nom *</label><input type="text" id="f-nom" placeholder="Dupont" required></div>
+    </div>
+    <div class="field"><label>Téléphone *</label><input type="tel" id="f-phone" placeholder="06 XX XX XX XX" required></div>
+    <div class="field"><label>Code postal *</label><input type="text" id="f-cp" placeholder="33000" required maxlength="5"></div>
+    <div class="field">
+      <label>Chauffage actuel *</label>
+      <select id="f-chauffage" required>
+        <option value="">— Sélectionnez —</option>
+        <option>Gaz</option><option>Fioul</option><option>Électrique</option><option>Poêle / bois</option><option>Autre</option>
+      </select>
+    </div>
+    <div class="field">
+      <label class="check-row">
+        <input type="checkbox" id="f-proprio" checked>
+        <span>Je suis propriétaire de mon logement</span>
+      </label>
+    </div>
+    <button type="submit" class="btn-submit" id="submit-btn">Je demande mon installation gratuite →</button>
+    <p style="text-align:center;font-size:11px;color:#aaa;margin-top:10px;">Un conseiller vous rappelle sous 24h · Sans engagement</p>
+  </form>
+</div>
+<div class="footer">IP5 Énergie · contact@ip5energie.com · 06 95 92 04 09<br>Sous réserve d'éligibilité.</div>
+<script>
+const SUPA_URL='https://ljmvtvxlojvamwfjhlac.supabase.co';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxqbXZ0dnhsb2p2YW13ZmpobGFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0NDU0OTksImV4cCI6MjA5NjAyMTQ5OX0.F80e1OvQijcGXuGI7hhM56doSA8kw_CRRsYfJqVMjfE';
+async function submitForm(e){
+  e.preventDefault();
+  const btn=document.getElementById('submit-btn');
+  btn.disabled=true;btn.textContent='Envoi en cours...';
+  const prenom=document.getElementById('f-prenom').value.trim();
+  const nom=document.getElementById('f-nom').value.trim();
+  const phone=document.getElementById('f-phone').value.trim().replace(/\s/g,'');
+  const cp=document.getElementById('f-cp').value.trim();
+  const chauffage=document.getElementById('f-chauffage').value;
+  const proprio=document.getElementById('f-proprio').checked;
+  const notes=`Source: formulaire web\nChauffage: ${chauffage}\nPropriétaire: ${proprio?'Oui':'Non'}\nCP: ${cp}`;
+  try{
+    const res=await fetch(`${SUPA_URL}/rest/v1/contacts`,{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify([{name:`${prenom} ${nom}`,phone,adresse:cp,notes,status:'pending',outcome:null,dur:0,enabled:true,cb_date:'',cb_time:'',cb_reason:'',commercial:'',tags:'Formulaire web'}])});
+    if(res.ok||res.status===201){
+      document.getElementById('form-card').innerHTML=`<div style="text-align:center;padding:2rem;"><div style="font-size:56px;margin-bottom:1rem;">🎉</div><h2 style="color:#2AAABF;font-size:22px;font-weight:800;margin-bottom:1rem;">Demande envoyée !</h2><p style="color:#4A6272;font-size:15px;line-height:1.7;">Merci <strong>${prenom}</strong>, un conseiller IP5 vous rappelle sous 24h.<br><br><a href="tel:0695920409" style="color:#2AAABF;font-weight:700;">📞 06 95 92 04 09</a></p></div>`;
+    }else{throw new Error();}
+  }catch(err){btn.disabled=false;btn.textContent='Je demande mon installation gratuite →';alert('Erreur. Appelez-nous au 06 95 92 04 09.');}
+}
+</script>
+</body>
+</html>
