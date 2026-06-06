@@ -1610,14 +1610,17 @@ function importCSV(input){
     if(!lines.length)return;
     const sep=lines[0].includes(';')?';':',';
     const headers=lines[0].split(sep).map(h=>h.replace(/^"|"$/g,'').trim().toLowerCase());
-    const aliases={name:['nom','name'],phone:['telephone','téléphone','tel','phone'],company:['societe','société','company'],commercial:['commercial'],email:['email','mail'],adresse:['adresse','address']};
+    const aliases={name:['nom','name','noms','prenom','prénom'],phone:['telephone','téléphone','tel','phone','mobile'],company:['societe','société','company'],commercial:['commercial'],email:['email','mail'],adresse:['adresse','address']};
     const colMap={};
     Object.entries(aliases).forEach(([key,alts])=>{const idx=headers.findIndex(h=>alts.includes(h));if(idx>=0)colMap[key]=idx;});
     if(colMap.name===undefined||colMap.phone===undefined){alert('Colonnes Nom et Téléphone obligatoires.');return;}
     const newContacts=[];
     for(let i=1;i<lines.length;i++){
       const cols=lines[i].split(sep).map(c=>c.replace(/^"|"$/g,'').trim());
-      const obj={name:cols[colMap.name]||'',phone:cols[colMap.phone]||''};
+      let rawPhone=(cols[colMap.phone]||'').replace(/\s/g,'');
+      if(rawPhone.startsWith('33')&&rawPhone.length===11)rawPhone='0'+rawPhone.slice(2);
+      else if(rawPhone.startsWith('+33'))rawPhone='0'+rawPhone.slice(3);
+      const obj={name:cols[colMap.name]||'',phone:rawPhone};
       if(!obj.name||!obj.phone)continue;
       if(colMap.company!==undefined)obj.company=cols[colMap.company]||'';
       if(colMap.commercial!==undefined)obj.commercial=cols[colMap.commercial]||'';
