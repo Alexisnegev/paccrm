@@ -987,7 +987,7 @@ function getFiltered(){
   const f=(document.getElementById('filter')||{value:''}).value;
   const fc=(document.getElementById('filter-com')||{value:''}).value;
   return contacts.filter(c=>{
-    if(q&&!c.name.toLowerCase().includes(q)&&!(c.phone||'').includes(q)&&!(c.company||'').toLowerCase().includes(q))return false;
+    if(q){const fields=[c.name,c.phone,c.company,c.email,c.adresse,c.notes,c.historique,c.shared_notes,c.tags].map(f=>(f||'').toLowerCase());if(!fields.some(f=>f.includes(q)))return false;}
     if(f==='pending'&&c.status!=='pending')return false;
     if(f==='done'&&c.status!=='done')return false;
     if(f==='cb'&&c.outcome!=='cb')return false;
