@@ -987,7 +987,7 @@ function getFiltered(){
   const f=(document.getElementById('filter')||{value:''}).value;
   const fc=(document.getElementById('filter-com')||{value:''}).value;
   return contacts.filter(c=>{
-    if(q){const fields=[c.name,c.phone,c.company,c.email,c.adresse,c.notes,c.historique,c.shared_notes,c.tags].map(f=>(f||'').toLowerCase());if(!fields.some(f=>f.includes(q)))return false;}
+    if(q){const fields=[c.name,c.phone,c.company,c.email,c.adresse,c.notes,c.historique,c.etat_pixel,c.shared_notes,c.tags].map(f=>(f||'').toLowerCase());if(!fields.some(f=>f.includes(q)))return false;}
     if(f==='pending'&&c.status!=='pending')return false;
     if(f==='done'&&c.status!=='done')return false;
     if(f==='cb'&&c.outcome!=='cb')return false;
@@ -1682,9 +1682,12 @@ function importCSV(input){
     if(toImport.length===0){alert(msg+'\n\nAucun nouveau contact à importer.');input.value='';return;}
     msg+='\n\nImporter uniquement les '+toImport.length+' nouveaux ?';
     if(!confirm(msg))return;
+    // Demander le code campagne
+    const campagne=prompt('Code campagne / liste (optionnel) :\nEx: RES-EC-104, Bat-eq-127, Depot, Led\nLaissez vide si pas de code.','');
+    const tagVal=campagne?campagne.trim():'';
     let done=0;
-    for(let i=0;i<toImport.length;i+=100){await supa('POST','contacts',toImport.slice(i,i+100).map(c=>({...c,status:'pending',outcome:null,notes:'',dur:0,enabled:true,cb_date:'',cb_time:'',cb_reason:''})));done+=Math.min(100,toImport.length-i);}
-    showToast(`✅ ${done} importés · ${already.length} ignorés (doublons)`);
+    for(let i=0;i<toImport.length;i+=100){await supa('POST','contacts',toImport.slice(i,i+100).map(c=>({...c,tags:tagVal,status:'pending',outcome:null,notes:'',dur:0,enabled:true,cb_date:'',cb_time:'',cb_reason:''})));done+=Math.min(100,toImport.length-i);}
+    showToast(`✅ ${done} importés${tagVal?' · tag: '+tagVal:''} · ${already.length} ignorés (doublons)`);
     input.value='';
     await loadContacts();
   };
