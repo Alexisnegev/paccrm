@@ -292,6 +292,13 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
       <option value="done">Appelés</option>
       <option value="cb">Rappels</option>
     </select>
+    <select id="filter-tag" onchange="onFilterChange()" style="width:auto;">
+      <option value="">Tous les tags</option>
+      <option value="Bat-eq-127">Bat-eq-127</option>
+<option value="RES-eq-104">RES-eq-104</option>
+<option value="Depot">Depot</option>
+<option value="Led">Led</option>
+    </select>
     <select id="filter-com" onchange="onFilterChange()" style="width:auto;" class="hidden">
       <option value="">Tous commerciaux</option>
       <option value="Mebarek">Mebarek</option>
@@ -304,6 +311,13 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
   <!-- Barre attribution (admin seulement) -->
   <div id="sel-bar" class="sel-bar hidden">
     <span id="sel-count" style="font-size:13px;font-weight:600;color:#534AB7;flex:1;"></span>
+    <select id="assign-tag-filter" onchange="filterByTag(this.value)" style="width:auto;font-size:12px;">
+      <option value="">Filtrer par tag...</option>
+      <option value="Bat-eq-127">Bat-eq-127</option>
+<option value="RES-eq-104">RES-eq-104</option>
+<option value="Depot">Depot</option>
+<option value="Led">Led</option>
+    </select>
     <select id="assign-com" style="width:auto;">
       <option value="">Attribuer à...</option>
       <option value="Mebarek">Mebarek</option>
@@ -442,6 +456,15 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
       <input id="edit-company" placeholder="Société" style="padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px;">
       <input id="edit-email" placeholder="Email" style="padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px;">
       <input id="edit-adresse" placeholder="Adresse" style="padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px;">
+      <div>
+        <div style="font-size:12px;color:#888;margin-bottom:6px;">Tags</div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;padding:8px;border:1px solid #e0e0e0;border-radius:8px;">
+          <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="checkbox" class="edit-tag-cb" value="Bat-eq-127"> Bat-eq-127</label>
+<label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="checkbox" class="edit-tag-cb" value="RES-eq-104"> RES-eq-104</label>
+<label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="checkbox" class="edit-tag-cb" value="Depot"> Depot</label>
+<label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="checkbox" class="edit-tag-cb" value="Led"> Led</label>
+        </div>
+      </div>
       <select id="edit-commercial" style="padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px;">
         <option value="">— Commercial —</option>
         <option>Mebarek</option><option>Megane</option><option>Jonas</option><option>Alexis</option><option>Carole</option>
@@ -662,6 +685,17 @@ async function deleteSelectedDoublons(){
   showToast(`🗑 ${done} contact(s) supprimé(s)`);
   renderList();updateStats();
   showDoublons();
+}
+function filterByTag(tag){
+  if(!tag)return;
+  // Cocher tous les contacts avec ce tag
+  contacts.forEach((c,i)=>{
+    const row=document.querySelector(`.crow[data-id='${c.id}'] input[type=checkbox]`);
+    if(row)row.checked=(c.tags||'').includes(tag);
+  });
+  // Aussi mettre à jour filter-tag
+  const ft=document.getElementById('filter-tag');
+  if(ft){ft.value=tag;onFilterChange();}
 }
 function showDoublons(){
   const byPhone={},byName={};
@@ -957,6 +991,8 @@ function getFiltered(){
     if(f==='pending'&&c.status!=='pending')return false;
     if(f==='done'&&c.status!=='done')return false;
     if(f==='cb'&&c.outcome!=='cb')return false;
+    const ft=(document.getElementById('filter-tag')||{}).value||'';
+    if(ft&&!(c.tags||'').includes(ft))return false;
     if(fc&&c.commercial!==fc)return false;
     const qcp=(document.getElementById('srch-cp')||{value:''}).value.toLowerCase();
     if(qcp){const addr=(c.adresse||'').toLowerCase();if(!addr.includes(qcp))return false;}
@@ -985,6 +1021,7 @@ function renderList(){
     const{b,f}=gc(i);const isCur=i===curIdx;const isSel=selectedIds.has(c.id);
     const comColor=COM_COLORS[c.commercial]||'#888';
     const comtag=c.commercial?`<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:${comColor}22;color:${comColor};margin-left:4px;">${c.commercial}</span>`:'';
+    const tagbadges=(c.tags||'').split(',').filter(t=>t.trim()).map(t=>`<span style="display:inline-flex;font-size:10px;padding:1px 7px;border-radius:10px;font-weight:600;background:#E0F0FF;color:#0C447C;margin-left:3px;">${t.trim()}</span>`).join('');
     const cbtag=c.outcome==='cb'?`<span class="ctag cb"><i class="ti ti-clock"></i>${fmtDT(c.cb_date,c.cb_time)}</span>`:'';
     const outlabel=c.outcome&&labels[c.outcome]?`<span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:${colors[c.outcome]}18;color:${colors[c.outcome]};"><i class="ti ${icons[c.outcome]}" style="font-size:10px;"></i>${labels[c.outcome]}</span>`:'';
     let si=isCur?'<i class="ti ti-phone" style="font-size:13px;color:#534AB7"></i>':'';
@@ -993,7 +1030,7 @@ function renderList(){
       <div class="cav" style="background:${b};color:${f}">${ini(c.name)}</div>
       <div style="flex:1;min-width:0;">
         <div class="cname">${c.name}${comtag}${outlabel}${cbtag}</div>
-        <div class="cmeta">${c.phone||''}${c.company?' · '+c.company:''}</div>
+        <div class="cmeta">${c.phone||''}${c.company?' · '+c.company:''}${(c.tags||'').split(',').filter(t=>t.trim()).map(t=>`<span style='display:inline-flex;font-size:10px;padding:1px 7px;border-radius:10px;font-weight:600;background:#E0F0FF;color:#0C447C;margin-left:4px;'>${t.trim()}</span>`).join('')}</div>
       </div>
       <div style="flex-shrink:0;">${si}</div>
       <a href="tel:${(c.phone||'').replace(/\s/g,'')}" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
@@ -1570,6 +1607,8 @@ function openEditContact(id){
   document.getElementById('edit-email').value=c.email||'';
   document.getElementById('edit-adresse').value=c.adresse||'';
   document.getElementById('edit-commercial').value=c.commercial||'';
+  const cTags=(c.tags||'').split(',').map(t=>t.trim()).filter(t=>t);
+  document.querySelectorAll('.edit-tag-cb').forEach(cb=>cb.checked=cTags.includes(cb.value));
   document.getElementById('edit-modal').style.display='flex';
 }
 function closeEditContact(){document.getElementById('edit-modal').style.display='none';}
@@ -1581,9 +1620,10 @@ async function saveEditContact(){
   const email=document.getElementById('edit-email').value.trim();
   const adresse=document.getElementById('edit-adresse').value.trim();
   const commercial=document.getElementById('edit-commercial').value;
+  const tags=[...document.querySelectorAll('.edit-tag-cb:checked')].map(cb=>cb.value).join(',');
   if(!name||!phone){alert('Nom et téléphone obligatoires.');return;}
   try{
-    await supa('PATCH','contacts',{name,phone,company,email,adresse,commercial},`?id=eq.${id}`);
+    await supa('PATCH','contacts',{name,phone,company,email,adresse,commercial,tags},`?id=eq.${id}`);
     const c=contacts.find(x=>x.id===id);
     if(c){c.name=name;c.phone=phone;c.company=company;c.email=email;c.adresse=adresse;c.commercial=commercial;}
     closeEditContact();renderList();
