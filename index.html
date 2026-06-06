@@ -1626,10 +1626,22 @@ function importCSV(input){
       newContacts.push(obj);
     }
     if(!newContacts.length){alert('Aucun contact valide.');return;}
-    if(!confirm(`Importer ${newContacts.length} contacts ?`))return;
+    // Détecter les doublons par numéro de téléphone
+    const existingPhones=new Set(contacts.map(c=>(c.phone||'').replace(/\s/g,'')));
+    const toImport=[];const already=[];
+    newContacts.forEach(c=>{
+      const p=(c.phone||'').replace(/\s/g,'');
+      if(existingPhones.has(p))already.push(c);
+      else toImport.push(c);
+    });
+    let msg=`📋 Résultat de l'analyse :\n✅ ${toImport.length} nouveaux contacts\n⚠️ ${already.length} déjà présents (même numéro)`;
+    if(already.length>0)msg+='\n\nExemples déjà présents :\n'+already.slice(0,5).map(c=>`• ${c.name} — ${c.phone}`).join('\n');
+    if(toImport.length===0){alert(msg+'\n\nAucun nouveau contact à importer.');input.value='';return;}
+    msg+='\n\nImporter uniquement les '+toImport.length+' nouveaux ?';
+    if(!confirm(msg))return;
     let done=0;
-    for(let i=0;i<newContacts.length;i+=100){await supa('POST','contacts',newContacts.slice(i,i+100));done+=Math.min(100,newContacts.length-i);}
-    showToast(`✅ ${done} contacts importés !`);
+    for(let i=0;i<toImport.length;i+=100){await supa('POST','contacts',toImport.slice(i,i+100).map(c=>({...c,status:'pending',outcome:null,notes:'',dur:0,enabled:true,cb_date:'',cb_time:'',cb_reason:''})));done+=Math.min(100,toImport.length-i);}
+    showToast(`✅ ${done} importés · ${already.length} ignorés (doublons)`);
     input.value='';
     await loadContacts();
   };
