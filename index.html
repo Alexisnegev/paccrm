@@ -301,6 +301,7 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
     </select>
     <select id="filter-com" onchange="onFilterChange()" style="width:auto;" class="hidden">
       <option value="">Tous commerciaux</option>
+      <option value="__non_attribue__">⚠️ Non attribués</option>
       <option value="Mebarek">Mebarek</option>
       <option value="Megane">Megane</option>
       <option value="Jonas">Jonas</option>
@@ -993,7 +994,8 @@ function getFiltered(){
     if(f==='cb'&&c.outcome!=='cb')return false;
     const ft=(document.getElementById('filter-tag')||{}).value||'';
     if(ft&&!(c.tags||'').includes(ft))return false;
-    if(fc&&c.commercial!==fc)return false;
+    if(fc==='__non_attribue__'){if(c.commercial&&c.commercial!=='')return false;}
+    else if(fc&&c.commercial!==fc)return false;
     const qcp=(document.getElementById('srch-cp')||{value:''}).value.toLowerCase();
     if(qcp){const addr=(c.adresse||'').toLowerCase();if(!addr.includes(qcp))return false;}
     return true;
