@@ -186,6 +186,8 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
     <button class="btn pr hidden" id="btn-import-init" onclick="importInitialContacts()"><i class="ti ti-database-import"></i> Importer contacts</button>
     <button class="btn am hidden" id="btn-update-data" onclick="updateExtraData()"><i class="ti ti-refresh"></i> Mettre à jour données</button>
     <button class="btn pr hidden" id="btn-assign"><i class="ti ti-users"></i> Attribuer</button>
+    <button class="btn hidden" id="btn-migrate" onclick="migrateLocalStorageToSupabase()" style="background:#9C6BB5;border-color:#9C6BB5;color:#fff;"><i class="ti ti-database-export"></i> Récupérer données locales</button>
+    <button class="btn hidden" id="btn-doublons" onclick="showDoublons()" style="background:#E24B4A;border-color:#E24B4A;color:#fff;"><i class="ti ti-copy"></i> Doublons</button>
   </div>
 </div>
 
@@ -412,6 +414,15 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
     <div id="email-template-list" style="display:flex;flex-direction:column;gap:10px;"></div>
   </div>
 </div>
+<div id="doublons-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9998;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:16px;padding:24px;width:90%;max-width:560px;max-height:80vh;overflow-y:auto;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <div style="font-weight:700;font-size:16px;">🔍 Doublons détectés</div>
+      <button onclick="document.getElementById('doublons-modal').style.display='none'" style="background:none;border:none;cursor:pointer;font-size:20px;color:#888;">✕</button>
+    </div>
+    <div id="doublons-content"></div>
+  </div>
+</div>
 <div class="save-toast" id="save-toast"><i class="ti ti-cloud-check"></i> Synchronisé</div>
 
 <div id="edit-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:9998;align-items:center;justify-content:center;">
@@ -632,6 +643,39 @@ let currentPage=0;const PAGE_SIZE=50;
 let filteredContacts=[];
 
 // --- LOGIN ---
+function showDoublons(){
+  const byPhone={},byName={};
+  contacts.forEach(c=>{
+    const p=(c.phone||'').replace(/\s/g,'');
+    const n=(c.name||'').toLowerCase().trim();
+    if(p){(byPhone[p]=byPhone[p]||[]).push(c);}
+    if(n){(byName[n]=byName[n]||[]).push(c);}
+  });
+  const dupsPhone=Object.entries(byPhone).filter(([k,v])=>v.length>1);
+  const dupsName=Object.entries(byName).filter(([k,v])=>v.length>1);
+  let html='';
+  if(dupsPhone.length){
+    html+='<div style="font-size:12px;font-weight:700;color:#E24B4A;text-transform:uppercase;margin-bottom:8px;">Par téléphone ('+dupsPhone.length+')</div>';
+    dupsPhone.forEach(([phone,cs])=>{
+      html+='<div style="background:#FFF5F5;border:0.5px solid #E24B4A;border-radius:8px;padding:10px 14px;margin-bottom:8px;">';
+      html+='<div style="font-size:12px;color:#888;margin-bottom:4px;">📞 '+phone+'</div>';
+      cs.forEach(c=>html+='<div style="font-size:13px;font-weight:500;display:flex;justify-content:space-between;padding:2px 0;"><span>'+c.name+'</span><span style="color:#888;font-size:11px;">ID:'+c.id+' · '+c.commercial+'</span></div>');
+      html+='</div>';
+    });
+  }
+  if(dupsName.length){
+    html+='<div style="font-size:12px;font-weight:700;color:#D4920A;text-transform:uppercase;margin:12px 0 8px;">Par nom ('+dupsName.length+')</div>';
+    dupsName.forEach(([name,cs])=>{
+      html+='<div style="background:#FFFBF0;border:0.5px solid #D4920A;border-radius:8px;padding:10px 14px;margin-bottom:8px;">';
+      html+='<div style="font-size:12px;color:#888;margin-bottom:4px;">👤 '+cs[0].name+'</div>';
+      cs.forEach(c=>html+='<div style="font-size:13px;font-weight:500;display:flex;justify-content:space-between;padding:2px 0;"><span>📞 '+c.phone+'</span><span style="color:#888;font-size:11px;">ID:'+c.id+' · '+c.commercial+'</span></div>');
+      html+='</div>';
+    });
+  }
+  if(!dupsPhone.length&&!dupsName.length)html='<div style="text-align:center;padding:2rem;color:#888;font-size:14px;">✅ Aucun doublon détecté !</div>';
+  document.getElementById('doublons-content').innerHTML=html;
+  document.getElementById('doublons-modal').style.display='flex';
+}
 function loginAdmin(){
   const code=prompt('Code administrateur :');
   if(code==='1306'){login('admin');}
@@ -650,6 +694,9 @@ function login(user){
   if(isAdmin){
     document.getElementById('btn-assign').classList.remove('hidden');
     document.getElementById('btn-update-data').classList.remove('hidden');
+    document.getElementById('btn-migrate').classList.remove('hidden');
+    document.getElementById('btn-doublons').classList.remove('hidden');
+    document.getElementById('stat-ca').classList.remove('hidden');
     document.getElementById('filter-com').classList.remove('hidden');
     document.getElementById('stat-ca').classList.remove('hidden');
     const importBar=document.getElementById('import-csv-bar');
