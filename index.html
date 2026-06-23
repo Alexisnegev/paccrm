@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0054)file:///Users/alexissitbonmac2/Downloads/index_10.html -->
+<!-- saved from url=(0054)file:///Users/alexissitbonmac2/Downloads/index_12.html -->
 <html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -146,9 +146,9 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
 .opp-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:8px 14px;margin-top:4px;}
 </style>
 </head>
-<body style="background: rgb(194, 0, 110);">
+<body>
 
-<div class="login-overlay" id="login-overlay" style="display: none;">
+<div class="login-overlay" id="login-overlay">
   <div class="login-box">
     <div style="font-size:36px;margin-bottom:10px;">📞</div>
     <div class="login-title">CRM Appel Automatique</div>
@@ -186,35 +186,35 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
     <button class="btn pr hidden" id="btn-import-init" onclick="importInitialContacts()"><i class="ti ti-database-import"></i> Importer contacts</button>
     <button class="btn am hidden" id="btn-update-data" onclick="updateExtraData()"><i class="ti ti-refresh"></i> Mettre à jour données</button>
     <button class="btn pr hidden" id="btn-assign"><i class="ti ti-users"></i> Attribuer</button>
-  <div style="font-size: 13px; font-weight: 600; padding: 4px 12px; border-radius: 20px; background: rgb(238, 237, 254); color: rgb(83, 74, 183); display: flex; align-items: center; gap: 6px;">👤 Carole<button onclick="logout()" style="background:none;border:none;cursor:pointer;font-size:11px;color:inherit;opacity:.7;padding:0;margin-left:4px;">✕</button></div></div>
+  </div>
 </div>
 
 <div class="stats">
-  <div class="stat"><div class="stat-l">Total</div><div class="stat-v" id="s-tot">523</div></div>
-  <div class="stat"><div class="stat-l">Appelés</div><div class="stat-v" id="s-done">88</div></div>
-  <div class="stat"><div class="stat-l">Contactés</div><div class="stat-v g" id="s-ok">2</div></div>
-  <div class="stat"><div class="stat-l">Sans réponse</div><div class="stat-v r" id="s-nok">42</div></div>
-  <div class="stat"><div class="stat-l">Rappels</div><div class="stat-v p" id="s-cb">1</div></div>
-  <div class="stat" style="border:1.5px solid #D4920A;background:#FFFBF0;"><div class="stat-l" style="color:#D4920A;font-weight:600;">🔥 Qualifiés aujourd'hui</div><div class="stat-v" style="color:#D4920A;" id="s-qualif">1</div></div>
-  <div class="stat" style="border:1.5px solid #534AB7;background:#F5F4FF;"><div class="stat-l" style="color:#534AB7;font-weight:600;">📞 Appelés aujourd'hui</div><div class="stat-v" style="color:#534AB7;" id="s-called-today">1</div></div>
-  <div class="stat" style="border:1.5px solid #E24B4A;background:#FFF5F5;"><div class="stat-l" style="color:#E24B4A;font-weight:600;">⏳ Attribués non appelés</div><div class="stat-v" style="color:#E24B4A;" id="s-non-appeles">434</div></div>
-  <div class="stat" style="border:1.5px solid #D4920A;background:#FFFBF0;cursor:pointer;" onclick="showTab(&#39;opportunites&#39;,document.querySelectorAll(&#39;.tab&#39;)[3]);setTimeout(()=&gt;setOppTab(&#39;vt&#39;,document.querySelector(&#39;.opp-subtab[data-tab=vt]&#39;)),50)"><div class="stat-l" style="color:#D4920A;font-weight:600;">🏠 VT programmées</div><div class="stat-v" style="color:#D4920A;" id="s-vt">3</div></div>
-  <div class="stat" style="border:1.5px solid #1D9E75;background:#F0FBF7;cursor:pointer;" onclick="showTab(&#39;opportunites&#39;,document.querySelectorAll(&#39;.tab&#39;)[3]);setTimeout(()=&gt;setOppTab(&#39;pose&#39;,document.querySelector(&#39;.opp-subtab[data-tab=pose]&#39;)),50)"><div class="stat-l" style="color:#1D9E75;font-weight:600;">🔧 Installations programmées</div><div class="stat-v" style="color:#1D9E75;" id="s-pose">2</div></div>
+  <div class="stat"><div class="stat-l">Total</div><div class="stat-v" id="s-tot">0</div></div>
+  <div class="stat"><div class="stat-l">Appelés</div><div class="stat-v" id="s-done">0</div></div>
+  <div class="stat"><div class="stat-l">Contactés</div><div class="stat-v g" id="s-ok">0</div></div>
+  <div class="stat"><div class="stat-l">Sans réponse</div><div class="stat-v r" id="s-nok">0</div></div>
+  <div class="stat"><div class="stat-l">Rappels</div><div class="stat-v p" id="s-cb">0</div></div>
+  <div class="stat" style="border:1.5px solid #D4920A;background:#FFFBF0;"><div class="stat-l" style="color:#D4920A;font-weight:600;">🔥 Qualifiés aujourd'hui</div><div class="stat-v" style="color:#D4920A;" id="s-qualif">0</div></div>
+  <div class="stat" style="border:1.5px solid #534AB7;background:#F5F4FF;"><div class="stat-l" style="color:#534AB7;font-weight:600;">📞 Appelés aujourd'hui</div><div class="stat-v" style="color:#534AB7;" id="s-called-today">0</div></div>
+  <div class="stat" style="border:1.5px solid #E24B4A;background:#FFF5F5;"><div class="stat-l" style="color:#E24B4A;font-weight:600;">⏳ Attribués non appelés</div><div class="stat-v" style="color:#E24B4A;" id="s-non-appeles">0</div></div>
+  <div class="stat" style="border:1.5px solid #D4920A;background:#FFFBF0;cursor:pointer;" onclick="showTab(&#39;opportunites&#39;,document.querySelectorAll(&#39;.tab&#39;)[3]);setTimeout(()=&gt;setOppTab(&#39;vt&#39;,document.querySelector(&#39;.opp-subtab[data-tab=vt]&#39;)),50)"><div class="stat-l" style="color:#D4920A;font-weight:600;">🏠 VT programmées</div><div class="stat-v" style="color:#D4920A;" id="s-vt">0</div></div>
+  <div class="stat" style="border:1.5px solid #1D9E75;background:#F0FBF7;cursor:pointer;" onclick="showTab(&#39;opportunites&#39;,document.querySelectorAll(&#39;.tab&#39;)[3]);setTimeout(()=&gt;setOppTab(&#39;pose&#39;,document.querySelector(&#39;.opp-subtab[data-tab=pose]&#39;)),50)"><div class="stat-l" style="color:#1D9E75;font-weight:600;">🔧 Installations programmées</div><div class="stat-v" style="color:#1D9E75;" id="s-pose">0</div></div>
 </div>
-<div class="pbw"><div class="pb" id="prog" style="width: 17%;"></div></div>
+<div class="pbw"><div class="pb" id="prog" style="width:0%"></div></div>
 <div id="objectif-bar" style="margin:8px 0 4px;padding:10px 14px;background:#F5F4FF;border-radius:10px;border:1.5px solid #534AB7;">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
     <span style="font-size:12px;font-weight:700;color:#534AB7;">🎯 Objectif journalier</span>
-    <span style="font-size:12px;color:#534AB7;font-weight:600;"><span id="obj-done">1</span> / <span id="obj-target">50</span> appels <button onclick="setObjectif()" style="margin-left:6px;background:none;border:1px solid #534AB7;border-radius:8px;font-size:10px;color:#534AB7;padding:1px 6px;cursor:pointer;">✏️</button></span>
+    <span style="font-size:12px;color:#534AB7;font-weight:600;"><span id="obj-done">0</span> / <span id="obj-target">50</span> appels <button onclick="setObjectif()" style="margin-left:6px;background:none;border:1px solid #534AB7;border-radius:8px;font-size:10px;color:#534AB7;padding:1px 6px;cursor:pointer;">✏️</button></span>
   </div>
-  <div style="background:#E0DEFF;border-radius:6px;height:8px;overflow:hidden;"><div id="obj-bar" style="height: 100%; background: rgb(83, 74, 183); border-radius: 6px; width: 2%; transition: width 0.4s;"></div></div>
+  <div style="background:#E0DEFF;border-radius:6px;height:8px;overflow:hidden;"><div id="obj-bar" style="height:100%;background:#534AB7;border-radius:6px;width:0%;transition:width .4s;"></div></div>
 </div>
 
 <div class="tabs">
   <button class="tab act" onclick="showTab(&#39;appel&#39;,this)">Appel en cours</button>
   <button class="tab" onclick="showTab(&#39;rappels&#39;,this)">Rappels</button>
   <button class="tab" onclick="showTab(&#39;liste&#39;,this)">Contacts</button>
-  <button class="tab" onclick="showTab(&#39;opportunites&#39;,this)">🏆 Opportunités <span id="opp-count" style="background:#1D9E75;color:#fff;border-radius:10px;padding:1px 6px;font-size:10px;margin-left:3px;">11</span></button>
+  <button class="tab" onclick="showTab(&#39;opportunites&#39;,this)">🏆 Opportunités <span id="opp-count" style="background:#1D9E75;color:#fff;border-radius:10px;padding:1px 6px;font-size:10px;margin-left:3px;"></span></button>
   <button class="tab" onclick="showTab(&#39;historique&#39;,this)">Historique</button>
   <button class="tab" onclick="showTab(&#39;stats&#39;,this)">Stats</button>
 </div>
@@ -223,17 +223,17 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
 <div id="tab-appel">
   <div class="panel">
     <div class="row">
-      <div class="av" id="cal-av" style="background: rgb(245, 196, 179); color: rgb(113, 43, 19);">SD</div>
+      <div class="av" id="cal-av" style="background:#CECBF6;color:#3C3489;">--</div>
       <div>
-        <div class="cal-name" id="cal-name">SNC DES MENCLAS</div>
-        <div class="cal-sub" id="cal-phone">06 85 55 72 08</div>
-        <div class="cal-sub" id="cal-co"> — 👤 Carole</div>
-        <div class="cal-sub" id="cal-extra" style="margin-top:4px;display:flex;flex-wrap:wrap;gap:6px;"><span style="font-size:11px;background:#e8e8ff;color:#3C3489;padding:2px 7px;border-radius:8px;font-weight:500;"><i class="ti ti-mail" style="font-size:10px;"></i> menclas21@gmail.com</span><span style="font-size:11px;background:#e8f5ee;color:#085041;padding:2px 7px;border-radius:8px;font-weight:500;"><i class="ti ti-map-pin" style="font-size:10px;"></i> MEURSAUGESAMPILLY-LES-BORDES21450</span><span style="font-size:11px;background:#EEEDFE;color:#534AB7;padding:2px 7px;border-radius:8px;font-weight:600;">6 - DEPOT 1</span><span style="font-size:11px;background:#fff3e0;color:#633806;padding:2px 7px;border-radius:8px;font-weight:500;">RES-EC-104</span></div>
+        <div class="cal-name" id="cal-name">Aucun appel en cours</div>
+        <div class="cal-sub" id="cal-phone">—</div>
+        <div class="cal-sub" id="cal-co"></div>
+        <div class="cal-sub" id="cal-extra" style="margin-top:4px;display:flex;flex-wrap:wrap;gap:6px;"></div>
       </div>
       <div style="margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-        <button id="tel-link" onclick="launchPhoneGsCall()" class="btn tel"><i class="ti ti-phone"></i> Lancer l'appel</button>
-        <button id="email-post-btn" onclick="openEmailModal()" class="btn" style="background:#534AB7;color:#fff;border:none;cursor:pointer;"><i class="ti ti-mail"></i> Email ▾</button>
-        <button id="whatsapp-btn" onclick="openWhatsAppModal()" class="btn" style="background:#25D366;color:#fff;border:none;cursor:pointer;"><i class="ti ti-brand-whatsapp"></i> WhatsApp ▾</button>
+        <button id="tel-link" onclick="launchPhoneGsCall()" class="btn tel hidden"><i class="ti ti-phone"></i> Lancer l'appel</button>
+        <button id="email-post-btn" onclick="openEmailModal()" class="btn hidden" style="background:#534AB7;color:#fff;border:none;cursor:pointer;"><i class="ti ti-mail"></i> Email ▾</button>
+        <button id="whatsapp-btn" onclick="openWhatsAppModal()" class="btn hidden" style="background:#25D366;color:#fff;border:none;cursor:pointer;"><i class="ti ti-brand-whatsapp"></i> WhatsApp ▾</button>
         <div class="badge idle" id="st-badge"><span class="dot" id="st-dot"></span><span id="st-txt">En attente</span></div>
       </div>
     </div>
@@ -336,562 +336,9 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
       <input type="checkbox" id="sel-all" onchange="toggleSelectAll(this)" style="width:15px;height:15px;cursor:pointer;">
       <span style="font-size:12px;color:#888;">Tout sélectionner (page)</span>
     </div>
-    <div id="clist"><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#CECBF6;color:#3C3489">RT</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">ROUBY THOMAS<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 21 57 53 17</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0621575317" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(0)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#9FE1CB;color:#085041">SL</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">SNC LE TREFLE<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">07 78 95 02 31</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0778950231" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(1)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#F5C4B3;color:#712B13">MD</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">MARIE DAVID<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 60 03 65 93</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0660036593" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(2)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#B5D4F4;color:#0C447C">DA</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">DEVILLARD ALAIN<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 50 71 68 49</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0650716849" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(3)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#FAC775;color:#633806">EC</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">EURL CTA PAK<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 66 83 47 71</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0666834771" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(4)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#F4C0D1;color:#72243E">TD</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">TALON DANIEL<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 83 55 08 66</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0683550866" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(5)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#C0DD97;color:#27500A">AJ</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">AU JARDIN DE LA TENDRESSE<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 73 60 31 30</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0673603130" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(6)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#D3D1C7;color:#444441">SC</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">SAIYAN CORP<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 73 55 95 92</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0673559592" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(7)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#CECBF6;color:#3C3489">PR</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">PATISSOU ROMAIN<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 27 58 53 88</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0627585388" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(8)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#9FE1CB;color:#085041">TA</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">TONIO AMARAL<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 82 18 23 42</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0682182342" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(9)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#F5C4B3;color:#712B13">ED</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">EARL DU TAULAT<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 80 75 56 17</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0680755617" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(10)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#B5D4F4;color:#0C447C">ED</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">EARL DOMAINE DE TAILLEFER<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 37 69 36 11</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0637693611" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(11)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#FAC775;color:#633806">A</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">Adri'aubrac<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 47 87 45 95</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0647874595" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(12)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#F4C0D1;color:#72243E">SM</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">SARL MELVIN<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#C05A1F18;color:#C05A1F;"><i class="ti ti-thumb-down" style="font-size:10px;"></i>Pas intéressé</span></div>
-        <div class="cmeta">06 46 16 01 01</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0646160101" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(13)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#C0DD97;color:#27500A">PJ</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">PUT JEAN MICHEL<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 81 25 53 97</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0681255397" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(14)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#D3D1C7;color:#444441">B</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">BOSLOUBET-CHANTEGROS<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 42 61 59 93</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0642615993" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(15)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#CECBF6;color:#3C3489">FP</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">FORNARO PATRICK<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#1D9E7518;color:#1D9E75;"><i class="ti ti-check" style="font-size:10px;"></i>Contacté</span></div>
-        <div class="cmeta">07 61 99 41 73</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0761994173" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(16)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#9FE1CB;color:#085041">GD</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">GAEC DU COLOMBIER-DAL<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 80 73 23 29</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0680732329" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(17)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#F5C4B3;color:#712B13">H</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">HOURAT<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#6B5EA818;color:#6B5EA8;"><i class="ti ti-ban" style="font-size:10px;"></i>Pas éligible</span></div>
-        <div class="cmeta">06 80 93 48 97</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0680934897" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(18)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#B5D4F4;color:#0C447C">LV</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">LES VERGERS DU TICOL<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 77 15 97 78</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0677159778" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(19)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#FAC775;color:#633806">GD</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">GAEC DE FREIWALD<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#6B5EA818;color:#6B5EA8;"><i class="ti ti-ban" style="font-size:10px;"></i>Pas éligible</span></div>
-        <div class="cmeta">06 79 74 29 79</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0679742979" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(20)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#F4C0D1;color:#72243E">DF</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">DE FURIA LORENZO<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 17 27 68 89</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0617276889" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(21)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#C0DD97;color:#27500A">MA</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">MICHEL ALAIN<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#6B5EA818;color:#6B5EA8;"><i class="ti ti-ban" style="font-size:10px;"></i>Pas éligible</span></div>
-        <div class="cmeta">07 83 22 85 05</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0783228505" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(22)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#D3D1C7;color:#444441">EL</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">EARL LA RENNE<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 88 10 45 59</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0688104559" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(23)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#CECBF6;color:#3C3489">GV</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">GAEC VEYRAC<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#D4920A18;color:#D4920A;"><i class="ti ti-flame" style="font-size:10px;"></i>🔥 Chaud</span></div>
-        <div class="cmeta">06 87 73 65 13</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0687736513" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(24)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#9FE1CB;color:#085041">BD</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">BLANC DAMIEN<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#BA751718;color:#BA7517;"><i class="ti ti-message" style="font-size:10px;"></i>Messagerie</span></div>
-        <div class="cmeta">06 08 84 90 96</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0608849096" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(25)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#F5C4B3;color:#712B13">GR</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">GAEC RECONNU LA VIEILLE GRANGE<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#C05A1F18;color:#C05A1F;"><i class="ti ti-thumb-down" style="font-size:10px;"></i>Pas intéressé</span></div>
-        <div class="cmeta">06 38 22 14 43</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0638221443" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(26)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#B5D4F4;color:#0C447C">GL</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">GAYET LOIC<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#C05A1F18;color:#C05A1F;"><i class="ti ti-thumb-down" style="font-size:10px;"></i>Pas intéressé</span></div>
-        <div class="cmeta">06 73 64 60 75</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0673646075" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(27)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#FAC775;color:#633806">BB</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">BIENFAIT BENJAMIN<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#C05A1F18;color:#C05A1F;"><i class="ti ti-thumb-down" style="font-size:10px;"></i>Pas intéressé</span></div>
-        <div class="cmeta">06 24 33 44 01</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0624334401" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(28)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#F4C0D1;color:#72243E">GD</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">GAEC DE BELLEVUE<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#1D9E7518;color:#1D9E75;"><i class="ti ti-check" style="font-size:10px;"></i>Contacté</span></div>
-        <div class="cmeta">06 88 34 02 53</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0688340253" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(29)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#C0DD97;color:#27500A">FJ</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">FRECAULT JEAN<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 64 91 57 92</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0664915792" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(30)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#D3D1C7;color:#444441">MA</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">MERIGARD AURELIEN<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#6B5EA818;color:#6B5EA8;"><i class="ti ti-ban" style="font-size:10px;"></i>Pas éligible</span></div>
-        <div class="cmeta">06 74 17 63 48</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0674176348" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(31)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#CECBF6;color:#3C3489">GD</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">GAEC DE STE MARGUERITE<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 74 75 93 99</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0674759399" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(32)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#9FE1CB;color:#085041">DS</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">DALBAVIE SAMUEL<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 51 35 21 65</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0651352165" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(33)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#F5C4B3;color:#712B13">GB</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">GAEC BASTIDA<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#BA751718;color:#BA7517;"><i class="ti ti-message" style="font-size:10px;"></i>Messagerie</span></div>
-        <div class="cmeta">06 85 19 95 70</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0685199570" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(34)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#B5D4F4;color:#0C447C">ES</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">EURL SERTILLANGE<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#6B5EA818;color:#6B5EA8;"><i class="ti ti-ban" style="font-size:10px;"></i>Pas éligible</span></div>
-        <div class="cmeta">06 86 17 02 25</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0686170225" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(35)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#FAC775;color:#633806">PE</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">PERCIVATI ESTER<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#C05A1F18;color:#C05A1F;"><i class="ti ti-thumb-down" style="font-size:10px;"></i>Pas intéressé</span></div>
-        <div class="cmeta">06 68 67 99 62</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0668679962" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(36)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#F4C0D1;color:#72243E">PT</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">PASCAL THUBIERE<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#C05A1F18;color:#C05A1F;"><i class="ti ti-thumb-down" style="font-size:10px;"></i>Pas intéressé</span></div>
-        <div class="cmeta">06 13 90 52 26</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0613905226" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(37)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#C0DD97;color:#27500A">GD</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">GAEC DU FOURNEAU<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 11 44 42 85</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0611444285" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(38)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#D3D1C7;color:#444441">OM</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">ORBELLO MATHIEU<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#6B5EA818;color:#6B5EA8;"><i class="ti ti-ban" style="font-size:10px;"></i>Pas éligible</span></div>
-        <div class="cmeta">06 80 35 74 20</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0680357420" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(39)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#CECBF6;color:#3C3489">BJ</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">BACCUS JULIEN<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#D4920A18;color:#D4920A;"><i class="ti ti-flame" style="font-size:10px;"></i>🔥 Chaud</span></div>
-        <div class="cmeta">0643263606</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0643263606" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(40)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#9FE1CB;color:#085041">C</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">COLLIVIEL<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#C05A1F18;color:#C05A1F;"><i class="ti ti-thumb-down" style="font-size:10px;"></i>Pas intéressé</span></div>
-        <div class="cmeta">06 77 93 37 57</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0677933757" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(41)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#F5C4B3;color:#712B13">BF</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">BOISSIERES FABRICE<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#BA751718;color:#BA7517;"><i class="ti ti-message" style="font-size:10px;"></i>Messagerie</span></div>
-        <div class="cmeta">06 04 09 32 53</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0604093253" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(42)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#B5D4F4;color:#0C447C">GD</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">GAEC DE LA TERRE A L'ASSIETTE<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 47 24 62 93</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0647246293" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(43)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#FAC775;color:#633806">ES</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">EARL SAINT JEAN<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">06 30 31 85 22</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0630318522" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(44)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#F4C0D1;color:#72243E">P</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">PILOU<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#D4920A18;color:#D4920A;"><i class="ti ti-flame" style="font-size:10px;"></i>🔥 Chaud</span></div>
-        <div class="cmeta">06 77 37 28 78</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0677372878" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(45)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#C0DD97;color:#27500A">FJ</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">FOURNIOLS JEAN NOEL<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#6B5EA818;color:#6B5EA8;"><i class="ti ti-ban" style="font-size:10px;"></i>Pas éligible</span></div>
-        <div class="cmeta">06 52 11 02 69</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0652110269" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(46)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#D3D1C7;color:#444441">PB</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">PELZER BERTRAND<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#6B5EA818;color:#6B5EA8;"><i class="ti ti-ban" style="font-size:10px;"></i>Pas éligible</span></div>
-        <div class="cmeta">06 60 85 68 93</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0660856893" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(47)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#CECBF6;color:#3C3489">S</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">SEICER<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">344311566</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:344311566" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(48)"><i class="ti ti-arrow-right"></i></button>
-    </div><div class="crow">
-      <div style="width:15px;flex-shrink:0;"></div>
-      <div class="cav" style="background:#9FE1CB;color:#085041">GB</div>
-      <div style="flex:1;min-width:0;">
-        <div class="cname">GARAGE BORY<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;background:#FFFFFF22;color:#FFFFFF;margin-left:4px;">Carole</span><span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:4px;background:#E24B4A18;color:#E24B4A;"><i class="ti ti-x" style="font-size:10px;"></i>Pas de réponse</span></div>
-        <div class="cmeta">07 50 09 14 99</div>
-      </div>
-      <div style="flex-shrink:0;"></div>
-      <a href="tel:0750091499" class="btn tel" style="padding:3px 9px;font-size:12px;"><i class="ti ti-phone"></i></a>
-      
-      <button class="btn" style="padding:3px 9px;font-size:12px;" onclick="jumpTo(49)"><i class="ti ti-arrow-right"></i></button>
-    </div></div>
+    <div id="clist"><div style="padding:2rem;text-align:center;color:#888;"><span class="spinner"></span> Chargement...</div></div>
   </div>
-  <div id="pagination" style="display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 0;">
-    <button class="btn" onclick="goPage(-1)" disabled=""><i class="ti ti-chevron-left"></i></button>
-    <span style="font-size:13px;color:#555;">Page 1/11 <span style="color:#888;">(523 contacts)</span></span>
-    <button class="btn" onclick="goPage(1)"><i class="ti ti-chevron-right"></i></button></div>
+  <div id="pagination" style="display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 0;"></div>
 </div>
 
 <!-- HISTORIQUE -->
@@ -907,10 +354,10 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
 <!-- OPPORTUNITÉS -->
 <div id="tab-opportunites" class="hidden">
   <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
-    <button class="opp-subtab act" data-tab="opp" onclick="setOppTab(&#39;opp&#39;,this)">🏆 Opportunités <span id="cnt-opp" style="background:#534AB7;color:#fff;border-radius:10px;padding:1px 6px;font-size:10px;margin-left:3px;">6</span></button>
+    <button class="opp-subtab act" data-tab="opp" onclick="setOppTab(&#39;opp&#39;,this)">🏆 Opportunités <span id="cnt-opp" style="background:#534AB7;color:#fff;border-radius:10px;padding:1px 6px;font-size:10px;margin-left:3px;"></span></button>
     <button class="opp-subtab" data-tab="attente" onclick="setOppTab(&#39;attente&#39;,this)">⏳ Attente conf. VT <span id="cnt-attente" style="background:#9C6BB5;color:#fff;border-radius:10px;padding:1px 6px;font-size:10px;margin-left:3px;"></span></button>
-    <button class="opp-subtab" data-tab="vt" onclick="setOppTab(&#39;vt&#39;,this)">🏠 VT programmées <span id="cnt-vt" style="background:#D4920A;color:#fff;border-radius:10px;padding:1px 6px;font-size:10px;margin-left:3px;">3</span></button>
-    <button class="opp-subtab" data-tab="pose" onclick="setOppTab(&#39;pose&#39;,this)">🔧 Installations <span id="cnt-pose" style="background:#1D9E75;color:#fff;border-radius:10px;padding:1px 6px;font-size:10px;margin-left:3px;">2</span></button>
+    <button class="opp-subtab" data-tab="vt" onclick="setOppTab(&#39;vt&#39;,this)">🏠 VT programmées <span id="cnt-vt" style="background:#D4920A;color:#fff;border-radius:10px;padding:1px 6px;font-size:10px;margin-left:3px;"></span></button>
+    <button class="opp-subtab" data-tab="pose" onclick="setOppTab(&#39;pose&#39;,this)">🔧 Installations <span id="cnt-pose" style="background:#1D9E75;color:#fff;border-radius:10px;padding:1px 6px;font-size:10px;margin-left:3px;"></span></button>
   </div>
   <div id="opp-pipeline" style="display:none;padding:8px 14px;margin-bottom:8px;background:#F5F4FF;border-radius:10px;font-size:13px;color:#534AB7;font-weight:500;"></div>
   <div id="opp-list"></div>
@@ -1028,19 +475,7 @@ input:focus,select:focus{outline:none;border-color:#534AB7;}
     </div>
   </div>
 </div>
-<div class="cb-popup" id="cb-popup"><div class="cb-popup-card"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;">
-      <div>
-        <div style="font-size:12px;font-weight:700;color:#534AB7;margin-bottom:4px;"><i class="ti ti-bell-ringing"></i> Rappel (en retard)</div>
-        <div style="font-size:14px;font-weight:600;">WAREMBOURG BENOIT</div>
-        <div style="font-size:12px;color:#888;">09 juin à 10:30</div>
-        
-      </div>
-      <button onclick="dismissCBPopup(199,this.closest(&#39;.cb-popup-card&#39;))" style="background:none;border:none;cursor:pointer;font-size:16px;color:#888;line-height:1;padding:0;">✕</button>
-    </div>
-    <div style="display:flex;gap:6px;margin-top:10px;">
-      <a href="tel:0603848587" class="btn tel" style="flex:1;justify-content:center;font-size:12px;padding:5px 8px;"><i class="ti ti-phone"></i> Appeler</a>
-      <button class="btn pr" style="flex:1;font-size:12px;padding:5px 8px;" onclick="jumpToCB(74,this.closest(&#39;.cb-popup-card&#39;))"><i class="ti ti-arrow-right"></i> Ouvrir</button>
-    </div></div></div>
+<div class="cb-popup" id="cb-popup"></div>
 
 <script>
 const SUPA_URL='https://ljmvtvxlojvamwfjhlac.supabase.co';
@@ -1234,7 +669,16 @@ function login(user){
   }
   initApp();
 }
-function logout(){sessionStorage.removeItem('crm_user');location.reload();}
+function logout(){
+  // Stopper toutes les alertes et vider les popups avant deconnexion
+  const wrap=document.getElementById('cb-popup');
+  if(wrap)wrap.innerHTML='';
+  notifiedCBs=new Set();
+  sessionStorage.removeItem('crm_user');
+  sessionStorage.removeItem('notified_cbs');
+  contacts=[];
+  location.reload();
+}
 
 async function initApp(){
   document.getElementById('cb-date').value=todayStr();
