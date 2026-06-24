@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)file:///Users/alexissitbonmac2/Downloads/parrainage_v2.html -->
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IP5 Énergie — Programme CEE</title>
+<link href="./IP5 Énergie — Programme CEE_files/css2" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#f0f4f0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px}
+
+.card{background:#fff;border-radius:16px;width:100%;max-width:400px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.10)}
+
+.header{background:#085041;padding:22px 24px;display:flex;align-items:center;gap:12px}
+.header-ico{width:40px;height:40px;background:rgba(255,255,255,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.header-logo{font-size:17px;font-weight:700;color:#fff}
+.header-sub{font-size:12px;color:rgba(255,255,255,.7);margin-top:2px}
+
+.bandeau{background:#004d38;padding:20px 24px;color:#fff;border-bottom:1px solid #085041}
+.bandeau-tag{display:inline-block;background:rgba(255,255,255,.15);border-radius:20px;padding:3px 11px;font-size:11px;font-weight:600;letter-spacing:.5px;margin-bottom:12px;text-transform:uppercase}
+.bandeau-title{font-size:16px;font-weight:600;line-height:1.5;margin-bottom:8px}
+.bandeau-title .canton{background:rgba(255,255,255,.2);padding:1px 8px;border-radius:5px;font-weight:700}
+.bandeau-title .gratuit{color:#7FFFD4;font-weight:700}
+.bandeau-sub{font-size:13px;color:rgba(255,255,255,.75);line-height:1.5}
+.bandeau-parrain{margin-top:12px;padding:9px 13px;background:rgba(255,255,255,.1);border-radius:8px;font-size:13px;color:rgba(255,255,255,.9);display:none;border-left:3px solid rgba(255,255,255,.4)}
+.bandeau-parrain b{color:#fff}
+
+.body{padding:22px 24px}
+
+.btn-call{display:flex;align-items:center;gap:13px;width:100%;padding:15px 18px;background:#085041;color:#fff;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;margin-bottom:10px;transition:background .15s}
+.btn-call:hover{background:#004d38}
+.btn-call-ico{font-size:22px;flex-shrink:0}
+.btn-call-title{font-size:15px;font-weight:700}
+.btn-call-sub{font-size:11px;font-weight:400;opacity:.75;margin-top:2px}
+
+.btn-wa{display:flex;align-items:center;gap:13px;width:100%;padding:13px 17px;background:#f0faf6;border:1.5px solid #1D9E75;border-radius:10px;color:#085041;text-decoration:none;transition:background .15s}
+.btn-wa:hover{background:#e0f5ed}
+.btn-wa-ico{font-size:26px;flex-shrink:0}
+.btn-wa-title{font-size:14px;font-weight:700;color:#085041}
+.btn-wa-sub{font-size:12px;color:#0F6E56;margin-top:2px}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="header">
+    <div class="header-ico">🌿</div>
+    <div>
+      <div class="header-logo">IP5 Énergie</div>
+      <div class="header-sub">Spécialiste pompes à chaleur — Aides CEE</div>
+    </div>
+  </div>
+
+  <div class="bandeau">
+    <div class="bandeau-tag" id="bandeau-tag">🎯 Sélection exclusive</div>
+    <div class="bandeau-title" id="bandeau-title">
+      Vous faites partie de nos clients potentiels<br>
+      du canton de <span class="canton" id="canton-display">votre région</span> —<br>
+      bénéficiez de notre programme pour<br>
+      rénover votre maison à <span class="gratuit">0€</span> grâce aux aides CEE !
+    </div>
+    <div class="bandeau-sub">Places limitées sur votre secteur. Contactez-nous maintenant.</div>
+  </div>
+
+  <div class="body">
+    <a class="btn-call" href="tel:0749525267">
+      <span class="btn-call-ico">📞</span>
+      <div>
+        <div class="btn-call-title">Appeler le 07 49 52 52 67</div>
+        <div class="btn-call-sub">Cliquez pour lancer l'appel directement</div>
+      </div>
+    </a>
+
+    <a class="btn-wa" id="wa-link" href="https://wa.me/33749525267?text=Bonjour%20IP5%20%C3%89nergie%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20programme%20de%20r%C3%A9novation%20%C3%A0%200%E2%82%AC.%20Pouvez-vous%20me%20contacter%20%3F%20%F0%9F%99%8F" target="_blank">
+      <span class="btn-wa-ico">💬</span>
+      <div>
+        <div class="btn-wa-title">Écrire sur WhatsApp</div>
+        <div class="btn-wa-sub">Un message est pré-rédigé, envoyez-le en 1 clic !</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const parrain = params.get('parrain') || '';
+const canton  = params.get('canton')  || '';
+
+if(canton){
+  document.getElementById('canton-display').textContent = decodeURIComponent(canton);
+}
+
+if(parrain){
+  const nom = decodeURIComponent(parrain);
+  const canton_nom = canton ? decodeURIComponent(canton) : 'votre région';
+  document.getElementById('bandeau-tag').textContent = '💝 ' + nom + ' a pensé à vous';
+  document.getElementById('bandeau-title').innerHTML =
+    '<b>' + nom + '</b> vous a recommandé et pense que cela pourrait vous intéresser !<br><br>' +
+    'Bénéficiez de notre programme pour le canton de <span class="canton">' + canton_nom + '</span>' +
+    ' et rénovez votre maison à <span class="gratuit">0€</span> grâce aux aides CEE.';
+}
+
+const nomParrain = parrain ? decodeURIComponent(parrain) : '';
+const nomCanton  = canton  ? decodeURIComponent(canton)  : '';
+let waMsg = 'Bonjour IP5 Énergie, je suis intéressé par le programme de rénovation à 0€';
+if(nomCanton)  waMsg += ' pour le canton de ' + nomCanton;
+if(nomParrain) waMsg += ". J'ai été recommandé par " + nomParrain;
+waMsg += '. Pouvez-vous me contacter ? 🙏';
+document.getElementById('wa-link').href = 'https://wa.me/33749525267?text=' + encodeURIComponent(waMsg);
+</script>
+
+</body></html>
